@@ -25,9 +25,11 @@
     "class-transformer": "^0.2.0",
     "class-validator": "^0.9.1",
     "joi": "latest",
+    "mysql": "^2.16.0",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.2.2",
+    "typeorm": "^0.2.15-rc.2",
     "typescript": "^3.0.1"
   },
   "devDependencies": {

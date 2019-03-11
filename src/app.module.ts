@@ -3,6 +3,7 @@ import { CarsModule } from './modules/cars/cars.module';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { RolesGuard } from './guards/roles.guard';
 import { HTTPLoggingInterceptor } from './interceptors/HTTPLogging.interceptors';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   providers: [
@@ -15,7 +16,9 @@ import { HTTPLoggingInterceptor } from './interceptors/HTTPLogging.interceptors'
       useClass: RolesGuard,
     },
   ],
-  imports: [CarsModule],
+  imports: [
+    CarsModule,
+  ],
 })
 
 export class ApplicationModule {
