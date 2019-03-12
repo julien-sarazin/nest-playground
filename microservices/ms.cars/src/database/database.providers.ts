@@ -4,23 +4,18 @@ export const databaseProviders = [
   {
     provide: 'DbConnectionToken',
     useFactory: async () => {
-      const connection = await createConnection({
+      return await createConnection({
         type: 'mysql',
         host: 'localhost',
-        port: 3030,
+        port: 3031,
         username: 'root',
         password: 'root',
-        database: 'nest_playground',
+        database: 'cars_service_database',
         entities: [
           __dirname + '/../**/*.entity{.ts,.js}',
         ],
         synchronize: true,
       });
-
-      await connection
-        .query('CREATE DATABASE IF NOT EXISTS nest_playground;');
-
-      return connection;
-    },
+      },
   },
 ];

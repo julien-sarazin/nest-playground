@@ -3,12 +3,13 @@ import { CarCreateDTO } from '../dto/create.dto';
 import { CarUpdateDTO } from '../dto/update.dto';
 import { CarsService } from '../service/cars.service';
 import { JoiValidationPipe } from '../../../pipes/joi-validator.pipe';
-import { create } from 'domain';
+import { Roles } from '../../../decorators/roles.decorator';
 
 @Controller('cars')
 export class CarsController {
 
-  constructor(private readonly carsService: CarsService) {}
+  constructor(private readonly carsService: CarsService) {
+  }
 
   @Get()
   async find(@Query() query): Promise<any[]> {
@@ -33,7 +34,7 @@ export class CarsController {
   }
 
   @Put(':id')
-  @UsePipes(new ValidationPipe({ transform: true}))
+  @UsePipes(new ValidationPipe({ transform: true }))
   async update(@Param('id') id, @Body() updateCarDTO: CarUpdateDTO) {
     return {};
   }
