@@ -3,7 +3,7 @@ import { CarCreateDTO } from '../dto/create.dto';
 import { CarUpdateDTO } from '../dto/update.dto';
 import { CarsService } from '../service/cars.service';
 import { JoiValidationPipe } from '../../../pipes/joi-validator.pipe';
-import { Roles } from '../../../decorators/roles.decorator';
+import { create } from 'domain';
 
 @Controller('cars')
 export class CarsController {
@@ -26,10 +26,10 @@ export class CarsController {
   }
 
   @Post()
-  @Roles('admin')
   @UsePipes(new JoiValidationPipe(CarCreateDTO.Schema()))
   async create(@Body() createCarDTO: CarCreateDTO) {
-    return {};
+    return await this.carsService
+      .create(createCarDTO);
   }
 
   @Put(':id')
