@@ -1,9 +1,20 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  InternalServerErrorException,
+  NotFoundException,
+  Param,
+  Post,
+  Put,
+  Query,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { CarCreateDTO } from '../dto/create.dto';
 import { CarUpdateDTO } from '../dto/update.dto';
-import { CarsService } from '../service/cars.service';
-import { JoiValidationPipe } from '../../../pipes/joi-validator.pipe';
-import { Roles } from '../../../decorators/roles.decorator';
+import CarsService, { CarNotFoundException } from '../service/cars.service';
 
 @Controller('cars')
 export class CarsController {
@@ -13,21 +24,32 @@ export class CarsController {
 
   @Get()
   async list(@Query() query): Promise<any[]> {
-    return this.carsService.find();
-  }
-
-  @Get()
-  async get(@Query() query): Promise<any> {
-    return this.carsService.find()[0];
+    return this.carsService
+      .list(query);
   }
 
   @Get(':id')
-  async getById(@Param() params): Promise<any> {
-    return this.carsService.find
+  async get(@Param('id') id): Promise<any> {
+    try {
+      return await this.carsService
+        .get(id);
+    }
+    catch (e) {
+      return (e instanceof CarNotFoundException)
+        ? new NotFoundException(e.message)
+        : new InternalServerErrorException(e);
+    }
+  }
+
+  @Get()
+  async peek(@Query() query): Promise<any> {
+    return this.carsService
+      .peek(query);
   }
 
   @Post()
-  @UsePipes(new JoiValidationPipe(CarCreateDTO.Schema()))
+  // Joi alternative: @UsePipes(new JoiValidationPipe(CarCreateDTO.Schema()))
+  @UsePipes(new ValidationPipe({ transform: true }))
   async create(@Body() createCarDTO: CarCreateDTO) {
     return await this.carsService
       .create(createCarDTO);
@@ -41,6 +63,7 @@ export class CarsController {
 
   @Delete()
   async remove(@Param('id') id) {
-    return {};
+    return this.carsService
+      .remove(id);
   }
 }
