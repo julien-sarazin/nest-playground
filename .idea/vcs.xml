@@ -2,5 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/microservices/ms.auth" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/microservices/ms.renting" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/microservices/ms.users" vcs="Git" />
   </component>
 </project>

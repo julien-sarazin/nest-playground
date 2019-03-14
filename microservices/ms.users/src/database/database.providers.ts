@@ -2,15 +2,15 @@ import { createConnection } from 'typeorm';
 
 export const databaseProviders = [
   {
-    provide: 'DbConnection',
+    provide: 'DbConnectionToken',
     useFactory: async () => {
       return await createConnection({
         type: 'mysql',
         host: 'localhost',
-        port: 3031,
+        port: 3033,
         username: 'root',
         password: 'root',
-        database: 'cars_service_database',
+        database: 'users_service_database',
         entities: [
           __dirname + '/../**/*.entity{.ts,.js}',
         ],

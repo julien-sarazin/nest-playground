@@ -8,6 +8,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: auth_service_database
+    volumes:
+      - data:/docker-entrypoint-initdb.d
     ports:
       - 3030:3306
 
@@ -40,3 +42,6 @@ services:
       MYSQL_DATABASE: users_service_database
     ports:
       - 3033:3306
+
+volumes:
+  data:

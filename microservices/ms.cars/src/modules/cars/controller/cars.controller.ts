@@ -12,18 +12,18 @@ export class CarsController {
   }
 
   @Get()
-  async find(@Query() query): Promise<any[]> {
+  async list(@Query() query): Promise<any[]> {
     return this.carsService.find();
   }
 
   @Get()
-  async findOne(@Param() query): Promise<any> {
+  async get(@Query() query): Promise<any> {
     return this.carsService.find()[0];
   }
 
   @Get(':id')
-  async findById(@Param() params): Promise<any> {
-    return {};
+  async getById(@Param() params): Promise<any> {
+    return this.carsService.find
   }
 
   @Post()
@@ -42,11 +42,5 @@ export class CarsController {
   @Delete()
   async remove(@Param('id') id) {
     return {};
-  }
-
-  @Post(':id')
-  @HttpCode(200)
-  async rent(@Param('id') id): Promise<void> {
-    return;
   }
 }

@@ -5,6 +5,6 @@ export const CarRepositoryProviders = [
   {
     provide: 'CarRepository',
     useFactory: (connection: Connection) => connection.getRepository(Car),
-    inject: ['DbConnectionToken'],
+    inject: ['DbConnection'],
   },
 ];
