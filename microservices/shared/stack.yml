@@ -8,28 +8,26 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: auth_service_database
-    volumes:
-      - data:/docker-entrypoint-initdb.d
     ports:
       - 3030:3306
 
-  cars_db:
+  patient_db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: cars_service_database
+      MYSQL_DATABASE: patients_service_database
     ports:
       - 3031:3306
 
-  renting_db:
+  diagnostic_db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: renting_service_database
+      MYSQL_DATABASE: diagnostics_service_database
     ports:
       - 3032:3306
 
@@ -43,5 +41,15 @@ services:
     ports:
       - 3033:3306
 
-volumes:
-  data:
+  medical_center_db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: medical_centers_service_database
+    ports:
+      - 3034:3306
+
+
+# Todo: Mount volumes to load fixtures at the database startup.
