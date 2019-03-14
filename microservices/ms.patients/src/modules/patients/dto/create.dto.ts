@@ -1,7 +1,7 @@
 import * as Joi from 'joi';
 import { IsNumber, IsString } from 'class-validator';
 
-export class CarCreateDTO {
+export class PatientCreateDTO {
   @IsString()
   readonly model: string;
 

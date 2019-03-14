@@ -1,8 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import ICar from './car.interface';
+import IPatient from './patient.interface';
 
 @Entity()
-export class Car implements ICar {
+export class Patient implements IPatient {
   @PrimaryGeneratedColumn()
   id: number;
 
