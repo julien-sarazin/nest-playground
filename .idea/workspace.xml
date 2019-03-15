@@ -2,36 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8deb895c-a55a-43a4-9f2d-95662ba4c9d4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/controller/diagnostics.controller.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/controller/diagnostics.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/diagnostics.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/dto/create.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/dto/update.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/model/diagnostic.entity.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/model/diagnostic.interface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/model/diagnostic.provider.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/service/diagnostics.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/service/diagnostics.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/controller/practitioners.controller.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/controller/practitioners.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/dto/create.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/dto/update.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/model/practitioner.entity.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/model/practitioner.interface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/model/repository.provider.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/practitioners.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/service/practitioners.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/service/practitioners.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/nest-cli.json" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/nest-cli.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/nodemon-debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/nodemon-debug.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/nodemon.json" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/nodemon.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/database/database.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/database/database.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/database/database.providers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/database/database.providers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/decorators/roles.decorator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/decorators/roles.decorator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/guards/roles.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/guards/roles.guard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/interceptors/HTTPLogging.interceptors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/interceptors/HTTPLogging.interceptors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/cars.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/patients.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/controller/cars.controller.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/controller/patients.controller.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/controller/cars.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/controller/patients.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/dto/create.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/dto/create.dto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/dto/update.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/dto/update.dto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/model/car.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/model/patient.entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/model/car.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/model/patient.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/model/repository.provider.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/model/repository.provider.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/service/cars.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/service/patients.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/service/cars.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/service/patients.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/src/pipes/joi-validator.pipe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/src/pipes/joi-validator.pipe.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/test/app.e2e-spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/test/app.e2e-spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/test/jest-e2e.json" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/test/jest-e2e.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/tsconfig.build.json" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/tsconfig.build.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/tslint.json" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/tslint.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices/ms.cars/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.patients/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservices/ms.medical_centers/src/database/database.providers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/database/database.providers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservices/ms.medical_centers/src/decorators/roles.decorator.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservices/ms.medical_centers/src/guards/roles.guard.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/patients/model/patient.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/patients/model/patient.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservices/ms.users/src/database/database.providers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/ms.users/src/database/database.providers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservices/shared/data/populate.sh" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/shared/fixtures/populate.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservices/shared/stack.yml" beforeDir="false" afterPath="$PROJECT_DIR$/microservices/shared/stack.yml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -43,170 +41,100 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.49377224">
-      <split-first>
-        <leaf>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/nodemon-debug.json">
-              <provider selected="true" editor-type-id="text-editor" />
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/package.json">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="15">
-                  <caret line="1" column="16" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="16" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/app.module.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="330">
-                  <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
-                  <folding>
-                    <element signature="e#0#40#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/patients.module.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="330">
-                  <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-                  <folding>
-                    <element signature="e#0#39#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/controller/patients.controller.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="240">
-                  <caret line="16" column="88" selection-start-line="16" selection-start-column="88" selection-end-line="16" selection-end-column="88" />
-                  <folding>
-                    <element signature="e#0#133#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/dto/create.dto.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="195">
-                  <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-                  <folding>
-                    <element signature="e#0#27#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/dto/update.dto.ts">
-              <provider selected="true" editor-type-id="text-editor" />
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/model/patient.entity.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-                  <folding>
-                    <element signature="e#0#65#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/model/patient.interface.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="90">
-                  <caret line="6" selection-start-line="6" selection-end-line="6" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/model/repository.provider.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="150">
-                  <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-                  <folding>
-                    <element signature="e#0#37#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/service/patients.service.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="450">
-                  <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
-                  <folding>
-                    <element signature="e#0#58#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/service/patients.service.spec.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
-                  <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-                  <folding>
-                    <element signature="e#0#54#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/controller/patients.controller.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
-                  <folding>
-                    <element signature="n#!!block;n#peek#0;n#CarsController#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/node_modules/@nestjs/common/exceptions/not-found.exception.d.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret column="19" selection-start-column="19" selection-end-column="19" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/microservices/ms.patients/node_modules/@nestjs/common/exceptions/http.exception.d.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret column="21" selection-start-column="21" selection-end-column="21" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/model/diagnostic.interface.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#62#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/service/diagnostics.service.spec.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#54#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/service/diagnostics.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="491">
+              <caret line="45" column="23" selection-start-line="45" selection-end-line="46" />
+              <folding>
+                <element signature="e#0#59#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/diagnostics.module.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/practitioners.module.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/patients/patients.module.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/dto/create.dto.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/controller/diagnostics.controller.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="866">
+              <caret line="51" column="1" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
+              <folding>
+                <element signature="e#0#188#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -219,12 +147,17 @@
     <findStrings>
       <find>mazx</find>
       <find>car</find>
+      <find>patient</find>
     </findStrings>
     <replaceStrings>
       <replace>patient</replace>
+      <replace>diagnostic</replace>
+      <replace>practitioner</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/microservices/ms.patients/src</dir>
+      <dir>$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics</dir>
+      <dir>$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -233,37 +166,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/cars/cars.module.ts" />
-        <option value="$PROJECT_DIR$/tslint.json" />
-        <option value="$PROJECT_DIR$/src/middlewares/logger.middleware.ts" />
-        <option value="$PROJECT_DIR$/src/modules/cars/model/car.schema.ts" />
-        <option value="$PROJECT_DIR$/src/pipes/validator.pipe.ts" />
-        <option value="$PROJECT_DIR$/src/decorators/roles.decorator.ts" />
-        <option value="$PROJECT_DIR$/src/guards/roles.guard.ts" />
-        <option value="$PROJECT_DIR$/src/modules/cars/dto/create.dto.ts" />
-        <option value="$PROJECT_DIR$/src/interceptors/logging.interceptors.ts" />
-        <option value="$PROJECT_DIR$/src/main.ts" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/database/database.provider.ts" />
-        <option value="$PROJECT_DIR$/src/database/database.module.ts" />
-        <option value="$PROJECT_DIR$/src/modules/cars/model/car.model.ts" />
-        <option value="$PROJECT_DIR$/src/modules/cars/model/car.entity.ts" />
-        <option value="$PROJECT_DIR$/src/modules/cars/model/repository.provider.ts" />
-        <option value="$PROJECT_DIR$/src/modules/cars/cars.module.ts" />
-        <option value="$PROJECT_DIR$/src/app.module.ts" />
-        <option value="$PROJECT_DIR$/src/modules/cars/model/car.interface.ts" />
-        <option value="$PROJECT_DIR$/src/modules/cars/service/cars.service.ts" />
-        <option value="$PROJECT_DIR$/Dockerfile" />
-        <option value="$PROJECT_DIR$/stack.yml" />
-        <option value="$PROJECT_DIR$/src/database/database.providers.ts" />
         <option value="$PROJECT_DIR$/src/modules/cars/controller/cars.controller.ts" />
         <option value="$PROJECT_DIR$/src/interceptors/HTTPLogging.interceptors.ts" />
         <option value="$PROJECT_DIR$/microservices/databases.yml" />
         <option value="$PROJECT_DIR$/microservices/stack.yml" />
         <option value="$PROJECT_DIR$/microservices/ms.cars/src/app.module.ts" />
-        <option value="$PROJECT_DIR$/microservices/shared/stack.yml" />
         <option value="$PROJECT_DIR$/microservices/shared/data/populate.sh" />
-        <option value="$PROJECT_DIR$/microservices/ms.users/src/database/database.providers.ts" />
         <option value="$PROJECT_DIR$/microservices/ms.cars/src/interceptors/HTTPLogging.interceptors.ts" />
         <option value="$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/model/repository.provider.ts" />
         <option value="$PROJECT_DIR$/microservices/ms.cars/src/database/database.providers.ts" />
@@ -284,6 +192,31 @@
         <option value="$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/service/cars.service.ts" />
         <option value="$PROJECT_DIR$/microservices/ms.patients/src/app.module.ts" />
         <option value="$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/patients.module.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/database/database.providers.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.users/src/database/database.providers.ts" />
+        <option value="$PROJECT_DIR$/microservices/shared/stack.yml" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/doctor/controller/doctors.controller.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/doctor/model/doctor.entity.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/doctor/model/doctor.interface.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practicioner/model/doctor.interface.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioner/model/doctor.interface.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioner/model/practitioner.interface.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioner/model/practitioner.entity.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioner/model/practitioner.provider.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioner/Practitioner.module.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioner/practitioners.module.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/model/patient.entity.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/dto/create.dto.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/patients/model/patient.entity.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/model/diagnostic.entity.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/model/practitioner.interface.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/model/practitioner.entity.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/dto/update.dto.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/controller/patients.controller.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/service/patients.service.spec.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/model/diagnostic.interface.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/service/diagnostics.service.ts" />
+        <option value="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/controller/diagnostics.controller.ts" />
       </list>
     </option>
   </component>
@@ -297,6 +230,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -313,67 +247,12 @@
               <item name="nest-playground" type="b2602c69:ProjectViewProjectNode" />
               <item name="nest-playground" type="462c0819:PsiDirectoryNode" />
               <item name="microservices" type="462c0819:PsiDirectoryNode" />
-              <item name="ms.patients" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nest-playground" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nest-playground" type="462c0819:PsiDirectoryNode" />
-              <item name="microservices" type="462c0819:PsiDirectoryNode" />
-              <item name="ms.patients" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nest-playground" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nest-playground" type="462c0819:PsiDirectoryNode" />
-              <item name="microservices" type="462c0819:PsiDirectoryNode" />
-              <item name="ms.patients" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nest-playground" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nest-playground" type="462c0819:PsiDirectoryNode" />
-              <item name="microservices" type="462c0819:PsiDirectoryNode" />
-              <item name="ms.patients" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="patients" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nest-playground" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nest-playground" type="462c0819:PsiDirectoryNode" />
-              <item name="microservices" type="462c0819:PsiDirectoryNode" />
-              <item name="ms.patients" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="patients" type="462c0819:PsiDirectoryNode" />
-              <item name="dto" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nest-playground" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nest-playground" type="462c0819:PsiDirectoryNode" />
-              <item name="microservices" type="462c0819:PsiDirectoryNode" />
-              <item name="ms.patients" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="patients" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nest-playground" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nest-playground" type="462c0819:PsiDirectoryNode" />
-              <item name="microservices" type="462c0819:PsiDirectoryNode" />
-              <item name="ms.patients" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="patients" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="ms.users" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -381,25 +260,29 @@
     <property name="last_opened_file_path" value="$USER_HOME$/.nvm/versions/node/v10.15.3/bin/nodemon" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.tslint" value="$PROJECT_DIR$/microservices/ms.cars/node_modules/tslint" />
+    <property name="node.js.selected.package.tslint" value="$PROJECT_DIR$/microservices/ms.medical_centers/node_modules/tslint" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
-    <property name="settings.editor.selected.configurable" value="fileTemplates" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.JavaScript" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/microservices/ms.medical_centers/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/microservices/ms.users/src/database" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/microservices/ms.users/src/modules/users/service" />
       <recent name="$PROJECT_DIR$/microservices/ms.users/src/modules/sad" />
       <recent name="$PROJECT_DIR$/microservices/ms.users/src/modules" />
       <recent name="$PROJECT_DIR$/microservices/ms.users/src/modules/users/users/controller" />
       <recent name="$PROJECT_DIR$/microservices/ms.cars/src" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners" />
+      <recent name="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics" />
+      <recent name="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/doctor/model" />
+      <recent name="$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/doctor/dto" />
+      <recent name="$PROJECT_DIR$/microservices/ms.users/src/database" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -414,17 +297,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Attach to Node.js/Chrome.DEBUG">
-    <configuration name="DEBUG" type="ChromiumRemoteDebugType" factoryName="Chromium Remote" port="9229" restartOnDisconnect="true">
+  <component name="RunManager" selected="Node.js.Unnamed">
+    <configuration name="Unnamed" type="NodeJSConfigurationType" path-to-node="$USER_HOME$/.nvm/versions/node/v10.15.3/bin/nodemon" nameIsGenerated="true" working-dir="$PROJECT_DIR$/microservices/ms.medical_centers">
       <method v="2" />
     </configuration>
-    <configuration name="Cars Service (Debug)" type="NodeJSConfigurationType" path-to-node="$USER_HOME$/.nvm/versions/node/v10.15.3/bin/nodemon" node-parameters="--config nodemon-debug.json " working-dir="$PROJECT_DIR$/microservices/ms.patients">
+    <configuration name="start:dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/microservices/ms.medical_centers/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start:dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Attach to Node.js/Chrome.DEBUG" />
-      <item itemvalue="Node.js.Cars Service (Debug)" />
+      <item itemvalue="Node.js.Unnamed" />
+      <item itemvalue="npm.start:dev" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start:dev" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -439,24 +334,25 @@
       <workItem from="1552164932626" duration="17746000" />
       <workItem from="1552389595372" duration="5047000" />
       <workItem from="1552495191585" duration="939000" />
-      <workItem from="1552557911285" duration="12816000" />
+      <workItem from="1552557911285" duration="17630000" />
+      <workItem from="1552651757964" duration="9651000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52334000" />
+    <option name="totallyTimeSpent" value="66799000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.121875" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5610948" visible="true" weight="0.15742187" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="npm" order="2" sideWeight="0.43890518" side_tool="true" visible="true" weight="0.15742187" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960938" weight="0.48191592" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32942328" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960938" weight="0.47018573" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" />
@@ -486,76 +382,84 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../nest_playground/src/modules/cars/model/repository.provider.ts" />
-    <entry file="file://$PROJECT_DIR$/../nest_playground/src/modules/cars/model/car.entity.ts" />
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/decorators/roles.decorator.ts">
+    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/controller/patients.controller.spec.ts" />
+    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/controller/patients.controller.ts" />
+    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/patients.module.ts" />
+    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/pipes/joi-validator.pipe.ts" />
+    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/interceptors/HTTPLogging.interceptors.ts" />
+    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/guards/roles.guard.ts" />
+    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/decorators/roles.decorator.ts" />
+    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/service/patients.service.ts" />
+    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/node_modules/@nestjs/common/exceptions/not-found.exception.d.ts" />
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/database/database.module.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/shared/data/populate.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/src/database/database.providers.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/shared/stack.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/interceptors/HTTPLogging.interceptors.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="e#0#106#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/.prettierrc">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/src/modules/users/controller/users.controller.spec.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/src/modules/users/service/users.service.spec.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/src/modules/users/service/users.service.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/src/modules/users/users.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="120">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/controller/patients.controller.spec.ts">
+    <entry file="file://$PROJECT_DIR$/microservices/ms.users/src/database/database.providers.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/decorators/roles.decorator.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/guards/roles.guard.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#75#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/pipes/joi-validator.pipe.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/interceptors/HTTPLogging.interceptors.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#78#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/database/database.providers.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/shared/stack.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/controller/practitioners.controller.spec.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>
@@ -564,46 +468,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/src/modules/users/model/user.entity.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="23" selection-start-line="23" selection-end-line="27" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/src/modules/users/model/user.interface.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/src/modules/users/dto/update.dto.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/database/database.providers.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/database/database.module.ts">
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/service/practitioners.service.spec.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/src/modules/users/model/repository.providers.ts">
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/node_modules/class-validator/decorator/decorators.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
+        <state relative-caret-position="318">
+          <caret line="70" column="147" lean-forward="true" selection-start-line="70" selection-start-column="147" selection-end-line="70" selection-end-column="147" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/model/practitioner.provider.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
           <caret line="10" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
@@ -611,194 +494,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/src/modules/users/dto/create.dto.ts">
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/dto/update.dto.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/controller/practitioners.controller.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/patients/controller/patients.controller.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/src/modules/users/controller/users.controller.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="31" column="8" lean-forward="true" selection-start-line="30" selection-end-line="31" selection-end-column="8" />
           <folding>
-            <element signature="e#0#108#0" expanded="true" />
+            <element signature="e#0#188#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/nodemon.json">
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/patients/model/patient.interface.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/nodemon-debug.json">
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/patients/model/repository.provider.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.users/src/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="518" column="10" selection-start-line="518" selection-start-column="10" selection-end-line="518" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/node_modules/typeorm/common/ObjectLiteral.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/node_modules/typeorm/query-builder/result/UpdateResult.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/service/ICarService.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/node_modules/typeorm/repository/Repository.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/tsconfig.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/tslint.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/node_modules/@nestjs/common/exceptions/http.exception.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="21" selection-start-column="21" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/node_modules/@nestjs/common/exceptions/not-found.exception.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" selection-start-column="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/controller/test.controller.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.cars/src/modules/cars/service/test.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="77" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
-          <folding>
-            <element signature="e#0#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/main.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/nest-cli.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/nodemon.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/nodemon-debug.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="16" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/controller/patients.controller.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="88" selection-start-line="16" selection-start-column="88" selection-end-line="16" selection-end-column="88" />
-          <folding>
-            <element signature="e#0#133#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/dto/create.dto.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/dto/update.dto.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/model/patient.interface.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/model/patient.entity.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="e#0#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/service/patients.service.spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/model/repository.provider.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
+        <state relative-caret-position="170">
           <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
@@ -806,32 +526,208 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/app.module.ts">
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/patients/service/patients.service.spec.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+        <state>
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/controller/diagnostics.controller.spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/patients/model/patient.entity.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="e#0#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/service/practitioners.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/dto/create.dto.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/controller/practitioners.controller.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/model/repository.provider.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/model/practitioner.interface.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/model/practitioner.entity.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="2" column="71" selection-start-line="2" selection-start-column="71" selection-end-line="2" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/service/practitioners.service.spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/service/practitioners.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/dto/update.dto.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/model/diagnostic.entity.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="1" lean-forward="true" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/model/diagnostic.provider.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/model/diagnostic.interface.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/service/diagnostics.service.spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/service/diagnostics.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="45" column="23" selection-start-line="45" selection-end-line="46" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/practitioners/practitioners.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/service/patients.service.ts">
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/patients/patients.module.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        <state relative-caret-position="238">
+          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
           <folding>
-            <element signature="e#0#58#0" expanded="true" />
+            <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/microservices/ms.patients/src/modules/patients/patients.module.ts">
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/diagnostics.module.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="391">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/dto/create.dto.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/node_modules/@nestjs/common/decorators/http/route-params.decorator.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/patients/service/patients.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microservices/ms.medical_centers/src/modules/diagnostics/controller/diagnostics.controller.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="866">
+          <caret line="51" column="1" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#188#0" expanded="true" />
           </folding>
         </state>
       </provider>
