@@ -57,7 +57,10 @@ export class DiagnosticsController {
   @UsePipes(new ValidationPipe({ transform: true }))
   async create(@Body() createDiagnosticDTO: DiagnosticCreateDTO) {
     const patient = await this.patientsService
-      .peek({ practitionerId: createDiagnosticDTO.practitionerId });
+      .peek({
+        id: createDiagnosticDTO.patientId,
+        practitionerId: createDiagnosticDTO.practitionerId
+      });
 
     if (!patient) {
       throw new UnprocessableEntityException();
