@@ -1,9 +1,9 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import IPatient from './patient.interface';
+import IPractitioner from './practitioner.interface';
 import { Diagnostic } from '../../diagnostics/model/diagnostic.entity';
 
 @Entity()
-export class Patient implements IPatient {
+export class Practitioner implements IPractitioner {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -19,6 +19,6 @@ export class Patient implements IPatient {
   @Column('date')
   birthDate: Date;
 
-  @OneToMany(type => Diagnostic, diagnostic => diagnostic.patient)
+  @OneToMany(type => Diagnostic, diagnostic => diagnostic.practitioner)
   diagnostics: Diagnostic[];
 }

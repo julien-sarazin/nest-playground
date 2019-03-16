@@ -10,7 +10,7 @@ export const databaseProviders = [
         port: 3031,
         username: 'root',
         password: 'root',
-        database: 'patients_service_database',
+        database: 'medical_centers_service_database',
         entities: [
           __dirname + '/../**/*.entity{.ts,.js}',
         ],
