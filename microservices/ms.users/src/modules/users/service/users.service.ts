@@ -93,6 +93,7 @@ export default class UsersService {
 
     if (same) {
       delete user.password;
+      delete user.email;
       return user;
     }
 

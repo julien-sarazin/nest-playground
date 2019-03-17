@@ -1,4 +1,4 @@
-import { BeforeInsert, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { hash } from 'bcrypt';
 
 @Entity()
@@ -30,7 +30,8 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  static async hash(chunk: string) {
-    return await hash(chunk, 10);
+  @BeforeUpdate()
+  private setUpdatedDate() {
+    this.updatedAt = new Date();
   }
 }

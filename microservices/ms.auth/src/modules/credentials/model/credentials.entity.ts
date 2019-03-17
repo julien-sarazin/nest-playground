@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, CreateDateColumn, BeforeUpdate } from 'typeorm';
 import ICredential from './credentials.interface';
 
 @Entity()
@@ -9,9 +9,14 @@ export class Credential implements ICredential {
   @Column('text')
   token: string;
 
-  @Column('date')
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column('date')
+  @CreateDateColumn()
   updatedAt: Date;
+
+  @BeforeUpdate()
+  private setUpdatedDate() {
+    this.updatedAt = new Date();
+  }
 }

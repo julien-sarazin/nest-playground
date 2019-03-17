@@ -64,7 +64,7 @@ export class UsersController {
 
   @Put(':id')
   @UsePipes(new ValidationPipe({ transform: true }))
-  public async update(@Param('id') id, @Body() userUpdateDTO: UserUpdateDTO, @Res() res): Promise<any> {
+  public async update(@Param('id') id, @Body() userUpdateDTO: UserUpdateDTO): Promise<any> {
     try {
       await this.usersService
         .update(id, userUpdateDTO);
