@@ -4,11 +4,14 @@ import ICredential from './credentials.interface';
 @Entity()
 export class Credential implements ICredential {
   @PrimaryColumn()
-  userId: number;
+  id: number;
 
   @Column('text')
-  email: string;
+  token: string;
 
-  @Column('text')
-  password: string;
+  @Column('date')
+  createdAt: Date;
+
+  @Column('date')
+  updatedAt: Date;
 }

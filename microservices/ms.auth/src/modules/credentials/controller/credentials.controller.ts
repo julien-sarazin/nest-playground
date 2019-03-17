@@ -48,18 +48,10 @@ export class CredentialsController {
   }
 
   @Post()
-  // Joi alternative: @UsePipes(new JoiValidationPipe(CredentialCreateDTO.Schema()))
   @UsePipes(new ValidationPipe({ transform: true }))
   async create(@Body() createCredentialDTO: CredentialCreateDTO) {
     return await this.credentialsService
       .create(createCredentialDTO);
-  }
-
-  @Put(':id')
-  @UsePipes(new ValidationPipe({ transform: true }))
-  async update(@Param('id') id, @Body() updateCredentialDTO: CredentialUpdateDTO) {
-    return this.credentialsService
-      .update(id, updateCredentialDTO);
   }
 
   @Delete()

@@ -2,20 +2,22 @@ import { IsDate, IsOptional, IsString } from 'class-validator';
 
 export class UserUpdateDTO {
   @IsString()
+  @IsOptional()
   readonly firstName: string;
 
   @IsString()
+  @IsOptional()
   readonly lastName: string;
 
   @IsDate()
   @IsOptional()
-  birthDate: Date;
+  readonly birthDate: Date;
 
   @IsString()
   @IsOptional()
-  streetAddress: string;
+  readonly streetAddress: string;
 
   @IsString()
   @IsOptional()
-  zipCode: string;
+  readonly zipCode: string;
 }

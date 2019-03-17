@@ -1,8 +1,12 @@
-import { NestFactory } from '@nestjs/core';
+import { FastifyAdapter, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  const app = await NestFactory.create(AppModule, new FastifyAdapter());
+  app.setGlobalPrefix('api');
+
+  await app.listen(3001);
 }
-bootstrap();
+
+bootstrap()
+  .then(() => console.log('> "Users service" listening on port', 3001));

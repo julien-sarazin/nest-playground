@@ -1,4 +1,4 @@
-import { IsDate, IsOptional, IsString } from 'class-validator';
+import { IsDateString, IsEmail, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 
 export class UserCreateDTO {
   @IsString()
@@ -7,15 +7,23 @@ export class UserCreateDTO {
   @IsString()
   readonly lastName: string;
 
-  @IsDate()
+  @IsEmail()
+  readonly email: string;
+
+  @IsString()
+  @MinLength(4)
+  @MaxLength(16)
+  readonly password: string;
+
+  @IsDateString()
   @IsOptional()
-  birthDate: Date;
+  readonly birthDate: Date;
 
   @IsString()
   @IsOptional()
-  streetAddress: string;
+  readonly streetAddress: string;
 
   @IsString()
   @IsOptional()
-  zipCode: string;
+  readonly zipCode: string;
 }

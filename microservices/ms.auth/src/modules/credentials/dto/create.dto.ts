@@ -1,17 +1,9 @@
 import { IsDate, IsString, ValidateNested } from 'class-validator';
 
-class CredentialDTO {
+class CreateCredentialsCreateDTO {
   @IsString()
-  firstName: string;
+  email: string;
 
   @IsString()
-  lastName: number;
-
-  @IsDate()
-  birthDate: Date;
-}
-
-export class CredentialCreateDTO {
-  @ValidateNested()
-  data: CredentialDTO;
+  password: number;
 }

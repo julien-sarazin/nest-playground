@@ -20,6 +20,7 @@ import PatientsService, { PatientNotFoundException } from '../service/patients.s
 export class PatientsController {
 
   constructor(private readonly patientsService: PatientsService) {
+    console.log('VAD Y VIENT LA ')
   }
 
   @Get()
@@ -41,7 +42,7 @@ export class PatientsController {
     }
   }
 
-  @Get()
+  @Get('peek')
   async peek(@Query() query): Promise<any> {
     return this.patientsService
       .peek(query);
@@ -62,9 +63,9 @@ export class PatientsController {
       .update(id, updatePatientDTO);
   }
 
-  @Delete()
+  @Delete(':id')
   async remove(@Param('id') id) {
-    return this.patientsService
+    return await this.patientsService
       .remove(id);
   }
 }
