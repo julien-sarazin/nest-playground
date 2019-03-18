@@ -37,3 +37,8 @@ services:
 #    volumes:
 #      - ./fixtures/users:/var/lib/mysql
 
+  ms_broker:
+    image: rabbitmq:3
+    restart: always
+    ports:
+      - 8431:3306

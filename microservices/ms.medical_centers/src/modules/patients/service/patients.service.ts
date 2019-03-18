@@ -20,7 +20,7 @@ export default class PatientsService {
 
   public async get(id: number): Promise<IPatient> {
     const result = await this.patientRepository
-      .findOneOrFail(id);
+      .findOne(id);
 
     if (!result) {
       throw new PatientNotFoundException();
@@ -50,7 +50,7 @@ export default class PatientsService {
 
   public async remove(id: number): Promise<boolean> {
     const entity = await this.patientRepository
-      .findOneOrFail(id);
+      .findOne(id);
 
     const result = await this.patientRepository
       .remove(entity);

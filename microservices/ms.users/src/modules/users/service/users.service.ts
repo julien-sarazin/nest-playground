@@ -21,7 +21,7 @@ export default class UsersService {
 
   public async get(id: number): Promise<User> {
     const entity = await this.userRepository
-      .findOneOrFail(id);
+      .findOne(id);
 
     if (!entity) {
       throw new UserNotFoundException();
