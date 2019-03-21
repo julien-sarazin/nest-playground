@@ -1,6 +1,7 @@
 import { Inject, Injectable, Query } from '@nestjs/common';
 import IToken from '../model/tokens.interface';
 import TokenRepository from '../model/tokens.repository';
+import { CreateTokensDTO } from '../dto/create.dto';
 
 @Injectable()
 export default class TokensService {
@@ -31,10 +32,14 @@ export default class TokensService {
       .findOne(query);
   }
 
-  public async create(dto: TokenCreateDTO): Promise<IToken> {
-    //Ask User service if the user exists
-    //if so, create a Token
-    //encrypt the identifier
+  public async create(dto: CreateTokensDTO): Promise<IToken> {
+    // Ask User service if the user exists
+    // if so, create a Token
+    // encrypt the identifier
+    return {
+      id: 1,
+      userId: 1,
+    };
   }
 
   public async remove(id: number): Promise<boolean> {

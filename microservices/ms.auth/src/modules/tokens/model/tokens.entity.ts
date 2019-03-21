@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryColumn, CreateDateColumn, BeforeUpdate } from 'typeorm';
 
 @Entity()
-export class Tokens{
+export class Tokens {
   @PrimaryColumn()
   id: number;
 
