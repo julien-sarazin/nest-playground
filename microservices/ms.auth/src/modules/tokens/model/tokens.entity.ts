@@ -5,7 +5,7 @@ export class Tokens {
   @PrimaryColumn()
   id: number;
 
-  @Column('number')
+  @Column('int')
   userId: number;
 
   @CreateDateColumn()

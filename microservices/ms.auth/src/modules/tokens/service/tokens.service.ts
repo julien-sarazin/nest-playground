@@ -33,9 +33,7 @@ export default class TokensService {
   }
 
   public async create(dto: CreateTokensDTO): Promise<IToken> {
-    // Ask User service if the user exists
-    // if so, create a Token
-    // encrypt the identifier
+
     return {
       id: 1,
       userId: 1,

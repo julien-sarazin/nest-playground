@@ -1,0 +1,55 @@
+{
+  "name": "nconsul",
+  "version": "0.0.0",
+  "description": "description",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "coveralls": "yarn run coverage --coverageReporters=text-lcov | coveralls",
+    "test:watch": "jest --watch",
+    "build": "rm -rf ./dist && tsc",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.123",
+    "consul": "latest",
+    "dotenv": "^6.1.0",
+    "glob": "^7.1.2",
+    "lodash": "^4.17.11",
+    "node-random-name": "^1.0.1",
+    "reflect-metadata": "^0.1.12",
+    "rxjs": "^6.0.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^5.1.0",
+    "@nestjs/core": "^5.1.0",
+    "@nestjs/testing": "^5.1.0",
+    "@types/consul": "^0.23.33",
+    "@types/dotenv": "^6.1.0",
+    "@types/glob": "^5.0.35",
+    "@types/jest": "^23.3.0",
+    "@types/uuid": "^3.4.4",
+    "coveralls": "^3.0.2",
+    "jest": "^23.3.0",
+    "prettier": "^1.13.7",
+    "ts-jest": "^23.0.0",
+    "typescript": "^3.3.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}
