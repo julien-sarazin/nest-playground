@@ -24,7 +24,7 @@ let ConsulModule = ConsulModule_1 = class ConsulModule {
         /**
          * Forcing the promisification
          */
-        options.connect.promisify = true;
+        options.consul.promisify = true;
         const consulConfigurationProvider = {
             provide: constants_1.CONSUL_CONFIGURATION_PROVIDER,
             useFactory: () => {
@@ -34,28 +34,14 @@ let ConsulModule = ConsulModule_1 = class ConsulModule {
                 return options;
             },
         };
+        /**
+         * Configure consul client by connecting to the client agent
+         * and register the current API if configuration is provided.
+         */
         const consulClientProvider = {
             provide: constants_1.CONSUL_CLIENT_PROVIDER,
             useFactory: () => __awaiter(this, void 0, void 0, function* () {
-                /*
-                 * In all cases we suppose the service will connect to the consul agent
-                 */
-                const consul = yield new Consul(options.connect);
-                /*
-                 * But the service might not need to be registered in the consul catalog.
-                 * We let the developer choose either he prefers use the service name
-                 * or complete a full exhaustive service description.
-                 */
-                if (options.register) {
-                    const registerOptions = (typeof options.register === 'string')
-                        ? { name: options.register }
-                        : options.register;
-                    console.log('> registering:', registerOptions);
-                    yield consul.agent.service
-                        .register(registerOptions);
-                    console.log('> registered successfully.');
-                }
-                return consul;
+                return yield new Consul(options.consul);
             }),
         };
         const consulServiceProvider = {

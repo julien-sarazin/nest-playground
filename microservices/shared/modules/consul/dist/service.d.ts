@@ -8,6 +8,9 @@ export declare class ConsulService implements OnModuleInit, OnModuleDestroy {
     private readonly serviceName;
     private readonly servicePort;
     private readonly serviceHost;
+    private readonly serviceTags;
+    private readonly serviceMeta;
+    private readonly check;
     private tries;
     private readonly maxRetry;
     private readonly retryInterval;

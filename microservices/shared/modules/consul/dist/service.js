@@ -30,39 +30,55 @@ let ConsulService = class ConsulService {
         this.consul = consul;
         this.configuration = configuration;
         this.logger = new common_1.Logger();
+        /**
+         * Common service information
+         */
         this.serviceId = lodash_1.get(configuration, 'service.id', uuid.v4());
         this.serviceName = lodash_1.get(configuration, 'service.name', 'unknown-service');
         this.servicePort = lodash_1.get(configuration, 'service.port');
         this.serviceHost = lodash_1.get(configuration, 'service.host');
+        this.serviceTags = lodash_1.get(configuration, 'service.tags');
+        this.serviceMeta = lodash_1.get(configuration, 'service.meta');
+        /**
+         * Health check settings
+         */
+        this.check = lodash_1.get(configuration, 'service.check');
+        /**
+         * Consul fail checks
+         */
         this.tries = 0;
         this.maxRetry = lodash_1.get(configuration, 'consul.maxRetry', 10);
         this.retryInterval = lodash_1.get(configuration, 'consul.retryInterval', 1000);
+        process.on('SIGINT', () => this.unregister());
     }
     onModuleInit() {
         return __awaiter(this, void 0, void 0, function* () {
+            this.logger.log('Initializing module...');
             return this.register();
         });
     }
     onModuleDestroy() {
         return __awaiter(this, void 0, void 0, function* () {
+            this.logger.log('Destroying module...');
             return yield this.unregister();
         });
     }
     register() {
         return __awaiter(this, void 0, void 0, function* () {
             const service = this.getServiceInfo();
+            console.log('service', service);
             try {
                 yield this.consul.agent.service
                     .register(service);
-                this.logger.log('Register the service success.');
+                console.log('Register the service success.');
                 this.resetTriesCount();
             }
             catch (e) {
                 if (this.tries > this.maxRetry) {
-                    this.logger.error(`Maximum connection retry reached. Exiting.`);
+                    console.error(`Maximum connection retry reached. Exiting.`);
                     process.exit(1);
                 }
-                this.logger.warn(`Registering the service ${this.serviceName} failed.\n ${e} \n Retrying in ${this.retryInterval}`);
+                console.warn(`Registering the service ${this.serviceName} failed.\n ${e} \n Retrying in ${this.retryInterval}`);
                 this.tries++;
                 setTimeout(() => this.register(), this.retryInterval);
             }
@@ -74,14 +90,14 @@ let ConsulService = class ConsulService {
             try {
                 yield this.consul.agent.service
                     .deregister(service);
-                this.logger.log(`Unregistered the service ${service.name} successfully.`);
+                console.log(`Unregistered the service ${service.name} successfully.`);
                 this.resetTriesCount();
             }
             catch (e) {
                 if (this.tries > this.maxRetry) {
                     this.logger.error('Deregister the service fail.', e);
                 }
-                this.logger.warn(`Deregister the service fail, will retry after ${this.retryInterval}`);
+                console.warn(`Deregister the service fail, will retry after ${this.retryInterval}`);
                 this.tries++;
                 setTimeout(() => this.register(), this.retryInterval);
             }
@@ -93,6 +109,9 @@ let ConsulService = class ConsulService {
             name: this.serviceName,
             address: this.serviceHost,
             port: this.servicePort,
+            tags: this.serviceTags,
+            meta: this.serviceMeta,
+            check: this.check
         };
     }
     resetTriesCount() {

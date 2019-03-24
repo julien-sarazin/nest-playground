@@ -12,6 +12,10 @@ export class ConsulService implements OnModuleInit, OnModuleDestroy {
     private readonly serviceName: string;
     private readonly servicePort: number;
     private readonly serviceHost: string;
+    private readonly serviceTags: string[];
+    private readonly serviceMeta: any;
+
+    private readonly check: any;
 
     private tries: number;
     private readonly maxRetry: number;
@@ -22,42 +26,54 @@ export class ConsulService implements OnModuleInit, OnModuleDestroy {
       @Inject(CONSUL_CONFIGURATION_PROVIDER) private readonly configuration: any,
       ) {
         this.logger = new Logger();
+        /**
+         * Common service information
+         */
         this.serviceId = get(configuration, 'service.id', uuid.v4());
         this.serviceName = get(configuration, 'service.name', 'unknown-service');
         this.servicePort = get(configuration, 'service.port');
         this.serviceHost = get(configuration, 'service.host');
-
+        this.serviceTags = get(configuration, 'service.tags');
+        this.serviceMeta = get(configuration, 'service.meta');
+        /**
+         * Health check settings
+         */
+        this.check = get(configuration, 'service.check');
+        /**
+         * Consul fail checks
+         */
         this.tries = 0;
         this.maxRetry = get(configuration, 'consul.maxRetry', 10);
         this.retryInterval = get(configuration, 'consul.retryInterval', 1000);
-
     }
 
     public async onModuleInit(): Promise<any> {
+        this.logger.log('Initializing module...');
         return this.register();
     }
 
     public async onModuleDestroy(): Promise<any> {
+        this.logger.log('Destroying module...');
         return await this.unregister();
     }
 
     private async register(): Promise<void> {
         const service = this.getServiceInfo();
-
+        console.log('service', service);
         try {
             await this.consul.agent.service
               .register(service);
 
-            this.logger.log('Register the service success.');
+            console.log('Register the service success.');
             this.resetTriesCount();
         }
         catch (e) {
             if (this.tries > this.maxRetry) {
-                this.logger.error(`Maximum connection retry reached. Exiting.`);
+                console.error(`Maximum connection retry reached. Exiting.`);
                 process.exit(1);
             }
 
-            this.logger.warn(`Registering the service ${this.serviceName} failed.\n ${e} \n Retrying in ${this.retryInterval}`);
+            console.warn(`Registering the service ${this.serviceName} failed.\n ${e} \n Retrying in ${this.retryInterval}`);
             this.tries++;
 
             setTimeout(() => this.register(), this.retryInterval);
@@ -71,7 +87,7 @@ export class ConsulService implements OnModuleInit, OnModuleDestroy {
             await this.consul.agent.service
               .deregister(service);
 
-            this.logger.log(`Unregistered the service ${service.name} successfully.`);
+            console.log(`Unregistered the service ${service.name} successfully.`);
             this.resetTriesCount();
         }
         catch (e) {
@@ -79,7 +95,7 @@ export class ConsulService implements OnModuleInit, OnModuleDestroy {
                 this.logger.error('Deregister the service fail.', e);
             }
 
-            this.logger.warn(`Deregister the service fail, will retry after ${this.retryInterval}`);
+            console.warn(`Deregister the service fail, will retry after ${this.retryInterval}`);
             this.tries++;
 
             setTimeout(() => this.register(), this.retryInterval);
@@ -92,10 +108,14 @@ export class ConsulService implements OnModuleInit, OnModuleDestroy {
             name: this.serviceName,
             address: this.serviceHost,
             port: this.servicePort,
+            tags: this.serviceTags,
+            meta: this.serviceMeta,
+            check: this.check
         };
     }
 
     private resetTriesCount(): void {
         this.tries = 0;
     }
+
 }
