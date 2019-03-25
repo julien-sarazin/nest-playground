@@ -1,10 +1,10 @@
-import { Injectable, Logger, LoggerService, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
-import * as Consul from 'consul';
-import { get } from 'lodash';
-import { ServiceConfiguration } from './interfaces/service-configuration.interface';
-import { ConsulCriteria } from './interfaces/consul-criteria.interface';
-import { RemoteService } from './classes/RemoteService';
-import uuid = require('uuid');
+import { Injectable, Logger, LoggerService, OnModuleDestroy, OnModuleInit } from "@nestjs/common";
+import * as Consul from "consul";
+import { get } from "lodash";
+import { ServiceConfiguration } from "./interfaces/service-configuration.interface";
+import { ConsulCriteria } from "./interfaces/consul-criteria.interface";
+import { RemoteService } from "./classes/RemoteService";
+import uuid = require("uuid");
 
 @Injectable()
 export class ConsulService implements OnModuleInit, OnModuleDestroy {
@@ -18,7 +18,7 @@ export class ConsulService implements OnModuleInit, OnModuleDestroy {
     constructor(
       private readonly consul: Consul.Consul,
       private readonly configuration: any,
-      private readonly logger?: LoggerService,
+      private readonly logger?: LoggerService
     ) {
         this.logger = this.logger || new Logger();
         /**
@@ -30,31 +30,25 @@ export class ConsulService implements OnModuleInit, OnModuleDestroy {
          * Consul fail checks
          */
         this.tries = 0;
-        this.maxRetry = get(configuration, 'consul.maxRetry', 10);
-        this.retryInterval = get(configuration, 'consul.retryInterval', 1000);
+        this.maxRetry = get(configuration, "consul.maxRetry", 10);
+        this.retryInterval = get(configuration, "consul.retryInterval", 1000);
+        /**
+         * Setup watchers
+         */
+        this.setupListeners();
     }
 
-    public next(c: ConsulCriteria | string): RemoteService {
-        const criteria = (typeof c === 'string')
-          ? { name: c }
-          : c;
-        /**
-         * Getting the first matching implies the array is
-         * maintained sorted.
-         */
-        const configuration = this.remoteServices
-          .find(rs => rs.name === criteria.name);
-
-        return new RemoteService(configuration);
+    public get(service: string): RemoteService {
+        return new RemoteService(this.consul, service);
     }
 
     public async onModuleInit(): Promise<any> {
-        this.logger.log('Initializing module...');
+        this.logger.log("Initializing module...");
         return this.register();
     }
 
     public async onModuleDestroy(): Promise<any> {
-        this.logger.log('Destroying module...');
+        this.logger.log("Destroying module...");
         return await this.unregister();
     }
 
@@ -66,8 +60,7 @@ export class ConsulService implements OnModuleInit, OnModuleDestroy {
 
             this.logger.log(`> Registered the service ${this.localService.name} successfully.`);
             this.resetTriesCount();
-        }
-        catch (e) {
+        } catch (e) {
             if (this.tries > this.maxRetry) {
                 this.logger.error(`> Maximum connection retry reached. Exiting.`);
                 process.exit(1);
@@ -87,10 +80,9 @@ export class ConsulService implements OnModuleInit, OnModuleDestroy {
 
             this.logger.log(`Unregistered the service ${this.localService.name} successfully.`);
             this.resetTriesCount();
-        }
-        catch (e) {
+        } catch (e) {
             if (this.tries > this.maxRetry) {
-                this.logger.error('Deregister the service fail.', e);
+                this.logger.error("Deregister the service fail.", e);
             }
 
             this.logger.warn(`Deregister the service fail, will retry after ${this.retryInterval}`);
@@ -104,4 +96,17 @@ export class ConsulService implements OnModuleInit, OnModuleDestroy {
         this.tries = 0;
     }
 
+    private setupListeners(): void {
+        process.on('SIGINT', async () => {
+            await this.unregister();
+            process.exit(0);
+        });
+
+        process.on('exit', async () => {
+            await this.unregister();
+            process.exit(0);
+        });
+
+
+    }
 }

@@ -3,23 +3,25 @@ import TokensService from './service/tokens.service';
 import { TokensController } from './controller/tokens.controller';
 import { DatabaseModule } from '../../database/database.module';
 import TokenRepository from './model/token.repository';
-import { ConsulModule } from '../../../../shared/modules/consul/src';
+import { UsersModule } from '../users/users.module';
+import UsersService from '../users/users.service';
 
 @Module({
-  controllers: [
-    TokensController,
-  ],
-  providers: [
-    TokensService,
-    TokenRepository,
-  ],
-  exports: [
-    TokensService,
-  ],
-  imports: [
-    DatabaseModule,
-    ConsulModule,
-  ],
+    controllers: [
+        TokensController,
+    ],
+    providers: [
+        TokensService,
+        TokenRepository,
+        UsersService,
+    ],
+    exports: [
+        TokensService,
+    ],
+    imports: [
+        DatabaseModule,
+        UsersModule,
+    ],
 })
 export class TokensModule {
 }

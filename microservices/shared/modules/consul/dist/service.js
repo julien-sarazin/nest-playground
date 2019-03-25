@@ -37,16 +37,21 @@ let ConsulService = class ConsulService {
          * Consul fail checks
          */
         this.tries = 0;
-        this.maxRetry = lodash_1.get(configuration, 'consul.maxRetry', 10);
-        this.retryInterval = lodash_1.get(configuration, 'consul.retryInterval', 1000);
+        this.maxRetry = lodash_1.get(configuration, "consul.maxRetry", 10);
+        this.retryInterval = lodash_1.get(configuration, "consul.retryInterval", 1000);
+        /**
+         * Setup watchers
+         */
+        this.setupWatchers();
     }
     next(c) {
-        const criteria = (typeof c === 'string')
+        const criteria = (typeof c === "string")
             ? { name: c }
             : c;
         /**
          * Getting the first matching implies the array is
          * maintained sorted.
+         * TODO: might add some load balancing logic here.
          */
         const configuration = this.remoteServices
             .find(rs => rs.name === criteria.name);
@@ -54,13 +59,13 @@ let ConsulService = class ConsulService {
     }
     onModuleInit() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.logger.log('Initializing module...');
+            this.logger.log("Initializing module...");
             return this.register();
         });
     }
     onModuleDestroy() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.logger.log('Destroying module...');
+            this.logger.log("Destroying module...");
             return yield this.unregister();
         });
     }
@@ -94,7 +99,7 @@ let ConsulService = class ConsulService {
             }
             catch (e) {
                 if (this.tries > this.maxRetry) {
-                    this.logger.error('Deregister the service fail.', e);
+                    this.logger.error("Deregister the service fail.", e);
                 }
                 this.logger.warn(`Deregister the service fail, will retry after ${this.retryInterval}`);
                 this.tries++;
@@ -104,6 +109,23 @@ let ConsulService = class ConsulService {
     }
     resetTriesCount() {
         this.tries = 0;
+    }
+    setupWatchers() {
+        const self = this;
+        watchServiceList();
+        function watchServiceList() {
+            const watch = self.consul
+                .watch({ method: self.consul.catalog.services });
+            watch.on("change", function (data, res) {
+                console.log("data:", data);
+            });
+            watch.on("error", function (err) {
+                console.log("error:", err);
+            });
+            setTimeout(function () {
+                watch.end();
+            }, 30 * 1000);
+        }
     }
 };
 ConsulService = __decorate([

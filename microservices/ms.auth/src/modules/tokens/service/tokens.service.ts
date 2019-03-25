@@ -7,27 +7,27 @@ import {
     ServiceUnavailableException,
 } from '@nestjs/common';
 import IToken from '../model/token.interface';
-import TokenRepository from '../model/token.repository';
 import { CreateTokensDTO } from '../dto/create.dto';
-import { UserService } from './user.service';
 import { Token } from '../model/token.entity';
+import UsersService, { UserNotAuthenticatedException } from '../../users/users.service';
+import TokensRepository from '../model/token.repository';
 
 @Injectable()
 export default class TokensService {
 
     constructor(
-      @Inject('TokenRepository') private readonly tokenRepository: TokenRepository,
-      @Inject('UserService') private readonly userService: UserService,
+      @Inject('TokensRepository') private readonly tokensRepository: TokensRepository,
+      @Inject('UsersService') private readonly userService: UsersService,
     ) {
     }
 
     public async list(@Query() query): Promise<IToken[]> {
-        return await this.tokenRepository
+        return await this.tokensRepository
           .find();
     }
 
     public async get(id: number): Promise<IToken> {
-        const result = await this.tokenRepository
+        const result = await this.tokensRepository
           .findOne(id);
 
         if (!result) {
@@ -38,7 +38,7 @@ export default class TokensService {
     }
 
     public async peek(@Query() query): Promise<IToken> {
-        return await this.tokenRepository
+        return await this.tokensRepository
           .findOne(query);
     }
 
@@ -50,7 +50,7 @@ export default class TokensService {
             const token = new Token();
             token.userId = result.id;
 
-            return await this.tokenRepository.save(token);
+            return await this.tokensRepository.save(token);
         }
         catch (e) {
             if (e instanceof UserNotAuthenticatedException) {
@@ -67,10 +67,10 @@ export default class TokensService {
     }
 
     public async remove(id: number): Promise<boolean> {
-        const entity = await this.tokenRepository
+        const entity = await this.tokensRepository
           .findOne(id);
 
-        const result = await this.tokenRepository
+        const result = await this.tokensRepository
           .remove(entity);
 
         return true;

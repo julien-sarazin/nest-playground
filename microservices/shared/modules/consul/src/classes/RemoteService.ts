@@ -1,19 +1,45 @@
-import { ServiceConfiguration } from '../interfaces/service-configuration.interface';
-import Axios, { AxiosRequestConfig } from 'axios';
-import * as path from 'path';
+import { ServiceConfiguration } from "../interfaces/service-configuration.interface";
+import Axios, { AxiosRequestConfig } from "axios";
+import * as path from "path";
+import * as Consul from "consul";
 
 export class RemoteService {
-    private readonly protocol: string;
-    private readonly port: number;
-    private readonly basePath: string;
+    private nodes: ServiceConfiguration[];
 
-    constructor(configuration: ServiceConfiguration) {
-        this.protocol = configuration.protocol || 'http://';
-        this.port = configuration.port;
-        this.basePath = configuration.meta.basePath;
+    constructor(
+      private readonly consul: Consul.Consul,
+      private readonly serviceName: String) {
+        this.watchNodes();
+    }
+
+    private watchNodes(): void {
+        const options: any = {
+            service: this.serviceName,
+            passing: true
+        };
+
+        const watch = this.consul.watch({
+            method: this.consul.health.service,
+            options
+        });
+
+        watch.on("change", (changes, res) => {
+            this.nodes = changes.map(data => data.Service);
+            console.log(`Service ${this.serviceName} access points:`, this.nodes);
+        });
+
+        watch.on("error", function(err) {
+            console.error("error:" + err);
+        });
+
+        setTimeout(function() {
+            // why?
+            watch.end();
+        }, 30 * 1000);
     }
 
     public async get(resourcePath: string, configuration?: AxiosRequestConfig): Promise<any> {
+
         const uri = path.join(this.protocol, this.basePath, resourcePath);
 
         return await Axios

@@ -1,0 +1,82 @@
+version: "3.4"
+
+networks:
+  consul:
+    external: true
+
+volumes:
+  consul:
+
+services:
+  server:
+    image: consul:1.4.4
+    volumes:
+      - consul:/consul
+    ports:
+      - target: 8500
+        published: 8500
+        mode: host
+    networks:
+      consul:
+        aliases:
+          - consul.cluster
+    environment:
+      - 'CONSUL_LOCAL_CONFIG={
+      "skip_leave_on_interrupt": true,
+      "acl_down_policy":"allow",
+      "acl_master_token":"*****-****-****-*****-*****",
+      "acl_agent_token":"****-****-****-****-***",
+      "acl_datacenter":"dc1",
+      "acl_default_policy":"deny",
+      "datacenter":"dc1",
+      "encrypt":"*****==",
+      "data_dir":"/consul/data",
+      "server":true
+      }'
+      - CONSUL_BIND_INTERFACE=eth0
+      - CONSUL_HTTP_TOKEN=*****-****-****-*****-*****
+    command: agent -ui -data-dir /consul/data -server -client 0.0.0.0 -bootstrap-expect=3 -retry-join consul.cluster
+    deploy:
+      endpoint_mode: dnsrr
+      mode: global
+      placement:
+        constraints: [node.role ==  manager]
+
+  client:
+    image: consul:1.4.4
+    volumes:
+      - consul:/consul
+    networks:
+      consul:
+        aliases:
+          - consul.client.cluster
+    environment:
+      - 'CONSUL_LOCAL_CONFIG={ "skip_leave_on_interrupt": true,
+      "acl_down_policy":"allow",
+      "acl_master_token":"*****-*****-****-*****-*****",
+      "acl_agent_token":"*****-****-****-****-******",
+      "acl_datacenter":"dc1",
+      "acl_default_policy":"deny",
+      "datacenter":"dc1",
+      "encrypt":"****==",
+      "data_dir":"/consul/data" }'
+      - CONSUL_BIND_INTERFACE=eth0
+      - CONSUL_HTTP_TOKEN=****-****-****-***-*****
+    command: agent -ui -data-dir /consul/data -client 0.0.0.0 -retry-join consul.cluster
+    deploy:
+      endpoint_mode: dnsrr
+      mode: global
+      placement:
+        constraints: [node.role !=  manager]
+
+  registrator:
+    image: gliderlabs/registrator:master
+    command: -internal consul://consul.cluster:8500
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+    networks:
+      - consul
+    environment:
+      - CONSUL_HTTP_TOKEN=*******-****-*****-*****-*****
+    deploy:
+      mode: global
