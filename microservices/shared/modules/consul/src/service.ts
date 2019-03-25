@@ -1,50 +1,51 @@
-import { Inject, Injectable, Logger, LoggerService, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+import { Injectable, Logger, LoggerService, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import * as Consul from 'consul';
 import { get } from 'lodash';
-import { CONSUL_CLIENT_PROVIDER, CONSUL_CONFIGURATION_PROVIDER } from './constants';
+import { ServiceConfiguration } from './interfaces/service-configuration.interface';
+import { ConsulCriteria } from './interfaces/consul-criteria.interface';
+import { RemoteService } from './classes/RemoteService';
 import uuid = require('uuid');
 
 @Injectable()
 export class ConsulService implements OnModuleInit, OnModuleDestroy {
-    private logger: LoggerService;
-
-    private readonly serviceId: string;
-    private readonly serviceName: string;
-    private readonly servicePort: number;
-    private readonly serviceHost: string;
-    private readonly serviceTags: string[];
-    private readonly serviceMeta: any;
-
-    private readonly check: any;
-
     private tries: number;
     private readonly maxRetry: number;
     private readonly retryInterval: number;
 
+    public readonly localService: ServiceConfiguration;
+    public readonly remoteServices: ServiceConfiguration[];
+
     constructor(
-      @Inject(CONSUL_CLIENT_PROVIDER) private readonly consul: Consul.Consul,
-      @Inject(CONSUL_CONFIGURATION_PROVIDER) private readonly configuration: any,
-      ) {
-        this.logger = new Logger();
+      private readonly consul: Consul.Consul,
+      private readonly configuration: any,
+      private readonly logger?: LoggerService,
+    ) {
+        this.logger = this.logger || new Logger();
         /**
          * Common service information
          */
-        this.serviceId = get(configuration, 'service.id', uuid.v4());
-        this.serviceName = get(configuration, 'service.name', 'unknown-service');
-        this.servicePort = get(configuration, 'service.port');
-        this.serviceHost = get(configuration, 'service.host');
-        this.serviceTags = get(configuration, 'service.tags');
-        this.serviceMeta = get(configuration, 'service.meta');
-        /**
-         * Health check settings
-         */
-        this.check = get(configuration, 'service.check');
+        this.localService = configuration.service;
+        this.localService.id = this.localService.id || uuid.v4();
         /**
          * Consul fail checks
          */
         this.tries = 0;
         this.maxRetry = get(configuration, 'consul.maxRetry', 10);
         this.retryInterval = get(configuration, 'consul.retryInterval', 1000);
+    }
+
+    public next(c: ConsulCriteria | string): RemoteService {
+        const criteria = (typeof c === 'string')
+          ? { name: c }
+          : c;
+        /**
+         * Getting the first matching implies the array is
+         * maintained sorted.
+         */
+        const configuration = this.remoteServices
+          .find(rs => rs.name === criteria.name);
+
+        return new RemoteService(configuration);
     }
 
     public async onModuleInit(): Promise<any> {
@@ -58,22 +59,21 @@ export class ConsulService implements OnModuleInit, OnModuleDestroy {
     }
 
     private async register(): Promise<void> {
-        const service = this.getServiceInfo();
-        console.log('service', service);
+        this.logger.log(`> Registering ${this.localService.name} ...`);
         try {
             await this.consul.agent.service
-              .register(service);
+              .register(this.localService);
 
-            console.log('Register the service success.');
+            this.logger.log(`> Registered the service ${this.localService.name} successfully.`);
             this.resetTriesCount();
         }
         catch (e) {
             if (this.tries > this.maxRetry) {
-                console.error(`Maximum connection retry reached. Exiting.`);
+                this.logger.error(`> Maximum connection retry reached. Exiting.`);
                 process.exit(1);
             }
 
-            console.warn(`Registering the service ${this.serviceName} failed.\n ${e} \n Retrying in ${this.retryInterval}`);
+            this.logger.warn(`Registering the service ${this.localService.name} failed.\n ${e} \n Retrying in ${this.retryInterval}`);
             this.tries++;
 
             setTimeout(() => this.register(), this.retryInterval);
@@ -81,13 +81,11 @@ export class ConsulService implements OnModuleInit, OnModuleDestroy {
     }
 
     private async unregister(): Promise<void> {
-        const service = this.getServiceInfo();
-
         try {
             await this.consul.agent.service
-              .deregister(service);
+              .deregister(this.localService);
 
-            console.log(`Unregistered the service ${service.name} successfully.`);
+            this.logger.log(`Unregistered the service ${this.localService.name} successfully.`);
             this.resetTriesCount();
         }
         catch (e) {
@@ -95,23 +93,11 @@ export class ConsulService implements OnModuleInit, OnModuleDestroy {
                 this.logger.error('Deregister the service fail.', e);
             }
 
-            console.warn(`Deregister the service fail, will retry after ${this.retryInterval}`);
+            this.logger.warn(`Deregister the service fail, will retry after ${this.retryInterval}`);
             this.tries++;
 
             setTimeout(() => this.register(), this.retryInterval);
         }
-    }
-
-    private getServiceInfo(): any {
-        return {
-            id: this.serviceId,
-            name: this.serviceName,
-            address: this.serviceHost,
-            port: this.servicePort,
-            tags: this.serviceTags,
-            meta: this.serviceMeta,
-            check: this.check
-        };
     }
 
     private resetTriesCount(): void {

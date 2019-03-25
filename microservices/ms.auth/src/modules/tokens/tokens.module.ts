@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import TokensService from './service/tokens.service';
 import { TokensController } from './controller/tokens.controller';
 import { DatabaseModule } from '../../database/database.module';
-import TokenRepository from './model/tokens.repository';
+import TokenRepository from './model/token.repository';
 import { ConsulModule } from '../../../../shared/modules/consul/src';
 
 @Module({

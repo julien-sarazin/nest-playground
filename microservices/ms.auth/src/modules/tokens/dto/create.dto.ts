@@ -5,5 +5,5 @@ export class CreateTokensDTO {
   email: string;
 
   @IsString()
-  password: number;
+  password: string;
 }

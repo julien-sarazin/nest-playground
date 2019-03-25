@@ -1,0 +1,45 @@
+{
+    "name": "nlogger",
+    "version": "0.0.0",
+    "description": "description",
+    "author": "",
+    "license": "MIT",
+    "scripts": {
+        "test": "jest",
+        "coverage": "jest --coverage",
+        "coveralls": "yarn run coverage --coverageReporters=text-lcov | coveralls",
+        "test:watch": "jest --watch",
+        "build": "rm -rf ./dist && tsc",
+        "prepublish": "npm run build"
+    },
+    "dependencies": {
+        "reflect-metadata": "^0.1.12",
+        "rxjs": "^6.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^11.11.6",
+        "@nestjs/common": "^5.1.0",
+        "@nestjs/core": "^5.1.0",
+        "@nestjs/testing": "^5.1.0",
+        "@types/jest": "^23.3.0",
+        "coveralls": "^3.0.2",
+        "jest": "^23.3.0",
+        "prettier": "^1.13.7",
+        "ts-jest": "^23.0.0",
+        "typescript": "^3.3.3"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "ts"
+        ],
+        "rootDir": "src",
+        "testRegex": ".spec.ts$",
+        "transform": {
+            "^.+\\.(t|j)s$": "ts-jest"
+        },
+        "coverageDirectory": "../coverage",
+        "testEnvironment": "node"
+    }
+}

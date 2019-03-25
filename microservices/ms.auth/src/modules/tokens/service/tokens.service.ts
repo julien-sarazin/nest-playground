@@ -1,58 +1,84 @@
-import { Inject, Injectable, Query } from '@nestjs/common';
-import IToken from '../model/tokens.interface';
-import TokenRepository from '../model/tokens.repository';
+import {
+    ForbiddenException,
+    Inject,
+    Injectable,
+    InternalServerErrorException,
+    Query,
+    ServiceUnavailableException,
+} from '@nestjs/common';
+import IToken from '../model/token.interface';
+import TokenRepository from '../model/token.repository';
 import { CreateTokensDTO } from '../dto/create.dto';
+import { UserService } from './user.service';
+import { Token } from '../model/token.entity';
 
 @Injectable()
 export default class TokensService {
 
-  constructor(
-    @Inject('TokenRepository') private readonly tokenRepository: TokenRepository,
-  ) {
-  }
-
-  public async list(@Query() query): Promise<IToken[]> {
-    return await this.tokenRepository
-      .find();
-  }
-
-  public async get(id: number): Promise<IToken> {
-    const result = await this.tokenRepository
-      .findOne(id);
-
-    if (!result) {
-      throw new TokenNotFoundException();
+    constructor(
+      @Inject('TokenRepository') private readonly tokenRepository: TokenRepository,
+      @Inject('UserService') private readonly userService: UserService,
+    ) {
     }
 
-    return result;
-  }
+    public async list(@Query() query): Promise<IToken[]> {
+        return await this.tokenRepository
+          .find();
+    }
 
-  public async peek(@Query() query): Promise<IToken> {
-    return await this.tokenRepository
-      .findOne(query);
-  }
+    public async get(id: number): Promise<IToken> {
+        const result = await this.tokenRepository
+          .findOne(id);
 
-  public async create(dto: CreateTokensDTO): Promise<IToken> {
+        if (!result) {
+            throw new TokenNotFoundException();
+        }
 
-    return {
-      id: 1,
-      userId: 1,
-    };
-  }
+        return result;
+    }
 
-  public async remove(id: number): Promise<boolean> {
-    const entity = await this.tokenRepository
-      .findOne(id);
+    public async peek(@Query() query): Promise<IToken> {
+        return await this.tokenRepository
+          .findOne(query);
+    }
 
-    const result = await this.tokenRepository
-      .remove(entity);
+    public async create(dto: CreateTokensDTO): Promise<IToken> {
+        try {
+            const result = await this.userService
+              .authenticate(dto.email, dto.password);
 
-    return true;
-  }
+            const token = new Token();
+            token.userId = result.id;
+
+            return await this.tokenRepository.save(token);
+        }
+        catch (e) {
+            if (e instanceof UserNotAuthenticatedException) {
+                throw new ForbiddenException(e);
+            }
+
+            if (e instanceof ServiceUnavailableException) {
+                throw e;
+            }
+            else {
+                throw new InternalServerErrorException(e);
+            }
+        }
+    }
+
+    public async remove(id: number): Promise<boolean> {
+        const entity = await this.tokenRepository
+          .findOne(id);
+
+        const result = await this.tokenRepository
+          .remove(entity);
+
+        return true;
+    }
 }
 
 export class TokenNotFoundException extends Error {
-  constructor(message?: string) {
-    super(message);
-  }
+    constructor(message?: string) {
+        super(message);
+    }
 }

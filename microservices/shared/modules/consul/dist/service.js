@@ -8,9 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -23,33 +20,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const Consul = require("consul");
 const lodash_1 = require("lodash");
-const constants_1 = require("./constants");
+const RemoteService_1 = require("./classes/RemoteService");
 const uuid = require("uuid");
 let ConsulService = class ConsulService {
-    constructor(consul, configuration) {
+    constructor(consul, configuration, logger) {
         this.consul = consul;
         this.configuration = configuration;
-        this.logger = new common_1.Logger();
+        this.logger = logger;
+        this.logger = this.logger || new common_1.Logger();
         /**
          * Common service information
          */
-        this.serviceId = lodash_1.get(configuration, 'service.id', uuid.v4());
-        this.serviceName = lodash_1.get(configuration, 'service.name', 'unknown-service');
-        this.servicePort = lodash_1.get(configuration, 'service.port');
-        this.serviceHost = lodash_1.get(configuration, 'service.host');
-        this.serviceTags = lodash_1.get(configuration, 'service.tags');
-        this.serviceMeta = lodash_1.get(configuration, 'service.meta');
-        /**
-         * Health check settings
-         */
-        this.check = lodash_1.get(configuration, 'service.check');
+        this.localService = configuration.service;
+        this.localService.id = this.localService.id || uuid.v4();
         /**
          * Consul fail checks
          */
         this.tries = 0;
         this.maxRetry = lodash_1.get(configuration, 'consul.maxRetry', 10);
         this.retryInterval = lodash_1.get(configuration, 'consul.retryInterval', 1000);
-        process.on('SIGINT', () => this.unregister());
+    }
+    next(c) {
+        const criteria = (typeof c === 'string')
+            ? { name: c }
+            : c;
+        /**
+         * Getting the first matching implies the array is
+         * maintained sorted.
+         */
+        const configuration = this.remoteServices
+            .find(rs => rs.name === criteria.name);
+        return new RemoteService_1.RemoteService(configuration);
     }
     onModuleInit() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -65,20 +66,19 @@ let ConsulService = class ConsulService {
     }
     register() {
         return __awaiter(this, void 0, void 0, function* () {
-            const service = this.getServiceInfo();
-            console.log('service', service);
+            this.logger.log(`> Registering ${this.localService.name} ...`);
             try {
                 yield this.consul.agent.service
-                    .register(service);
-                console.log('Register the service success.');
+                    .register(this.localService);
+                this.logger.log(`> Registered the service ${this.localService.name} successfully.`);
                 this.resetTriesCount();
             }
             catch (e) {
                 if (this.tries > this.maxRetry) {
-                    console.error(`Maximum connection retry reached. Exiting.`);
+                    this.logger.error(`> Maximum connection retry reached. Exiting.`);
                     process.exit(1);
                 }
-                console.warn(`Registering the service ${this.serviceName} failed.\n ${e} \n Retrying in ${this.retryInterval}`);
+                this.logger.warn(`Registering the service ${this.localService.name} failed.\n ${e} \n Retrying in ${this.retryInterval}`);
                 this.tries++;
                 setTimeout(() => this.register(), this.retryInterval);
             }
@@ -86,33 +86,21 @@ let ConsulService = class ConsulService {
     }
     unregister() {
         return __awaiter(this, void 0, void 0, function* () {
-            const service = this.getServiceInfo();
             try {
                 yield this.consul.agent.service
-                    .deregister(service);
-                console.log(`Unregistered the service ${service.name} successfully.`);
+                    .deregister(this.localService);
+                this.logger.log(`Unregistered the service ${this.localService.name} successfully.`);
                 this.resetTriesCount();
             }
             catch (e) {
                 if (this.tries > this.maxRetry) {
                     this.logger.error('Deregister the service fail.', e);
                 }
-                console.warn(`Deregister the service fail, will retry after ${this.retryInterval}`);
+                this.logger.warn(`Deregister the service fail, will retry after ${this.retryInterval}`);
                 this.tries++;
                 setTimeout(() => this.register(), this.retryInterval);
             }
         });
-    }
-    getServiceInfo() {
-        return {
-            id: this.serviceId,
-            name: this.serviceName,
-            address: this.serviceHost,
-            port: this.servicePort,
-            tags: this.serviceTags,
-            meta: this.serviceMeta,
-            check: this.check
-        };
     }
     resetTriesCount() {
         this.tries = 0;
@@ -120,8 +108,6 @@ let ConsulService = class ConsulService {
 };
 ConsulService = __decorate([
     common_1.Injectable(),
-    __param(0, common_1.Inject(constants_1.CONSUL_CLIENT_PROVIDER)),
-    __param(1, common_1.Inject(constants_1.CONSUL_CONFIGURATION_PROVIDER)),
-    __metadata("design:paramtypes", [Object, Object])
+    __metadata("design:paramtypes", [Object, Object, Object])
 ], ConsulService);
 exports.ConsulService = ConsulService;

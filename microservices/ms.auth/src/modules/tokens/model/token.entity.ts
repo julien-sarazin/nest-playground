@@ -1,7 +1,8 @@
 import { Entity, Column, PrimaryColumn, CreateDateColumn, BeforeUpdate } from 'typeorm';
+import IToken from './token.interface';
 
 @Entity()
-export class Tokens {
+export class Token implements IToken{
   @PrimaryColumn()
   id: number;
 

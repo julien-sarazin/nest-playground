@@ -1,4 +1,6 @@
-export const CONSUL_CONFIG = {
+import { ConsulModuleConfiguration } from '@shared/modules/consul/src';
+
+export const CONSUL_CONFIG: ConsulModuleConfiguration = {
     consul: {
         host: '127.0.0.1',
         port: '8500',
@@ -7,7 +9,7 @@ export const CONSUL_CONFIG = {
     },
     service: {
         name: 'auth',
-        host: 'localhost',
+        address: 'localhost',
         port: 3002,
         tags: ['auth', 'macro'],
         meta: {
@@ -18,10 +20,6 @@ export const CONSUL_CONFIG = {
             http: 'http://localhost:3002/api/health/check',
             interval: '10s',
             ttl: '15s',
-        },
-        weights: {
-            passing: 10,
-            warning: 1,
         },
     },
 };
