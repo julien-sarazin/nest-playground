@@ -1,6 +1,6 @@
 import { DynamicModule, Global, Module} from '@nestjs/common';
 import * as Consul from 'consul';
-import { ConsulService } from './service';
+import { NestConsulService } from './nest-consul.service';
 import {
     CONSUL_CLIENT_PROVIDER,
     CONSUL_CONFIGURATION_PROVIDER,
@@ -10,7 +10,7 @@ import { ConsulModuleConfiguration } from './interfaces';
 
 @Global()
 @Module({})
-export class ConsulModule {
+export class NestConsulModule {
 
     static init(options: ConsulModuleConfiguration): DynamicModule {
         /**
@@ -40,14 +40,14 @@ export class ConsulModule {
         };
         const consulServiceProvider = {
             provide: CONSUL_SERVICE_PROVIDER,
-            useFactory: async (consulClient: any, consulConfiguration: ConsulModuleConfiguration ): Promise<ConsulService> => {
-                return new ConsulService(consulClient, consulConfiguration);
+            useFactory: async (consulClient: Consul.Consul, consulConfiguration: ConsulModuleConfiguration ): Promise<NestConsulService> => {
+                return new NestConsulService(consulClient, consulConfiguration);
             },
             inject: [CONSUL_CLIENT_PROVIDER, CONSUL_CONFIGURATION_PROVIDER],
         };
 
         return {
-            module: ConsulModule,
+            module: NestConsulModule,
             providers: [consulConfigurationProvider, consulClientProvider, consulServiceProvider],
             exports: [consulServiceProvider],
         };

@@ -1,12 +1,15 @@
-import { CONSUL_SERVICE_PROVIDER } from '@shared/modules/consul';
-import { ConsulService } from '@shared/modules/consul';
+import { CONSUL_SERVICE_PROVIDER, NestConsulService, RemoteRepositoryService } from '@shared/modules/consul';
 import { Inject, Injectable } from '@nestjs/common';
+import { Users } from './Users.model';
 
 @Injectable()
 export default class UsersService {
+    private usersRepository: RemoteRepositoryService<Users>;
+
     constructor(
-      @Inject(CONSUL_SERVICE_PROVIDER) private readonly consulService: ConsulService,
+      @Inject(CONSUL_SERVICE_PROVIDER) private readonly consulService: NestConsulService,
     ) {
+        this.usersRepository = consulService.getRemoteRepository<Users>(Users);
     }
 
     public async authenticate(email: string, password: string): Promise<{ id: number }> {

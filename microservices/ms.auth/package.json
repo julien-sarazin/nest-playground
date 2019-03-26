@@ -23,6 +23,7 @@
     "@nestjs/common": "^5.4.0",
     "@nestjs/core": "^5.4.0",
     "@types/consul": "^0.23.33",
+    "@types/uuid": "^3.4.4",
     "class-transformer": "^0.2.0",
     "class-validator": "^0.9.1",
     "consul": "^0.34.1",
@@ -31,7 +32,8 @@
     "rimraf": "^2.6.2",
     "rxjs": "^6.2.2",
     "typeorm": "^0.2.15-rc.2",
-    "typescript": "^3.0.1"
+    "typescript": "^3.0.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@nestjs/testing": "^5.1.0",

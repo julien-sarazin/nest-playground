@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ConsulModule } from '@shared/modules/consul/src';
 import UsersService from './users.service';
+import { NestConsulModule } from '@shared/modules/consul';
 
 @Module({
     providers: [
@@ -10,7 +10,7 @@ import UsersService from './users.service';
         UsersService,
     ],
     imports: [
-        ConsulModule,
+        NestConsulModule,
     ],
 })
 export class UsersModule {

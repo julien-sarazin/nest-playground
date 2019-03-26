@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { User } from '../model/user.entity';
 import { UserCreateDTO } from '../dto/create.dto';
 import { UserUpdateDTO } from '../dto/update.dto';
-import UserRepository from '../model/user.repository';
+import UsersRepository from '../model/user.repository';
 import { compare, hash } from 'bcrypt';
 import { UserAuthenticateDTO } from '../dto/authenticate.dto';
 
@@ -10,17 +10,17 @@ import { UserAuthenticateDTO } from '../dto/authenticate.dto';
 export default class UsersService {
 
   constructor(
-    @Inject('UserRepository') private readonly userRepository: UserRepository,
+    @Inject('UsersRepository') private readonly usersRepository: UsersRepository,
   ) {
   }
 
   public async list(criteria): Promise<User[]> {
-    return await this.userRepository
+    return await this.usersRepository
       .find(criteria);
   }
 
   public async get(id: number): Promise<User> {
-    const entity = await this.userRepository
+    const entity = await this.usersRepository
       .findOne(id);
 
     if (!entity) {
@@ -31,12 +31,12 @@ export default class UsersService {
   }
 
   public async peek(criteria): Promise<User> {
-    return await this.userRepository
+    return await this.usersRepository
       .findOne(criteria);
   }
 
   public async create(dto: UserCreateDTO): Promise<User> {
-    let user = await this.userRepository
+    let user = await this.usersRepository
       .findOne({ email: dto.email });
 
     if (user) {
@@ -46,12 +46,12 @@ export default class UsersService {
     user = Object.assign(new User(), dto);
     user.password = await hash(dto.password, 10);
 
-    return await this.userRepository
+    return await this.usersRepository
       .save(user);
   }
 
   public async update(id: number, dto: UserUpdateDTO): Promise<void> {
-    let user = await this.userRepository
+    let user = await this.usersRepository
       .findOne(id);
 
     if (!user) {
@@ -60,24 +60,24 @@ export default class UsersService {
 
     user = Object.assign(user, dto);
 
-    await this.userRepository
+    await this.usersRepository
       .save(user);
   }
 
   public async remove(id: number): Promise<void> {
-    const entity = await this.userRepository
+    const entity = await this.usersRepository
       .findOne(id);
 
     if (!entity) {
       throw new UserNotFoundException(`No user with the identifier ${id}`);
     }
 
-    await this.userRepository
+    await this.usersRepository
       .remove(entity);
   }
 
   public async authenticate(dto: UserAuthenticateDTO): Promise<User> {
-    const user = await this.userRepository
+    const user = await this.usersRepository
       .findOne({
         select: ['id', 'email', 'password'],
         where: {

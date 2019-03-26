@@ -1,13 +1,15 @@
 import { ConsulModuleConfiguration } from '@shared/modules/consul/src';
+import uuid = require('uuid');
 
 export const CONSUL_CONFIG: ConsulModuleConfiguration = {
     consul: {
         host: '127.0.0.1',
-        port: '8500',
+        port: process.env.PORT,
         maxRetry: 5,
         retryInterval: 1000,
     },
     service: {
+        id: uuid.v4(),
         name: 'auth',
         address: 'localhost',
         port: 3002,
