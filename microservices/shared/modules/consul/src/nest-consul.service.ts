@@ -1,14 +1,9 @@
 import { Injectable, Logger, LoggerService, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import * as Consul from 'consul';
 import { get } from 'lodash';
-import {
-    ConsulModuleConfiguration,
-    ConsulServiceOptions,
-    IRemoteRepository,
-    IServiceWatcherDelegate
-} from "./interfaces";
+import { ConsulModuleConfiguration, ConsulServiceOptions, IServiceWatcherDelegate } from './interfaces';
+import { RemoteRepositoryService } from './remote-repository.service';
 import uuid = require('uuid');
-import { RemoteRepositoryService } from "./remote-repository.service";
 
 @Injectable()
 export class NestConsulService implements OnModuleInit, OnModuleDestroy {
@@ -44,7 +39,9 @@ export class NestConsulService implements OnModuleInit, OnModuleDestroy {
         this.setupProcessHandlers();
     }
 
-    public getRemoteRepository<R>(ResourceType: new () => R): IRemoteRepository<R> {
+    public getRemoteRepository<R>(ResourceType: new () => R): RemoteRepositoryService<R> {
+        this.logger.log('Providing remote repository:', ResourceType.name.toLocaleLowerCase());
+
         const repository = new RemoteRepositoryService(ResourceType);
         const resourceName = ResourceType.name.toLocaleLowerCase();
 
@@ -135,6 +132,8 @@ export class NestConsulService implements OnModuleInit, OnModuleDestroy {
     }
 
     private watch(resourceName: string): void {
+        this.logger.log(`Watching resource ${resourceName}`);
+
         const options: any = {
             service: resourceName,
             passing: true,
@@ -151,7 +150,7 @@ export class NestConsulService implements OnModuleInit, OnModuleDestroy {
         setTimeout(() => watch.end(), 30 * 1000);
 
         function notifyDelegates(change) {
-
+            this.logger.log('Le changement c"est maintenqnt' + change);
         }
     }
 }

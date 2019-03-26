@@ -1,12 +1,12 @@
-import Axios from 'axios';
-import * as _ from 'lodash';
-import { Injectable, ServiceUnavailableException } from '@nestjs/common';
-import * as path from 'path';
-import { IRemoteRepository, IResourceConfiguration, IServiceWatcherDelegate } from './interfaces';
-import { ServiceNode } from './classes/ServiceNode';
+import Axios from "axios";
+import * as _ from "lodash";
+import { Injectable, ServiceUnavailableException } from "@nestjs/common";
+import * as path from "path";
+import { IResourceConfiguration, IServiceWatcherDelegate } from "./interfaces";
+import { ServiceNode } from "./classes/ServiceNode";
 
 @Injectable()
-export class RemoteRepositoryService<T> implements IRemoteRepository<T>, IServiceWatcherDelegate {
+export class RemoteRepositoryService<T> implements IServiceWatcherDelegate {
     private defaultConfiguration: IResourceConfiguration;
     private nodes: ServiceNode[];
     private index: number;
@@ -24,7 +24,7 @@ export class RemoteRepositoryService<T> implements IRemoteRepository<T>, IServic
 
     constructor(private ResourceType: new () => T) {
         this.index = 0;
-        this.defaultConfiguration.path = ResourceType.name.toLocaleLowerCase();
+        this.defaultConfiguration = { path: ResourceType.name.toLocaleLowerCase() };
     }
 
     public setConfiguration(defaultConfiguration: IResourceConfiguration): void {
@@ -53,7 +53,7 @@ export class RemoteRepositoryService<T> implements IRemoteRepository<T>, IServic
           .then(response => _.assign(new this.ResourceType(), response.data));
     }
 
-    public async peek(data?: any, extra?: IResourceConfiguration): Promise<T | null> {
+    public async peek(extra?: IResourceConfiguration): Promise<T | null> {
         const configuration = _.assignIn({}, this.defaultConfiguration, extra);
         const node = this.node;
 
@@ -93,7 +93,7 @@ export class RemoteRepositoryService<T> implements IRemoteRepository<T>, IServic
         const uri = path.join(node.address, configuration.path);
 
         return await Axios
-          .put(uri, configuration)
+          .put(uri, data, configuration)
           .then(response => _.assign(new this.ResourceType(), response.data));
     }
 
@@ -120,8 +120,7 @@ export class RemoteRepositoryService<T> implements IRemoteRepository<T>, IServic
         const node = this.nodes.find(n => n.id === service.id);
         if (!node) {
             this.nodes.push(node);
-        }
-        else {
+        } else {
             _.assign(node, service);
         }
     }
