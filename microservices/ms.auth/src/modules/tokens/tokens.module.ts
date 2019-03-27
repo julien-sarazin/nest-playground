@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import TokensService from './service/tokens.service';
 import { TokensController } from './controller/tokens.controller';
 import { DatabaseModule } from '../../database/database.module';
-import TokenRepository from './model/token.repository';
+import TokenRepository, { TokensRepositoryProvider } from './model/token.repository';
 import { UsersModule } from '../users/users.module';
 import UsersService from '../users/users.service';
 
@@ -12,8 +12,12 @@ import UsersService from '../users/users.service';
     ],
     providers: [
         TokensService,
-        TokenRepository,
+        TokensRepositoryProvider,
         UsersService,
+        {
+            provide: 'LoggerService',
+            useClass: Logger,
+        },
     ],
     exports: [
         TokensService,

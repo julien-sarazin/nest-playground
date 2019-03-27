@@ -1,8 +1,9 @@
 import { Connection, Repository } from 'typeorm';
-import IToken from './token.interface';
 import { Token } from './token.entity';
+import { EntityRepository } from 'typeorm';
 
-export default class TokensRepository extends Repository<IToken> {
+@EntityRepository(Token)
+export default class TokensRepository extends Repository<Token> {
 
 }
 

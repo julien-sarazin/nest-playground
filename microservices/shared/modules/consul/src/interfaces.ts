@@ -40,27 +40,22 @@ export interface ConsulModuleConfiguration {
     collaborators?: CollaboratorOptions[];
 }
 
-export interface IResourceConfiguration extends AxiosRequestConfig {
-    path: string;
-    mapper?(source: any, target: any): void;
-}
-
 export interface IServiceNodeWatcherDelegate {
     onNodesDidChange(nodes: ServiceNode[]): void;
 }
 
 export interface IRemoteRepository<T> {
-    setConfiguration(defaultConfiguration: IResourceConfiguration): void;
+    setConfiguration(defaultConfiguration: AxiosRequestConfig): void;
 
-    list(configuration?: IResourceConfiguration): Promise<T[]>;
+    list(configuration?: AxiosRequestConfig): Promise<T[]>;
 
-    peek(data?: any, configuration?: IResourceConfiguration): Promise<T | null>;
+    peek(data?: any, configuration?: AxiosRequestConfig): Promise<T | null>;
 
-    create(data?: any, configuration?: IResourceConfiguration): Promise<T>;
+    create(data?: any, configuration?: AxiosRequestConfig): Promise<T>;
 
-    update(data?: any, configuration?: IResourceConfiguration): Promise<T>;
+    update(data?: any, configuration?: AxiosRequestConfig): Promise<T>;
 
-    remove(configuration?: IResourceConfiguration): Promise<void>;
+    remove(configuration?: AxiosRequestConfig): Promise<void>;
 
-    raw(extra: IResourceConfiguration): Promise<any>;
+    raw(extra: AxiosRequestConfig): Promise<any>;
 }

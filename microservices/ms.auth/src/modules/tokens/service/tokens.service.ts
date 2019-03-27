@@ -3,6 +3,7 @@ import {
     Inject,
     Injectable,
     InternalServerErrorException,
+    LoggerService,
     Query,
     ServiceUnavailableException,
 } from '@nestjs/common';
@@ -18,6 +19,7 @@ export default class TokensService {
     constructor(
       @Inject('TokensRepository') private readonly tokensRepository: TokensRepository,
       @Inject('UsersService') private readonly userService: UsersService,
+      @Inject('LoggerService') private readonly loggerService: LoggerService,
     ) {
     }
 
@@ -53,6 +55,8 @@ export default class TokensService {
             return await this.tokensRepository.save(token);
         }
         catch (e) {
+            this.loggerService.error(e.message, e.stack, TokensService.name);
+
             if (e instanceof UserNotAuthenticatedException) {
                 throw new ForbiddenException(e);
             }

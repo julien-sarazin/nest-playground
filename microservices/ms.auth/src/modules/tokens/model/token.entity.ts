@@ -1,22 +1,22 @@
-import { Entity, Column, PrimaryColumn, CreateDateColumn, BeforeUpdate } from 'typeorm';
+import { BeforeUpdate, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import IToken from './token.interface';
 
 @Entity()
-export class Token implements IToken{
-  @PrimaryColumn()
-  id: number;
+export class Token implements IToken {
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @Column('int')
-  userId: number;
+    @Column('int')
+    userId: number;
 
-  @CreateDateColumn()
-  createdAt: Date;
+    @CreateDateColumn()
+    createdAt: Date;
 
-  @CreateDateColumn()
-  updatedAt: Date;
+    @CreateDateColumn()
+    updatedAt: Date;
 
-  @BeforeUpdate()
-  private setUpdatedDate() {
-    this.updatedAt = new Date();
-  }
+    @BeforeUpdate()
+    private setUpdatedDate() {
+        this.updatedAt = new Date();
+    }
 }

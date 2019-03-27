@@ -1,15 +1,20 @@
-import Axios from "axios";
-import * as _ from "lodash";
-import { Injectable, ServiceUnavailableException } from "@nestjs/common";
-import * as path from "path";
-import { IResourceConfiguration, IServiceNodeWatcherDelegate } from "./interfaces";
-import { ServiceNode } from "./classes/ServiceNode";
-import { Instantiable } from "./nest-consul.service";
+import * as _ from 'lodash';
+import { Injectable, ServiceUnavailableException } from '@nestjs/common';
+import { ServiceNode } from './classes/ServiceNode';
+import { Instantiable } from './nest-consul.service';
+import { AxiosRequestConfig } from 'axios';
 
 @Injectable()
-export class RemoteRepositoryService<R> implements IServiceNodeWatcherDelegate {
-    private defaultConfiguration: IResourceConfiguration;
+export class RemoteRepositoryService<R> {
     private nodes: ServiceNode[];
+
+    constructor(
+        private ResourceType: Instantiable<R>,
+        private index: number = 0,
+        private readonly resourceName: string = ResourceType.name.toLocaleLowerCase()
+    )
+    {
+    }
 
     /**
      * Computed properties
@@ -23,123 +28,55 @@ export class RemoteRepositoryService<R> implements IServiceNodeWatcherDelegate {
         return this.nodes[loop];
     }
 
-    constructor(
-      private ResourceType: Instantiable<R>,
-      private index: number = 0,
-      private readonly resourceName: string = ResourceType.name.toLocaleLowerCase(),
-    ) {
-        this.defaultConfiguration = { path: '/' + this.resourceName };
-    }
-
     public setNodes(nodes: ServiceNode[]) {
         this.nodes = nodes;
     }
 
-    /**
-     *
-     * @param defaultConfiguration
-     */
-    public setConfiguration(defaultConfiguration: IResourceConfiguration): void {
-        this.defaultConfiguration = defaultConfiguration;
+    public async create(data?: any, config?: AxiosRequestConfig): Promise<R> {
+        const configuration = _.assignIn({ method: 'POST', url: this.resourceName, data }, config);
+
+        return await this.node
+            .request(configuration)
+            .then(response => _.assign(new this.ResourceType(), response.data));
     }
 
-    /**
-     *
-     * @param data
-     * @param extra
-     */
-    public async create(data?: any, extra?: IResourceConfiguration): Promise<R> {
-        const configuration = _.assignIn({}, this.defaultConfiguration, extra);
-        const node = this.node;
+    public async list(config?: AxiosRequestConfig): Promise<R[]> {
+        const configuration = _.assignIn({ method: 'GET', url: this.resourceName }, config);
 
-        const uri = path.join(node.address, configuration.path);
-
-        return await Axios
-          .post(uri, data, configuration)
-          .then(response => _.assign(new this.ResourceType(), response.data));
+        return await this.node
+            .request(configuration)
+            .then(response => response.data.map(data => _.assign(new this.ResourceType(), data)));
     }
 
-    /**
-     *
-     * @param extra
-     */
-    public async list(extra?: IResourceConfiguration): Promise<R[]> {
-        const configuration = _.assignIn({}, this.defaultConfiguration, extra);
-        const node = this.node;
+    public async peek(config?: AxiosRequestConfig): Promise<R | null> {
+        const configuration = _.assignIn({ method: 'GET', url: this.resourceName + '/peek' }, config);
 
-        const uri = path.join(node.address, configuration.path);
-
-        return await Axios
-          .get(uri, configuration)
-          .then(response => _.assign(new this.ResourceType(), response.data));
+        return await this.node
+            .request(configuration)
+            .then(response => _.assign(new this.ResourceType(), response.data));
     }
 
-    /**
-     *
-     * @param extra
-     */
-    public async peek(extra?: IResourceConfiguration): Promise<R | null> {
-        const configuration = _.assignIn({}, this.defaultConfiguration, extra);
-        const node = this.node;
+    public async raw(config?: AxiosRequestConfig): Promise<any> {
+        const configuration = _.assignIn({}, config);
 
-        const uri = path.join(node.address, configuration.path);
-
-        return await Axios
-          .get(uri, configuration)
-          .then(response => _.assign(new this.ResourceType(), response.data));
+        // TODO: Do something with the response.data
+        return await this.node
+            .request(configuration)
+            .then(response => response.data);
     }
 
-    /**
-     *
-     * @param extra
-     */
-    public async raw(extra: IResourceConfiguration): Promise<any> {
-        const configuration = _.assignIn({}, this.defaultConfiguration, extra);
-        const node = this.node;
+    public async remove(config?: AxiosRequestConfig): Promise<void> {
+        const configuration = _.assignIn({ method: 'DELETE', url: this.resourceName }, config);
 
-        extra.url = path.join(node.address, configuration.path);
-
-        return await Axios
-          .request(configuration)
-          .then(response => _.assign(new this.ResourceType(), response.data));
+        await this.node
+            .request(configuration)
     }
 
-    /**
-     *
-     * @param extra
-     */
-    public async remove(extra?: IResourceConfiguration): Promise<void> {
-        const configuration = _.assignIn({}, this.defaultConfiguration, extra);
-        const node = this.node;
+    public async update(data?: any, config?: AxiosRequestConfig): Promise<R> {
+        const configuration = _.assignIn({ method: 'PUT',  url: this.resourceName, data }, config);
 
-        const uri = path.join(node.address, configuration.path);
-
-        return await Axios
-          .delete(uri, configuration)
-          .then(response => _.assign(new this.ResourceType(), response.data));
-    }
-
-    /**
-     *
-     * @param data
-     * @param extra
-     */
-    public async update(data?: any, extra?: IResourceConfiguration): Promise<R> {
-        const configuration = _.assignIn({}, this.defaultConfiguration, extra);
-        const node = this.node;
-
-        const uri = path.join(node.address, configuration.path);
-
-        return await Axios
-          .put(uri, data, configuration)
-          .then(response => _.assign(new this.ResourceType(), response.data));
-    }
-
-    /**
-     * Updated information regarding the current repository datasource
-     * @param nodes new list of nodes
-     */
-    public onNodesDidChange(nodes: ServiceNode[]): void {
-        this.nodes = nodes;
+        return await this.node
+            .request(configuration)
+            .then(response => _.assign(new this.ResourceType(), response.data));
     }
 }

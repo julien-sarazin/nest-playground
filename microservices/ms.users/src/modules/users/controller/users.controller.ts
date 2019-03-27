@@ -36,7 +36,7 @@ export class UsersController {
         .get(id);
     }
     catch (e) {
-      return (e instanceof UserNotFoundException)
+      throw (e instanceof UserNotFoundException)
         ? new NotFoundException(e.message)
         : new InternalServerErrorException(e);
     }
@@ -56,7 +56,7 @@ export class UsersController {
         .create(userCreateDTO);
     }
     catch (e) {
-      return (e instanceof EmailAlreadyExistsException)
+      throw (e instanceof EmailAlreadyExistsException)
         ? new ConflictException(e.message)
         : new InternalServerErrorException(e);
     }
@@ -70,7 +70,7 @@ export class UsersController {
         .update(id, userUpdateDTO);
     }
     catch (e) {
-      return (e instanceof UserNotFoundException)
+      throw (e instanceof UserNotFoundException)
         ? new NotFoundException(e.message)
         : new InternalServerErrorException(e);
     }
@@ -83,7 +83,7 @@ export class UsersController {
         .remove(id);
     }
     catch (e) {
-      return (e instanceof UserNotFoundException)
+      throw (e instanceof UserNotFoundException)
         ? new NotFoundException(e.message)
         : new InternalServerErrorException(e);
     }
@@ -101,7 +101,7 @@ export class UsersController {
         .send(authenticated);
     }
     catch (e) {
-      return (e instanceof UserNotFoundException)
+      throw (e instanceof UserNotFoundException)
         ? new NotFoundException(e.message)
         : new InternalServerErrorException(e);
     }

@@ -14,15 +14,18 @@ export default class UsersService {
     }
 
     public async authenticate(email: string, password: string): Promise<{ id: number }> {
-        this.consulService
+
+        const authentication = await this.consulService
           .getRemoteRepository<Users>(Users, 'users')
           .raw({
-              path: '/authenticate',
+              url: '/users/authenticate',
               method: 'POST',
               data: { email, password },
           });
 
-        return { id: 1 };
+        console.log('> authentication:', authentication);
+        // TODO: use jwt to encrypt the token
+        return authentication;
     }
 }
 

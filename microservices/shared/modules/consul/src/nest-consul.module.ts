@@ -1,11 +1,7 @@
-import { DynamicModule, Global, Module} from '@nestjs/common';
+import { DynamicModule, Global, Module } from '@nestjs/common';
 import * as Consul from 'consul';
 import { NestConsulService } from './nest-consul.service';
-import {
-    CONSUL_CLIENT_PROVIDER,
-    CONSUL_CONFIGURATION_PROVIDER,
-    CONSUL_SERVICE_PROVIDER,
-} from './constants';
+import { CONSUL_CLIENT_PROVIDER, CONSUL_CONFIGURATION_PROVIDER, CONSUL_SERVICE_PROVIDER } from './constants';
 import { ConsulModuleConfiguration } from './interfaces';
 
 @Global()
@@ -25,7 +21,7 @@ export class NestConsulModule {
                  * TODO: lean the configuration with default properties.
                  */
                 return options;
-            },
+            }
         };
 
         /**
@@ -36,20 +32,20 @@ export class NestConsulModule {
             provide: CONSUL_CLIENT_PROVIDER,
             useFactory: async (): Promise<any> => {
                 return await new Consul(options.consul);
-            },
+            }
         };
         const consulServiceProvider = {
             provide: CONSUL_SERVICE_PROVIDER,
-            useFactory: async (consulClient: Consul.Consul, consulConfiguration: ConsulModuleConfiguration ): Promise<NestConsulService> => {
+            useFactory: async (consulClient: Consul.Consul, consulConfiguration: ConsulModuleConfiguration): Promise<NestConsulService> => {
                 return new NestConsulService(consulClient, consulConfiguration);
             },
-            inject: [CONSUL_CLIENT_PROVIDER, CONSUL_CONFIGURATION_PROVIDER],
+            inject: [CONSUL_CLIENT_PROVIDER, CONSUL_CONFIGURATION_PROVIDER]
         };
 
         return {
             module: NestConsulModule,
             providers: [consulConfigurationProvider, consulClientProvider, consulServiceProvider],
-            exports: [consulServiceProvider],
+            exports: [consulServiceProvider]
         };
     }
 }

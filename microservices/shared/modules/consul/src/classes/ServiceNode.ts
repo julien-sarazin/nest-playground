@@ -1,6 +1,6 @@
-import { ConsulServiceOptions, ServiceNodeConfiguration } from "../interfaces";
+import { ServiceNodeConfiguration } from '../interfaces';
 import * as _ from 'lodash';
-import { Logger } from '@nestjs/common';
+import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 export class ServiceNode {
     public readonly id: string;
@@ -8,12 +8,7 @@ export class ServiceNode {
     public readonly host: string;
     public readonly port: number;
     public readonly meta: any;
-
-    get address() {
-        const address = `http://${this.host}${this.port !== 80 ? `:${this.port}` : ''}/api`;
-        console.log('[DEBUG] Service node address:', address);
-        return address;
-    }
+    private readonly axios: AxiosInstance;
 
     constructor(configuration: ServiceNodeConfiguration) {
         /**
@@ -31,5 +26,13 @@ export class ServiceNode {
         this.meta = configuration.meta;
         this.host = configuration.address;
         this.port = configuration.port;
+
+        this.axios = Axios.create({ baseURL: `http://${this.host}${this.port !== 80 ? `:${this.port}` : ''}/api` });
     }
+
+    public async request(configuration: AxiosRequestConfig) {
+        return await this.axios
+            .request(configuration);
+    }
+
 }
