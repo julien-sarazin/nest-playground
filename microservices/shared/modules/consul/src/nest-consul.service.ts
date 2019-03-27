@@ -1,83 +1,81 @@
-import { Injectable, Logger, LoggerService, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
-import * as Consul from 'consul';
-import { get } from 'lodash';
-import { ConsulModuleConfiguration, ConsulServiceOptions, IServiceWatcherDelegate } from './interfaces';
-import { RemoteRepositoryService } from './remote-repository.service';
-import uuid = require('uuid');
+import { Injectable, Logger, LoggerService, OnModuleDestroy, OnModuleInit, Optional } from "@nestjs/common";
+import * as Consul from "consul";
+import { get } from "lodash";
+import { ConsulModuleConfiguration, ConsulServiceOptions } from "./interfaces";
+import { RemoteRepositoryService } from "./remote-repository.service";
+import { ServiceNode } from "./classes/ServiceNode";
+import uuid = require("uuid");
+
+export interface Instantiable<T> {
+    new(): T;
+}
 
 @Injectable()
 export class NestConsulService implements OnModuleInit, OnModuleDestroy {
     private tries: number;
+    private collaborators: Map<string, ServiceNode[]>;
     private readonly maxRetry: number;
     private readonly retryInterval: number;
 
     public readonly localService: ConsulServiceOptions;
-    public readonly delegates: Map<string, IServiceWatcherDelegate[]>;
 
     constructor(
       private readonly consul: Consul.Consul,
       private readonly configuration: ConsulModuleConfiguration,
-      private readonly logger?: LoggerService,
+      @Optional() private readonly logger?: LoggerService
     ) {
-        this.logger = this.logger || new Logger();
-        this.delegates = new Map();
-
+        this.collaborators = new Map<string, ServiceNode[]>();
+        this.logger = this.logger || new Logger(NestConsulService.name);
         /**
          * Common service information
          */
         this.localService = configuration.service;
+        console.log('> configuration.service:', configuration.service);
         this.localService.id = this.localService.id || uuid.v4();
         /**
          * Consul fail checks
          */
         this.tries = 0;
-        this.maxRetry = get(configuration, 'consul.maxRetry', 10);
-        this.retryInterval = get(configuration, 'consul.retryInterval', 1000);
-        /**
-         * Setup Event Listeners
-         */
-        this.setupProcessHandlers();
+        this.maxRetry = get(configuration, "consul.maxRetry", 10);
+        this.retryInterval = get(configuration, "consul.retryInterval", 1000);
     }
 
-    public getRemoteRepository<R>(ResourceType: new () => R): RemoteRepositoryService<R> {
-        this.logger.log('Providing remote repository:', ResourceType.name.toLocaleLowerCase());
+    public async onModuleInit(): Promise<any> {
+        this.logger.log("Initializing module...");
 
-        const repository = new RemoteRepositoryService(ResourceType);
-        const resourceName = ResourceType.name.toLocaleLowerCase();
+        await this.register();
+        await this.discover();
+        await this.setupProcessHandlers();
+    }
 
-        const delegates = this.delegates.get(resourceName);
+    public async onModuleDestroy(): Promise<any> {
+        this.logger.log("Destroying module...", NestConsulService.name);
+        return await this.unregister();
+    }
 
-        if (!delegates) {
-            this.watch(resourceName);
-            this.delegates.set(resourceName, [repository]);
+    public getRemoteRepository<R>(Type: Instantiable<R>, service: string): RemoteRepositoryService<R> {
+        this.logger.log("Providing remote repository for service:" + Type.name.toLocaleLowerCase(), NestConsulService.name);
+
+        const collaborators = this.collaborators.get(service);
+        if (!collaborators) {
+            throw new ServiceUnavailableError();
         }
-        else {
-            delegates.push(repository);
-        }
+
+        const repository = new RemoteRepositoryService(Type);
+        repository.setNodes(collaborators);
 
         return repository;
     }
 
-    public async onModuleInit(): Promise<any> {
-        this.logger.log('Initializing module...');
-        return this.register();
-    }
-
-    public async onModuleDestroy(): Promise<any> {
-        this.logger.log('Destroying module...');
-        return await this.unregister();
-    }
-
     private async register(): Promise<void> {
-        this.logger.log(`> Registering service ${this.localService.name} ...`);
+        this.logger.log(`Registering service ${this.localService} ...`, NestConsulService.name);
         try {
             await this.consul.agent.service
               .register(this.localService);
 
-            this.logger.log(`> Registration succeeded.`);
+            this.logger.log(`Registration succeeded.`, NestConsulService.name);
             this.resetTriesCount();
-        }
-        catch (e) {
+        } catch (e) {
             if (this.tries > this.maxRetry) {
                 this.logger.error(`> Maximum connection retry reached. Exiting.`);
                 process.exit(1);
@@ -97,10 +95,9 @@ export class NestConsulService implements OnModuleInit, OnModuleDestroy {
 
             this.logger.log(`Unregistered the service ${this.localService.name} successfully.`);
             this.resetTriesCount();
-        }
-        catch (e) {
+        } catch (e) {
             if (this.tries > this.maxRetry) {
-                this.logger.error('Deregister the service fail.', e);
+                this.logger.error("Deregister the service fail.", e);
             }
 
             this.logger.warn(`Deregister the service fail, will retry after ${this.retryInterval}`);
@@ -110,47 +107,68 @@ export class NestConsulService implements OnModuleInit, OnModuleDestroy {
         }
     }
 
-    private resetTriesCount(): void {
-        this.tries = 0;
+    private async discover() {
+        const self = this;
+
+        return Promise
+          .all(self.configuration.collaborators.map(collaborator => fetch(collaborator.name).then(watch)));
+
+        async function fetch(serviceName: string) {
+            self.logger.log(`Fetching health for ${serviceName}.service`, NestConsulService.name);
+
+            const options = { service: serviceName };
+            const healthData: [any] = await self.consul.health.service(options);
+
+            self.collaborators
+              .set(serviceName, healthData.map(data => new ServiceNode(data.Service)));
+
+            self.logger.log("[DEBUG] collaborators:" + JSON.stringify(self.collaborators.entries(), null, 4), NestConsulService.name);
+            return serviceName;
+        }
+
+        async function watch(serviceName: string) {
+            self.logger.log(`Watching service ${serviceName}`, NestConsulService.name);
+
+            const options: any = {
+                service: serviceName,
+                passing: true
+            };
+
+            const watch = self.consul
+              .watch({ method: self.consul.health.service, options });
+
+            watch.on("change", (changes, res) => {
+                self.collaborators
+                  .set(serviceName, changes.map(data => new ServiceNode(data.Service)));
+
+                self.logger.log("[DEBUG] collaborators:" + JSON.stringify(self.collaborators.get(serviceName), null, 4), NestConsulService.name);
+            });
+
+            watch.on("error", err => self.logger.error("error:" + err));
+        }
     }
 
     private setupProcessHandlers(): void {
         /**
          * Process terminated manually.
          */
-        process.on('SIGINT', async () => {
+        process.on("SIGINT", async () => {
             await this.unregister();
             process.exit(0);
         });
         /**
          * Process terminated during its lifecycle.
          */
-        process.on('exit', async () => {
+        process.on("exit", async () => {
             await this.unregister();
             process.exit(0);
         });
     }
 
-    private watch(resourceName: string): void {
-        this.logger.log(`Watching resource ${resourceName}`);
-
-        const options: any = {
-            service: resourceName,
-            passing: true,
-        };
-
-        const watch = this.consul.watch({
-            method: this.consul.health.service,
-            options,
-        });
-        watch.on('change', (changes, res) => changes.forEach(notifyDelegates.bind(this)));
-        watch.on('error', err => this.logger.error('error:' + err));
-
-        // Why?
-        setTimeout(() => watch.end(), 30 * 1000);
-
-        function notifyDelegates(change) {
-            this.logger.log('Le changement c"est maintenqnt' + change);
-        }
+    private resetTriesCount(): void {
+        this.tries = 0;
     }
+}
+
+export class ServiceUnavailableError extends Error {
 }

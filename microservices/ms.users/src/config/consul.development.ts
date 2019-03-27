@@ -4,7 +4,7 @@ import uuid = require('uuid');
 export const CONSUL_CONFIG: ConsulModuleConfiguration = {
     consul: {
         host: '127.0.0.1',
-        port: process.env.PORT,
+        port: '8500',
         maxRetry: 5,
         retryInterval: 1000,
     },
@@ -12,16 +12,18 @@ export const CONSUL_CONFIG: ConsulModuleConfiguration = {
         id: uuid.v4(),
         name: 'users',
         address: 'localhost',
-        port: 3001,
+        port: parseInt(process.env.PORT),
         tags: ['users'],
         meta: {
             nestjs_version: '5.0.1',
+            prefix: 'api',
         },
         check: {
             DeregisterCriticalServiceAfter: '20s',
-            http: 'http://localhost:3001/api/health/check',
+            http: `http://localhost:${process.env.PORT}/api/health/check`,
             interval: '10s',
             ttl: '15s',
         },
     },
+    collaborators: [],
 };

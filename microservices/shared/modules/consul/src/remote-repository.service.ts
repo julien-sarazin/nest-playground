@@ -2,36 +2,53 @@ import Axios from "axios";
 import * as _ from "lodash";
 import { Injectable, ServiceUnavailableException } from "@nestjs/common";
 import * as path from "path";
-import { IResourceConfiguration, IServiceWatcherDelegate } from "./interfaces";
+import { IResourceConfiguration, IServiceNodeWatcherDelegate } from "./interfaces";
 import { ServiceNode } from "./classes/ServiceNode";
+import { Instantiable } from "./nest-consul.service";
 
 @Injectable()
-export class RemoteRepositoryService<T> implements IServiceWatcherDelegate {
+export class RemoteRepositoryService<R> implements IServiceNodeWatcherDelegate {
     private defaultConfiguration: IResourceConfiguration;
     private nodes: ServiceNode[];
-    private index: number;
 
+    /**
+     * Computed properties
+     */
     private get node(): ServiceNode {
         if (this.nodes.length === 0) {
             throw new ServiceUnavailableException();
         }
 
         const loop = (this.index++) % this.nodes.length;
-        const configuration = this.nodes[loop];
-
-        return new ServiceNode(configuration);
+        return this.nodes[loop];
     }
 
-    constructor(private ResourceType: new () => T) {
-        this.index = 0;
-        this.defaultConfiguration = { path: ResourceType.name.toLocaleLowerCase() };
+    constructor(
+      private ResourceType: Instantiable<R>,
+      private index: number = 0,
+      private readonly resourceName: string = ResourceType.name.toLocaleLowerCase(),
+    ) {
+        this.defaultConfiguration = { path: '/' + this.resourceName };
     }
 
+    public setNodes(nodes: ServiceNode[]) {
+        this.nodes = nodes;
+    }
+
+    /**
+     *
+     * @param defaultConfiguration
+     */
     public setConfiguration(defaultConfiguration: IResourceConfiguration): void {
         this.defaultConfiguration = defaultConfiguration;
     }
 
-    public async create(data?: any, extra?: IResourceConfiguration): Promise<T> {
+    /**
+     *
+     * @param data
+     * @param extra
+     */
+    public async create(data?: any, extra?: IResourceConfiguration): Promise<R> {
         const configuration = _.assignIn({}, this.defaultConfiguration, extra);
         const node = this.node;
 
@@ -42,7 +59,11 @@ export class RemoteRepositoryService<T> implements IServiceWatcherDelegate {
           .then(response => _.assign(new this.ResourceType(), response.data));
     }
 
-    public async list(extra?: IResourceConfiguration): Promise<T[]> {
+    /**
+     *
+     * @param extra
+     */
+    public async list(extra?: IResourceConfiguration): Promise<R[]> {
         const configuration = _.assignIn({}, this.defaultConfiguration, extra);
         const node = this.node;
 
@@ -53,7 +74,11 @@ export class RemoteRepositoryService<T> implements IServiceWatcherDelegate {
           .then(response => _.assign(new this.ResourceType(), response.data));
     }
 
-    public async peek(extra?: IResourceConfiguration): Promise<T | null> {
+    /**
+     *
+     * @param extra
+     */
+    public async peek(extra?: IResourceConfiguration): Promise<R | null> {
         const configuration = _.assignIn({}, this.defaultConfiguration, extra);
         const node = this.node;
 
@@ -64,6 +89,10 @@ export class RemoteRepositoryService<T> implements IServiceWatcherDelegate {
           .then(response => _.assign(new this.ResourceType(), response.data));
     }
 
+    /**
+     *
+     * @param extra
+     */
     public async raw(extra: IResourceConfiguration): Promise<any> {
         const configuration = _.assignIn({}, this.defaultConfiguration, extra);
         const node = this.node;
@@ -75,6 +104,10 @@ export class RemoteRepositoryService<T> implements IServiceWatcherDelegate {
           .then(response => _.assign(new this.ResourceType(), response.data));
     }
 
+    /**
+     *
+     * @param extra
+     */
     public async remove(extra?: IResourceConfiguration): Promise<void> {
         const configuration = _.assignIn({}, this.defaultConfiguration, extra);
         const node = this.node;
@@ -86,7 +119,12 @@ export class RemoteRepositoryService<T> implements IServiceWatcherDelegate {
           .then(response => _.assign(new this.ResourceType(), response.data));
     }
 
-    public async update(data?: any, extra?: IResourceConfiguration): Promise<T> {
+    /**
+     *
+     * @param data
+     * @param extra
+     */
+    public async update(data?: any, extra?: IResourceConfiguration): Promise<R> {
         const configuration = _.assignIn({}, this.defaultConfiguration, extra);
         const node = this.node;
 
@@ -98,52 +136,10 @@ export class RemoteRepositoryService<T> implements IServiceWatcherDelegate {
     }
 
     /**
-     * Add a node matching the service attached to the resource.
-     */
-    onServiceDidRegister(service: ServiceNode): void {
-        if (service.name !== this.defaultConfiguration.path) {
-            return;
-        }
-
-        this.nodes.push(service);
-    }
-
-    /**
      * Updated information regarding the current repository datasource
-     * @param service
+     * @param nodes new list of nodes
      */
-    onServiceDidUpdate(service: ServiceNode): void {
-        if (service.name !== this.defaultConfiguration.path) {
-            return;
-        }
-
-        const node = this.nodes.find(n => n.id === service.id);
-        if (!node) {
-            this.nodes.push(node);
-        } else {
-            _.assign(node, service);
-        }
-    }
-
-    /**
-     * Unregister the service from the current repository datasource
-     * @param service
-     */
-    onServiceDidUnregister(service: ServiceNode): void {
-        if (service.name !== this.defaultConfiguration.path) {
-            return;
-        }
-
-        let index;
-        this.nodes.some((n, i) => {
-            if (n.id === service.id) {
-                index = i;
-                return true;
-            }
-        });
-
-        if (index !== undefined) {
-            this.nodes.splice(index, 1);
-        }
+    public onNodesDidChange(nodes: ServiceNode[]): void {
+        this.nodes = nodes;
     }
 }

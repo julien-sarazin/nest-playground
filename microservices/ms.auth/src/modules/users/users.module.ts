@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import UsersService from './users.service';
-import { NestConsulModule } from '@shared/modules/consul';
+import { NestConsulModule } from '@shared/modules/consul/src';
 
 @Module({
     providers: [

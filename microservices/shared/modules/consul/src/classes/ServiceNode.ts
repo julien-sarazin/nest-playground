@@ -1,24 +1,34 @@
-import { ConsulServiceOptions } from "../interfaces";
+import { ConsulServiceOptions, ServiceNodeConfiguration } from "../interfaces";
+import * as _ from 'lodash';
+import { Logger } from '@nestjs/common';
 
 export class ServiceNode {
     public readonly id: string;
-    public readonly name: string;
-    public readonly protocol: string;
-    public readonly prefixPath: string;
+    public readonly service: string;
     public readonly host: string;
     public readonly port: number;
+    public readonly meta: any;
 
     get address() {
-        const address = `${this.protocol}://${this.host}${this.port !== 80 ? `:${this.port}` : ""}${this.prefixPath}`;
-        console.log("> Service node address:", address);
+        const address = `http://${this.host}${this.port !== 80 ? `:${this.port}` : ''}/api`;
+        console.log('[DEBUG] Service node address:', address);
         return address;
     }
 
-    constructor(configuration: ConsulServiceOptions) {
+    constructor(configuration: ServiceNodeConfiguration) {
+        /**
+         * Vicious trick when the configuration comes from Consul response which use
+         * capitalized properties.
+         *
+         * TODO: Remove this piece of shit.
+         */
+        configuration = _.mapKeys(configuration, (v, k) => k.toLowerCase()) as ServiceNodeConfiguration;
+
+        console.log('[DEBUG] Service node configuration:' + JSON.stringify(configuration, null, 4), ServiceNode.name);
+
         this.id = configuration.id;
-        this.name = configuration.name;
-        this.protocol = configuration.protocol || "http";
-        this.prefixPath = configuration.meta.prefixPath;
+        this.service = configuration.service;
+        this.meta = configuration.meta;
         this.host = configuration.address;
         this.port = configuration.port;
     }
