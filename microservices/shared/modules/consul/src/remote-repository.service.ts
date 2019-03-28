@@ -3,9 +3,10 @@ import { Injectable, ServiceUnavailableException } from '@nestjs/common';
 import { ServiceNode } from './classes/ServiceNode';
 import { Instantiable } from './nest-consul.service';
 import { AxiosRequestConfig } from 'axios';
+import { IServiceNodeWatcherDelegate } from './interfaces';
 
 @Injectable()
-export class RemoteRepositoryService<R> {
+export class RemoteRepositoryService<R> implements IServiceNodeWatcherDelegate{
     private nodes: ServiceNode[];
 
     constructor(
@@ -26,10 +27,6 @@ export class RemoteRepositoryService<R> {
 
         const loop = (this.index++) % this.nodes.length;
         return this.nodes[loop];
-    }
-
-    public setNodes(nodes: ServiceNode[]) {
-        this.nodes = nodes;
     }
 
     public async create(data?: any, config?: AxiosRequestConfig): Promise<R> {
@@ -78,5 +75,9 @@ export class RemoteRepositoryService<R> {
         return await this.node
             .request(configuration)
             .then(response => _.assign(new this.ResourceType(), response.data));
+    }
+
+    onNodesDidChange(nodes: ServiceNode[]): void {
+        this.nodes = nodes;
     }
 }

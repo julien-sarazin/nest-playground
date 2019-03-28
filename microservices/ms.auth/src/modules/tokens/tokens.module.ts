@@ -4,7 +4,7 @@ import { TokensController } from './controller/tokens.controller';
 import { DatabaseModule } from '../../database/database.module';
 import TokenRepository, { TokensRepositoryProvider } from './model/token.repository';
 import { UsersModule } from '../users/users.module';
-import UsersService from '../users/users.service';
+import UsersRemoteService from '../users/remote/users.remote.service';
 
 @Module({
     controllers: [
@@ -13,7 +13,7 @@ import UsersService from '../users/users.service';
     providers: [
         TokensService,
         TokensRepositoryProvider,
-        UsersService,
+        UsersRemoteService,
         {
             provide: 'LoggerService',
             useClass: Logger,

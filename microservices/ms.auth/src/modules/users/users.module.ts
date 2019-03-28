@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
-import UsersService from './users.service';
+import UsersRemoteService from './remote/users.remote.service';
 import { NestConsulModule } from '@shared/modules/consul/src';
+import { UsersRemoteRepositoryProvider } from './remote/users.remote.repository';
 
 @Module({
     providers: [
-        UsersService,
+        UsersRemoteService,
+        UsersRemoteRepositoryProvider,
     ],
     exports: [
-        UsersService,
+        UsersRemoteService,
+        UsersRemoteRepositoryProvider,
     ],
     imports: [
         NestConsulModule,

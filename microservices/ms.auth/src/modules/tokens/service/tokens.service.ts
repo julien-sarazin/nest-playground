@@ -10,15 +10,16 @@ import {
 import IToken from '../model/token.interface';
 import { CreateTokensDTO } from '../dto/create.dto';
 import { Token } from '../model/token.entity';
-import UsersService, { UserNotAuthenticatedException } from '../../users/users.service';
+import UsersRemoteService, { UserNotAuthenticatedException } from '../../users/remote/users.remote.service';
 import TokensRepository from '../model/token.repository';
+import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export default class TokensService {
 
     constructor(
       @Inject('TokensRepository') private readonly tokensRepository: TokensRepository,
-      @Inject('UsersService') private readonly userService: UsersService,
+      @Inject('UsersRemoteService') private readonly userService: UsersRemoteService,
       @Inject('LoggerService') private readonly loggerService: LoggerService,
     ) {
     }
@@ -44,7 +45,7 @@ export default class TokensService {
           .findOne(query);
     }
 
-    public async create(dto: CreateTokensDTO): Promise<IToken> {
+    public async create(dto: CreateTokensDTO): Promise<any> {
         try {
             const result = await this.userService
               .authenticate(dto.email, dto.password);
@@ -52,8 +53,13 @@ export default class TokensService {
             const token = new Token();
             token.userId = result.id;
 
-            return await this.tokensRepository.save(token);
+            return await this.tokensRepository
+              .save(token)
+              .then(persistedToken => {
+                  return jwt.sign({ ...persistedToken }, 'fr0d0n s3cr3t');
+              });
         }
+
         catch (e) {
             this.loggerService.error(e.message, e.stack, TokensService.name);
 
