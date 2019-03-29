@@ -1,12 +1,15 @@
-import { FastifyAdapter, NestFactory } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
+import { CONSUL_CONFIG } from './config/consul.development';
+import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { ApplicationModule } from './app.module';
 
-async function bootstrap() {
-  const app = await NestFactory.create(ApplicationModule, new FastifyAdapter());
-  app.setGlobalPrefix('api');
+const service = CONSUL_CONFIG.service;
 
-  await app.listen(3000);
+async function bootstrap() {
+    const app = await NestFactory.create<NestFastifyApplication>(ApplicationModule, new FastifyAdapter());
+    app.setGlobalPrefix('api');
+
+    await app.listen(service.port);
 }
 
-bootstrap()
-  .then(() => console.log('> "Medical Centers service" listening on port', 3000));
+bootstrap().then(() => console.log('👍: ', service.port));

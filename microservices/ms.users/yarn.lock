@@ -18,43 +18,6 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@nestcloud/boot@^0.1.3", "@nestcloud/boot@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.implicity.fr/repository/npm/@nestcloud/boot/-/boot-0.1.4.tgz#e16a4a0dfe8daf4adfc7bde07c1cd167967637e0"
-  integrity sha512-Rg7nmbq8kU+qwMzfxevxps9Dk9DMLL5kJOgJVZvp/w76fW76jEWgc3dx3iK4qjGSEmnAh+aGvibODPu7cvyB+w==
-  dependencies:
-    lodash "^4.17.11"
-    reflect-metadata "^0.1.12"
-    yamljs "^0.3.0"
-
-"@nestcloud/common@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.implicity.fr/repository/npm/@nestcloud/common/-/common-0.1.3.tgz#c60e6319105963a730e29c9807a7b2b782d41856"
-  integrity sha512-6YBMp/HPVVaHS884I5p+vutqu/IryzM6XEv8wbRzMVFOJTso+6j9/vgLU75fMc0bouYT2abmUZ35h8s2Rho8yg==
-  dependencies:
-    lodash "^4.17.11"
-
-"@nestcloud/consul-service@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.implicity.fr/repository/npm/@nestcloud/consul-service/-/consul-service-0.1.3.tgz#81258e6087084d500e4efe80acade5e6ce0be295"
-  integrity sha512-jRwe6FP3CS7Ez7xp08dYW0gkT7Ae5TpMi/hXQohXkEaHZDa4YaoDODUcUj79uH5xJqwd52MQe1FnUjZBGjIPDg==
-  dependencies:
-    blueimp-md5 "^2.10.0"
-    lodash "^4.17.11"
-    yamljs "^0.3.0"
-  optionalDependencies:
-    "@nestcloud/boot" "^0.1.3"
-
-"@nestcloud/consul@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.implicity.fr/repository/npm/@nestcloud/consul/-/consul-0.1.4.tgz#29937d2405c2606a47088d13d4c13ddce340872c"
-  integrity sha512-CVYax4T7TjDDSdg5edaoLcxDSF2O57nV8m3g+GTWP5KzdhcASxiuWwVyS4PQQhaRInEs0VDHYzczPCVzzTo3YQ==
-  dependencies:
-    reflect-metadata "^0.1.13"
-    yamljs "^0.3.0"
-  optionalDependencies:
-    "@nestcloud/boot" "^0.1.4"
-
 "@nestjs/common@^6.0.4":
   version "6.0.4"
   resolved "https://registry.implicity.fr/repository/npm/@nestjs/common/-/common-6.0.4.tgz#7cc7e07d43548cdd86466ed100848be9e8153e42"
@@ -75,6 +38,16 @@
     object-hash "1.3.1"
     optional "0.1.4"
     uuid "3.3.2"
+
+"@nestjs/platform-fastify@^6.0.4":
+  version "6.0.4"
+  resolved "https://registry.implicity.fr/repository/npm/@nestjs/platform-fastify/-/platform-fastify-6.0.4.tgz#298f9684a55af1f49501e37d4fbaaf72770e2050"
+  integrity sha512-+pExwfjrXfLbIAsdojXhmxY1I/m4XfU+RbAmNkkkH4wdiLewL6ElGUlw9jIEgTqYF926t0L1w/sZW53kTolYUg==
+  dependencies:
+    fastify "2.1.0"
+    fastify-cors "2.1.2"
+    fastify-formbody "3.1.0"
+    path-to-regexp "3.0.0"
 
 "@nestjs/testing@^5.1.0":
   version "5.7.4"
@@ -661,11 +634,6 @@ binary-extensions@^1.0.0:
   version "1.13.0"
   resolved "https://registry.implicity.fr/repository/npm/binary-extensions/-/binary-extensions-1.13.0.tgz#9523e001306a32444b907423f1de2164222f6ab1"
   integrity sha512-EgmjVLMn22z7eGGv3kcnHwSnJXmFHjISTY9E/S5lIcTD3Oxw05QTcBLNkJFzcb3cNueUdF/IN4U+d78V0zO8Hw==
-
-blueimp-md5@^2.10.0:
-  version "2.10.0"
-  resolved "https://registry.implicity.fr/repository/npm/blueimp-md5/-/blueimp-md5-2.10.0.tgz#02f0843921f90dca14f5b8920a38593201d6964d"
-  integrity sha512-EkNUOi7tpV68TqjpiUz9D9NcT8um2+qtgntmMbi5UKssVX2m/2PLqotcric0RE63pB3HPN/fjf3cKHN2ufGSUQ==
 
 bourne@^1.1.2:
   version "1.1.2"
@@ -1562,7 +1530,15 @@ fast-safe-stringify@2.0.6, fast-safe-stringify@^2.0.6:
   resolved "https://registry.implicity.fr/repository/npm/fast-safe-stringify/-/fast-safe-stringify-2.0.6.tgz#04b26106cc56681f51a044cfc0d76cf0008ac2c2"
   integrity sha512-q8BZ89jjc+mz08rSxROs8VsrBBcn1SIw1kq9NjolL509tkABRk9io01RAjSaEv1Xb2uFLt8VtRiZbGp5H8iDtg==
 
-fastify-formbody@^3.1.0:
+fastify-cors@2.1.2:
+  version "2.1.2"
+  resolved "https://registry.implicity.fr/repository/npm/fastify-cors/-/fastify-cors-2.1.2.tgz#5cafc79b974a73f61136f1871bf59208af06b7b0"
+  integrity sha512-/TEco5naXbM2ob3fSvl8IvbRpM4fBDLnwOZ7KJ5frpgiky8Yv0O8k8W5JE3oc64xfNeVcv/yBkqgRByRPk1ecw==
+  dependencies:
+    fastify-plugin "^1.5.0"
+    vary "^1.1.2"
+
+fastify-formbody@3.1.0, fastify-formbody@^3.1.0:
   version "3.1.0"
   resolved "https://registry.implicity.fr/repository/npm/fastify-formbody/-/fastify-formbody-3.1.0.tgz#604cdafdb9e3af6068e6d9940985baf692d6e922"
   integrity sha512-GQQtRmI8w07SMcnXiWrk9H8GAMJwheKAkQS4q0FbJ56Qu8bV39GOffiZ8GLHQmvcJ2B65S+4IAtNjsG6vtMEig==
@@ -1570,14 +1546,14 @@ fastify-formbody@^3.1.0:
     fastify-plugin "^1.0.0"
     qs "^6.5.1"
 
-fastify-plugin@^1.0.0:
+fastify-plugin@^1.0.0, fastify-plugin@^1.5.0:
   version "1.5.0"
   resolved "https://registry.implicity.fr/repository/npm/fastify-plugin/-/fastify-plugin-1.5.0.tgz#4bea12c54112f4749c17f3a1f17356cbdfa661af"
   integrity sha512-bXKSTR4Q1lxERf1p/10Aakga570XtcxCCvPR1gby5js1XOtg7E8UV+aHHEPbGowQGV/KVb7ARBROhPk2I4DfBw==
   dependencies:
     semver "^5.5.0"
 
-fastify@^2.1.0:
+fastify@2.1.0, fastify@^2.1.0:
   version "2.1.0"
   resolved "https://registry.implicity.fr/repository/npm/fastify/-/fastify-2.1.0.tgz#2f1659479f0aead139594ee9c2e7e07bd6629b22"
   integrity sha512-rktprBPTTt1aAsaiMjkbKVzmy/fhX5SGj1DkJY6wddBOzxHAKaQ7F3ia3n8tVPHw07JzNlTmJKtG4zHhnXEdlA==
@@ -1832,7 +1808,7 @@ glob-parent@^3.1.0:
     is-glob "^3.1.0"
     path-dirname "^1.0.0"
 
-glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3:
+glob@^7.0.3, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3:
   version "7.1.3"
   resolved "https://registry.implicity.fr/repository/npm/glob/-/glob-7.1.3.tgz#3960832d3f1574108342dafd3a67b332c0969df1"
   integrity sha512-vcfuiIxogLV4DlGBHIUOwI0IbrJ8HWPc4MU7HzviGeNho/UJDfi6B5p3sHeWIQ0KGIU0Jpxi5ZHxemQfLkkAwQ==
@@ -3747,7 +3723,7 @@ path-parse@^1.0.5, path-parse@^1.0.6:
   resolved "https://registry.implicity.fr/repository/npm/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
   integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
 
-path-to-regexp@^3.0.0:
+path-to-regexp@3.0.0, path-to-regexp@^3.0.0:
   version "3.0.0"
   resolved "https://registry.implicity.fr/repository/npm/path-to-regexp/-/path-to-regexp-3.0.0.tgz#c981a218f3df543fa28696be2f88e0c58d2e012a"
   integrity sha512-ZOtfhPttCrqp2M1PBBH4X13XlvnfhIwD7yCLx+GoGoXRPQyxGOTdQMpIzPSPKXAJT/JQrdfFrgdJOyAzvgpQ9A==
@@ -4991,6 +4967,11 @@ validator@10.4.0:
   resolved "https://registry.implicity.fr/repository/npm/validator/-/validator-10.4.0.tgz#ee99a44afb3bb5ed350a159f056ca72a204cfc3c"
   integrity sha512-Q/wBy3LB1uOyssgNlXSRmaf22NxjvDNZM2MtIQ4jaEOAB61xsh1TQxsq1CgzUMBV1lDrVMogIh8GjG1DYW0zLg==
 
+vary@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.implicity.fr/repository/npm/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
+  integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
+
 verror@1.10.0:
   version "1.10.0"
   resolved "https://registry.implicity.fr/repository/npm/verror/-/verror-1.10.0.tgz#3a105ca17053af55d6e270c1f8288682e18da400"
@@ -5164,14 +5145,6 @@ yallist@^3.0.0, yallist@^3.0.2:
   version "3.0.3"
   resolved "https://registry.implicity.fr/repository/npm/yallist/-/yallist-3.0.3.tgz#b4b049e314be545e3ce802236d6cd22cd91c3de9"
   integrity sha512-S+Zk8DEWE6oKpV+vI3qWkaK+jSbIK86pCwe2IF/xwIpQ8jEuxpw9NyaGjmp9+BoJv5FV2piqCDcoCtStppiq2A==
-
-yamljs@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.implicity.fr/repository/npm/yamljs/-/yamljs-0.3.0.tgz#dc060bf267447b39f7304e9b2bfbe8b5a7ddb03b"
-  integrity sha512-C/FsVVhht4iPQYXOInoxUM/1ELSf9EsgKH34FofQOp6hwCPrW4vG4w5++TED3xRUo8gD7l0P1J1dLlDYzODsTQ==
-  dependencies:
-    argparse "^1.0.7"
-    glob "^7.0.5"
 
 yargonaut@^1.1.2:
   version "1.1.4"

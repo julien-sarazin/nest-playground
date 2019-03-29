@@ -40,7 +40,7 @@ export class TokensController {
     }
   }
 
-  @Get()
+  @Get('peek')
   async peek(@Query() query): Promise<any> {
     return this.tokensService
       .peek(query);

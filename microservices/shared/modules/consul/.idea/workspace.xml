@@ -2,8 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bab7fee9-d0c3-448f-a843-31a7555e1f3b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../ms.medical_centers/src/config/consul.development.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.auth/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.auth/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.auth/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.auth/src/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.auth/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.auth/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.auth/src/modules/tokens/controller/tokens.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.auth/src/modules/tokens/controller/tokens.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.auth/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.auth/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.medical_centers/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.medical_centers/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.medical_centers/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.medical_centers/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.medical_centers/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.medical_centers/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.medical_centers/tslint.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.medical_centers/tslint.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.medical_centers/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.medical_centers/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.users/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.users/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.users/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.users/src/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.users/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.users/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.users/tslint.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.users/tslint.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ms.users/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.users/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nest-consul.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/nest-consul.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,24 +47,29 @@
                 <element signature="n#!!block;n#raw#0;n#RemoteRepositoryService#0" expanded="true" />
                 <element signature="n#!!block;n#remove#0;n#RemoteRepositoryService#0" expanded="true" />
                 <element signature="n#!!block;n#update#0;n#RemoteRepositoryService#0" expanded="true" />
-                <element signature="e#2920#2921#0" expanded="true" />
-                <element signature="e#2945#2946#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/nest-consul.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" column="52" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
+              <folding>
+                <element signature="n#NestConsulService#0" />
+                <element signature="n#ServiceUnavailableError#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/nest-consul.service.ts">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="212" lean-forward="true" selection-start-line="212" selection-end-line="212" />
-              <folding>
-                <element signature="e#0#108#0" expanded="true" />
-                <element signature="n#NestConsulService#0" />
-                <element signature="e#5234#5522#0" expanded="true" />
-                <element signature="n#ServiceUnavailableError#0" />
-              </folding>
+            <state relative-caret-position="188">
+              <caret line="37" column="26" lean-forward="true" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -130,6 +152,7 @@
         <option value="$PROJECT_DIR$/src/classes/ServiceNode.ts" />
         <option value="$PROJECT_DIR$/src/remote-repository.service.ts" />
         <option value="$PROJECT_DIR$/src/nest-consul.service.ts" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -139,7 +162,7 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="width" value="638" />
     <option name="height" value="800" />
   </component>
@@ -161,18 +184,6 @@
               <item name="consul" type="b2602c69:ProjectViewProjectNode" />
               <item name="consul" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="consul" type="b2602c69:ProjectViewProjectNode" />
-              <item name="consul" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="consul" type="b2602c69:ProjectViewProjectNode" />
-              <item name="consul" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="decorators" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -240,23 +251,23 @@
       <workItem from="1553586741975" duration="45683000" />
       <workItem from="1553713374271" duration="264000" />
       <workItem from="1553713656002" duration="6752000" />
+      <workItem from="1553849479130" duration="831000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62100000" />
+    <option name="totallyTimeSpent" value="62931000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="638" height="800" extended-state="0" />
+    <frame x="0" y="0" width="2560" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978602" weight="0.27734375" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978602" visible="true" weight="0.27734375" />
       <window_info id="npm" order="1" sideWeight="0.50048876" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48203126" weight="0.36339167" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.48125" visible="true" weight="0.36265886" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -264,15 +275,16 @@
       <window_info anchor="bottom" id="Docker" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="TypeScript" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.5179688" side_tool="true" weight="0.32942328" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.51875" side_tool="true" visible="true" weight="0.36265886" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="DB Execution Console" order="12" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Structure" order="3" sideWeight="0.50145775" side_tool="true" weight="0.3296875" />
       <window_info anchor="right" id="DB Browser" order="4" sideWeight="0.49854228" weight="0.32916668" />
+      <window_info anchor="right" id="Database" order="5" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -391,15 +403,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/interfaces.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/remote-repository.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1311">
@@ -413,22 +416,34 @@
             <element signature="n#!!block;n#raw#0;n#RemoteRepositoryService#0" expanded="true" />
             <element signature="n#!!block;n#remove#0;n#RemoteRepositoryService#0" expanded="true" />
             <element signature="n#!!block;n#update#0;n#RemoteRepositoryService#0" expanded="true" />
-            <element signature="e#2920#2921#0" expanded="true" />
-            <element signature="e#2945#2946#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/interfaces.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/nest-consul.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="212" lean-forward="true" selection-start-line="212" selection-end-line="212" />
+        <state relative-caret-position="95">
+          <caret line="5" column="52" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
           <folding>
-            <element signature="e#0#108#0" expanded="true" />
             <element signature="n#NestConsulService#0" />
-            <element signature="e#5234#5522#0" expanded="true" />
             <element signature="n#ServiceUnavailableError#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="37" column="26" lean-forward="true" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
         </state>
       </provider>
     </entry>

@@ -11,5 +11,5 @@ import { CONSUL_CONFIG } from './config/consul.development';
         NestConsulModule.init(CONSUL_CONFIG),
     ],
 })
-export class AppModule {
+export class ApplicationModule {
 }

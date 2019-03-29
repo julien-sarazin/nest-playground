@@ -1,5 +1,5 @@
 import {
-  Body, Component, ConflictException,
+  Body, ConflictException,
   Controller,
   Delete,
   Get, HttpStatus, InternalServerErrorException,
