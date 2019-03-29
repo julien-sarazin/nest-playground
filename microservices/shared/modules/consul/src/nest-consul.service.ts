@@ -34,7 +34,6 @@ export class NestConsulService implements OnModuleInit, OnModuleDestroy {
          * Common service information
          */
         this.localService = configuration.service;
-        console.log('> configuration.service:', configuration.service);
         this.localService.id = this.localService.id || uuid.v4();
         /**
          * Consul fail checks
@@ -45,20 +44,17 @@ export class NestConsulService implements OnModuleInit, OnModuleDestroy {
     }
 
     public async onModuleInit(): Promise<any> {
-        this.logger.log('Initializing module...');
-
         await this.register();
         await this.discover();
         await this.setupProcessHandlers();
     }
 
     public async onModuleDestroy(): Promise<any> {
-        this.logger.log('Destroying module...', NestConsulService.name);
-        return await this.unregister();
+       return await this.unregister();
     }
 
     public getRemoteRepository<R>(Type: Instantiable<R>, service: string): RemoteRepositoryService<R> {
-        this.logger.log('Providing remote repository for service:' + Type.name.toLocaleLowerCase(), NestConsulService.name);
+        this.logger.log('Providing remote repository for service: ' + Type.name.toLocaleLowerCase(), NestConsulService.name);
 
         let collaborators = this.collaborators.get(service);
 
@@ -74,7 +70,7 @@ export class NestConsulService implements OnModuleInit, OnModuleDestroy {
     }
 
     public addServiceListener(service: string, listener: IServiceNodeWatcherDelegate) {
-        let collaborators = this.collaborators.get(service);
+        const collaborators = this.collaborators.get(service);
 
         if (!collaborators) {
             throw new ServiceUnavailableError();
@@ -133,7 +129,7 @@ export class NestConsulService implements OnModuleInit, OnModuleDestroy {
             .all(self.configuration.collaborators.map(collaborator => fetch(collaborator.name).then(watch)));
 
         async function fetch(serviceName: string) {
-            self.logger.log(`Fetching health for ${serviceName}.service`, NestConsulService.name);
+            self.logger.debug(`Fetching health for ${serviceName}.service`, NestConsulService.name);
 
             const options = { service: serviceName };
             const healthData: [any] = await self.consul.health.service(options);
@@ -150,12 +146,12 @@ export class NestConsulService implements OnModuleInit, OnModuleDestroy {
                 collaborators.listeners.forEach(l => l.onNodesDidChange(collaborators.nodes));
             }
 
-            self.logger.log('[DEBUG] collaborators:' + JSON.stringify(self.collaborators.entries(), null, 4), NestConsulService.name);
+            self.logger.debug('collaborators:' + JSON.stringify(self.collaborators.entries(), null, 4), NestConsulService.name);
             return serviceName;
         }
 
         async function watch(serviceName: string) {
-            self.logger.log(`Watching service ${serviceName}`, NestConsulService.name);
+            self.logger.debug(`Watching service ${serviceName}`, NestConsulService.name);
 
             const options: any = {
                 service: serviceName,
@@ -178,7 +174,7 @@ export class NestConsulService implements OnModuleInit, OnModuleDestroy {
                     collaborators.listeners.forEach(l => l.onNodesDidChange(collaborators.nodes));
                 }
 
-                self.logger.log('[DEBUG] collaborators:' + JSON.stringify(self.collaborators.get(serviceName), null, 4), NestConsulService.name);
+                self.logger.debug('collaborators:' + JSON.stringify(self.collaborators.get(serviceName), null, 4), NestConsulService.name);
             });
 
             watch.on('error', err => self.logger.error('error:' + err));

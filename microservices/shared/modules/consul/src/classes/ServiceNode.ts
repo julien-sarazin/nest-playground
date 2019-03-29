@@ -1,6 +1,7 @@
 import { ServiceNodeConfiguration } from '../interfaces';
 import * as _ from 'lodash';
 import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import { Logger } from '@nestjs/common';
 
 export class ServiceNode {
     public readonly id: string;
@@ -19,7 +20,7 @@ export class ServiceNode {
          */
         configuration = _.mapKeys(configuration, (v, k) => k.toLowerCase()) as ServiceNodeConfiguration;
 
-        console.log('[DEBUG] Service node configuration:' + JSON.stringify(configuration, null, 4), ServiceNode.name);
+        Logger.debug('Service node configuration:' + JSON.stringify(configuration, null, 4), ServiceNode.name);
 
         this.id = configuration.id;
         this.service = configuration.service;

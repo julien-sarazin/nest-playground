@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bab7fee9-d0c3-448f-a843-31a7555e1f3b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../../README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../clients/angular/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../clients/react/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../clients/vue/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/ServiceNode.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/ServiceNode.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nest-consul.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/nest-consul.service.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
