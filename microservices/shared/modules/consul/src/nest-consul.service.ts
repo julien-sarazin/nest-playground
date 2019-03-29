@@ -26,9 +26,8 @@ export class NestConsulService implements OnModuleInit, OnModuleDestroy {
     constructor(
         private readonly consul: Consul.Consul,
         private readonly configuration: ConsulModuleConfiguration,
-        @Optional() private readonly logger?: LoggerService
-    )
-    {
+        @Optional() private readonly logger?: LoggerService,
+    ) {
         this.collaborators = new Map<string, Collaborator>();
         this.logger = this.logger || new Logger(NestConsulService.name);
         /**
@@ -70,6 +69,7 @@ export class NestConsulService implements OnModuleInit, OnModuleDestroy {
 
         const repository = new RemoteRepositoryService(Type);
         this.addServiceListener(service, repository);
+
         return repository;
     }
 
@@ -159,7 +159,7 @@ export class NestConsulService implements OnModuleInit, OnModuleDestroy {
 
             const options: any = {
                 service: serviceName,
-                passing: true
+                passing: true,
             };
 
             const watch = self.consul

@@ -7,7 +7,7 @@ export default class UsersRepository extends Repository<User> {
 }
 
 export const UsersRepositoryProvider = {
-  provide: 'UsersRepository',
-  useFactory: (connection: Connection) => connection.getCustomRepository(UsersRepository),
-  inject: ['DbConnection'],
+    provide: 'UsersRepository',
+    useFactory: (connection: Connection) => connection.getCustomRepository(UsersRepository),
+    inject: ['DbConnection'],
 };

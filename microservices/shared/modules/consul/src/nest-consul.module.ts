@@ -21,7 +21,7 @@ export class NestConsulModule {
                  * TODO: lean the configuration with default properties.
                  */
                 return options;
-            }
+            },
         };
 
         /**
@@ -32,20 +32,20 @@ export class NestConsulModule {
             provide: CONSUL_CLIENT_PROVIDER,
             useFactory: async (): Promise<any> => {
                 return await new Consul(options.consul);
-            }
+            },
         };
         const consulServiceProvider = {
             provide: CONSUL_SERVICE_PROVIDER,
             useFactory: async (consulClient: Consul.Consul, consulConfiguration: ConsulModuleConfiguration): Promise<NestConsulService> => {
                 return new NestConsulService(consulClient, consulConfiguration);
             },
-            inject: [CONSUL_CLIENT_PROVIDER, CONSUL_CONFIGURATION_PROVIDER]
+            inject: [CONSUL_CLIENT_PROVIDER, CONSUL_CONFIGURATION_PROVIDER],
         };
 
         return {
             module: NestConsulModule,
             providers: [consulConfigurationProvider, consulClientProvider, consulServiceProvider],
-            exports: [consulServiceProvider]
+            exports: [consulServiceProvider],
         };
     }
 }

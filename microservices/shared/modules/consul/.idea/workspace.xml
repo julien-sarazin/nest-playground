@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bab7fee9-d0c3-448f-a843-31a7555e1f3b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../ms.auth/src/modules/users/remote/users.remote.repository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ms.auth/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.auth/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ms.auth/src/modules/tokens/service/tokens.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.auth/src/modules/tokens/service/tokens.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ms.auth/src/modules/tokens/tokens.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.auth/src/modules/tokens/tokens.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ms.auth/src/modules/users/Users.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.auth/src/modules/users/remote/users.remote.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ms.auth/src/modules/users/users.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.auth/src/modules/users/users.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ms.auth/src/modules/users/users.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.auth/src/modules/users/remote/users.remote.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ms.auth/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ms.auth/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nest-consul.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/nest-consul.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/remote-repository.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/remote-repository.service.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,7 +20,7 @@
         <entry file="file://$PROJECT_DIR$/src/remote-repository.service.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1311">
-              <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
+              <caret line="78" selection-start-line="78" selection-end-line="78" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
                 <element signature="n#constructor#0;n#RemoteRepositoryService#0" expanded="true" />
@@ -49,19 +40,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/nest-consul.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="145" column="50" selection-start-line="145" selection-start-column="50" selection-end-line="145" selection-end-column="50" />
+            <state relative-caret-position="437">
+              <caret line="212" lean-forward="true" selection-start-line="212" selection-end-line="212" />
               <folding>
                 <element signature="e#0#108#0" expanded="true" />
-                <element signature="n#!!block;n#constructor#0;n#NestConsulService#0" expanded="true" />
-                <element signature="n#!!block;n#onModuleDestroy#0;n#NestConsulService#0" expanded="true" />
-                <element signature="n#!!block;n#getRemoteRepository#0;n#NestConsulService#0" expanded="true" />
-                <element signature="n#!!block;n#addServiceListener#0;n#NestConsulService#0" expanded="true" />
-                <element signature="n#!!block;n#register#0;n#NestConsulService#0" expanded="true" />
-                <element signature="n#!!block;n#watch#0;n#!!block;n#discover#0;n#NestConsulService#0" expanded="true" />
+                <element signature="n#NestConsulService#0" />
                 <element signature="e#5234#5522#0" expanded="true" />
-                <element signature="e#6387#6388#0" expanded="true" />
-                <element signature="e#6417#6418#0" expanded="true" />
+                <element signature="n#ServiceUnavailableError#0" />
               </folding>
             </state>
           </provider>
@@ -155,10 +140,8 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="394" />
-    <option name="y" value="110" />
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="width" value="638" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -256,24 +239,24 @@
       <workItem from="1553450260788" duration="9401000" />
       <workItem from="1553586741975" duration="45683000" />
       <workItem from="1553713374271" duration="264000" />
-      <workItem from="1553713656002" duration="5048000" />
+      <workItem from="1553713656002" duration="6752000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60396000" />
+    <option name="totallyTimeSpent" value="62100000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="2560" height="1080" extended-state="0" />
+    <frame x="0" y="0" width="638" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978602" visible="true" weight="0.13867188" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978602" weight="0.27734375" />
       <window_info id="npm" order="1" sideWeight="0.50048876" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.48203126" visible="true" weight="0.2639296" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48203126" weight="0.36339167" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -420,7 +403,7 @@
     <entry file="file://$PROJECT_DIR$/src/remote-repository.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1311">
-          <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
             <element signature="n#constructor#0;n#RemoteRepositoryService#0" expanded="true" />
@@ -438,19 +421,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/nest-consul.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="145" column="50" selection-start-line="145" selection-start-column="50" selection-end-line="145" selection-end-column="50" />
+        <state relative-caret-position="437">
+          <caret line="212" lean-forward="true" selection-start-line="212" selection-end-line="212" />
           <folding>
             <element signature="e#0#108#0" expanded="true" />
-            <element signature="n#!!block;n#constructor#0;n#NestConsulService#0" expanded="true" />
-            <element signature="n#!!block;n#onModuleDestroy#0;n#NestConsulService#0" expanded="true" />
-            <element signature="n#!!block;n#getRemoteRepository#0;n#NestConsulService#0" expanded="true" />
-            <element signature="n#!!block;n#addServiceListener#0;n#NestConsulService#0" expanded="true" />
-            <element signature="n#!!block;n#register#0;n#NestConsulService#0" expanded="true" />
-            <element signature="n#!!block;n#watch#0;n#!!block;n#discover#0;n#NestConsulService#0" expanded="true" />
+            <element signature="n#NestConsulService#0" />
             <element signature="e#5234#5522#0" expanded="true" />
-            <element signature="e#6387#6388#0" expanded="true" />
-            <element signature="e#6417#6418#0" expanded="true" />
+            <element signature="n#ServiceUnavailableError#0" />
           </folding>
         </state>
       </provider>
