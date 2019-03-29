@@ -20,8 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs/common": "^5.4.0",
-    "@nestjs/core": "^5.4.0",
+    "@nestjs/common": "^6.0.4",
+    "@nestjs/core": "^6.0.4",
     "class-transformer": "^0.2.0",
     "class-validator": "^0.9.1",
     "fastify": "^2.1.0",
