@@ -3,7 +3,7 @@
 ## Getting started
 
 ### The stack
-The microservices are backed by a MySQL / Consul Stack.
+The microservices are backed by a MySQL / Consul / Traefik Stack.
 Before executing your microservices, please install :
  - Docker : https://docs.docker.com/install/
  
