@@ -1,0 +1,47 @@
+defaultEntryPoints = ["http"]
+
+##
+# Define where the entrypoints are configured in the gateway, also means where any http request
+# can enter the gateway.
+##
+[entryPoints]
+  [entryPoints.http]
+  address = ":8084"
+
+##
+# Define links between entrypoints and backend servers
+##
+[frontends]
+  [frontends.auth]
+    backend = "auth"
+    passHostHeader = true
+    [frontends.auth.routes.auth]
+        rule = "Path:/auth-service"
+  [frontends.users]
+    backend = "users"
+    passHostHeader = true
+    [frontends.users.routes.users]
+        rule = "Path:/users-service"
+
+##
+# Define the loadbalancing part. These elements will be targeted by the frontend.
+##
+[backends]
+  [backends.auth]
+    [backends.auth.servers.server1]
+    url = "http://localhost:8080"
+    [backends.auth.servers.server2]
+    url = "http://localhost:8081"
+    [backends.auth.servers.server3]
+    url = "http://localhost:8083"
+    [backends.auth.servers.server4]
+    url = "http://localhost:8084"
+  [backends.users]
+    [backends.users.servers.server1]
+    url = "http://localhost:8001"
+    [backends.users.servers.server2]
+    url = "http://localhost:8002"
+    [backends.users.servers.server3]
+    url = "http://localhost:8002"
+    [backends.users.servers.server4]
+    url = "http://localhost:8003"
