@@ -12,4 +12,9 @@ async function bootstrap() {
     await app.listen(service.port);
 }
 
-bootstrap().then(() => console.log('👍: ', service.port));
+if (isNaN(service.port)) {
+    console.error('No port provided. 👏');
+    process.exit(666);
+}
+
+bootstrap().then(() => console.log('Listening 👍: ', service.port));
