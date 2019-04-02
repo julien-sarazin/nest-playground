@@ -8,6 +8,9 @@ defaultEntryPoints = ["http"]
   [entryPoints.http]
   address = ":8084"
 
+# THIS MOTHER FUCKER NEEDS TO BE SET TO TEL TRAEFIK THE UPCOMING CONFIGURATION
+# COMES FROM THIS MOTHER FUCKING FILE.
+[file]
 ##
 # Define links between entrypoints and backend servers
 ##
@@ -16,12 +19,12 @@ defaultEntryPoints = ["http"]
     backend = "auth"
     passHostHeader = true
     [frontends.auth.routes.auth]
-        rule = "Path:/auth-service"
+        rule = "PathPrefix:/auth-service"
   [frontends.users]
     backend = "users"
     passHostHeader = true
     [frontends.users.routes.users]
-        rule = "Path:/users-service"
+        rule = "PathPrefix:/users-service"
 
 ##
 # Define the loadbalancing part. These elements will be targeted by the frontend.
@@ -38,10 +41,10 @@ defaultEntryPoints = ["http"]
     url = "http://localhost:8084"
   [backends.users]
     [backends.users.servers.server1]
-    url = "http://localhost:8001"
+    url = "http://localhost:9000"
     [backends.users.servers.server2]
-    url = "http://localhost:8002"
+    url = "http://localhost:9001"
     [backends.users.servers.server3]
-    url = "http://localhost:8002"
+    url = "http://localhost:9002"
     [backends.users.servers.server4]
-    url = "http://localhost:8003"
+    url = "http://localhost:9003"
