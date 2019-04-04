@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  ####
+  # Register container automatically
+  ###############################################
+  registrator:
+    image: gliderlabs/registrator:latest
+    command: "consul://consul:8500"
+    container_name: registrator
+    depends_on:
+      - consul-server-bootstrap
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+
+
+  ####
+  # Users Service
+  ###############################################
+  users:
+    image: nest-playground/users
+    restart: always
+    environment:
+      PORT: 4040
+      CONSUL_HOST: consul
+      CONSUL_PORT: 8500
+    networks:
+      - consul-net
+    ports:
+      - 4040:4040
+

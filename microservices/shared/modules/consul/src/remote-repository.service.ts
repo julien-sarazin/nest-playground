@@ -6,15 +6,14 @@ import { AxiosRequestConfig } from 'axios';
 import { IServiceNodeWatcherDelegate } from './interfaces';
 
 @Injectable()
-export class RemoteRepositoryService<R> implements IServiceNodeWatcherDelegate{
+export class RemoteRepositoryService<R> implements IServiceNodeWatcherDelegate {
     private nodes: ServiceNode[];
 
     constructor(
         private ResourceType: Instantiable<R>,
         private index: number = 0,
-        private readonly resourceName: string = ResourceType.name.toLocaleLowerCase()
-    )
-    {
+        private readonly resourceName: string = ResourceType.name.toLocaleLowerCase(),
+    ) {
     }
 
     /**
@@ -45,7 +44,7 @@ export class RemoteRepositoryService<R> implements IServiceNodeWatcherDelegate{
             .then(response => response.data.map(data => _.assign(new this.ResourceType(), data)));
     }
 
-    public async peek(config?: AxiosRequestConfig): Promise<R | null> {
+    public async pick(config?: AxiosRequestConfig): Promise<R | null> {
         const configuration = _.assignIn({ method: 'GET', url: this.resourceName + '/peek' }, config);
 
         return await this.node
@@ -66,11 +65,11 @@ export class RemoteRepositoryService<R> implements IServiceNodeWatcherDelegate{
         const configuration = _.assignIn({ method: 'DELETE', url: this.resourceName }, config);
 
         await this.node
-            .request(configuration)
+            .request(configuration);
     }
 
     public async update(data?: any, config?: AxiosRequestConfig): Promise<R> {
-        const configuration = _.assignIn({ method: 'PUT',  url: this.resourceName, data }, config);
+        const configuration = _.assignIn({ method: 'PUT', url: this.resourceName, data }, config);
 
         return await this.node
             .request(configuration)

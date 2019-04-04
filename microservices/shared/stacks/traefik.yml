@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  traefik_init:
+    image: traefik:1.7
+    command:
+      - "storeconfig"
+      - "--api"
+      - "--entrypoints=Name:http Address::80"
+      - "--consul"
+      - "--consul.endpoint=consul:8500"
+      - "--consul.prefix=traefik"
+      - "--consul.watch=true"
+    networks:
+      - consul-net
+    depends_on:
+      - consul
+
+
+  traefik:
+    image: traefik:1.7
+    depends_on:
+      - traefik_init
+      - consul
+    command:
+      - "--consul"
+      - "--consul.endpoint=consul:8500"
+      - "--consul.prefix=traefik"
+      - "--consul.watch=true"
+      - "--consulCatalog"
+      - "--web"
+      - "--web.address=:8080"
+    networks:
+      - consul-net
+    ports:
+      - target: 8080
+        published: 8080
+        mode: host

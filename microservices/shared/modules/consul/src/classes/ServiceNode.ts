@@ -1,6 +1,6 @@
 import { ServiceNodeConfiguration } from '../interfaces';
 import * as _ from 'lodash';
-import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import Axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig } from 'axios';
 import { Logger } from '@nestjs/common';
 
 export class ServiceNode {
@@ -31,9 +31,8 @@ export class ServiceNode {
         this.axios = Axios.create({ baseURL: `http://${this.host}${this.port !== 80 ? `:${this.port}` : ''}/api` });
     }
 
-    public async request(configuration: AxiosRequestConfig) {
+    public async request(configuration: AxiosRequestConfig): Promise<any> {
         return await this.axios
             .request(configuration);
     }
-
 }
