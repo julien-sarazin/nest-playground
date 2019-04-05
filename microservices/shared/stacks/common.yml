@@ -87,7 +87,6 @@ services:
 ###############################################
 networks:
   consul-net:
-    driver: bridge
 
 ####
 # Volume

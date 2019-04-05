@@ -2,19 +2,6 @@ version: '3.7'
 
 services:
   ####
-  # Register container automatically
-  ###############################################
-  registrator:
-    image: gliderlabs/registrator:latest
-    command: "consul://consul:8500"
-    container_name: registrator
-    depends_on:
-      - consul-server-bootstrap
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock
-
-
-  ####
   # Users Service
   ###############################################
   users:
@@ -28,4 +15,3 @@ services:
       - consul-net
     ports:
       - 4040:4040
-
