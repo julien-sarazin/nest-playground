@@ -19,7 +19,7 @@ export default class TokensService {
 
     constructor(
       @Inject('TokensRepository') private readonly tokensRepository: TokensRepository,
-      @Inject('UsersRemoteService') private readonly userService: UsersRemoteService,
+      // @Inject('UsersRemoteService') private readonly userService: UsersRemoteService,
       @Inject('LoggerService') private readonly loggerService: LoggerService,
     ) {
     }
@@ -45,36 +45,36 @@ export default class TokensService {
           .findOne(query);
     }
 
-    public async create(dto: CreateTokensDTO): Promise<any> {
-        try {
-            const result = await this.userService
-              .authenticate(dto.email, dto.password);
-
-            const token = new Token();
-            token.userId = result.id;
-
-            return await this.tokensRepository
-              .save(token)
-              .then(persistedToken => {
-                  return jwt.sign({ ...persistedToken }, 'fr0d0n s3cr3t');
-              });
-        }
-
-        catch (e) {
-            this.loggerService.error(e.message, e.stack, TokensService.name);
-
-            if (e instanceof UserNotAuthenticatedException) {
-                throw new ForbiddenException(e);
-            }
-
-            if (e instanceof ServiceUnavailableException) {
-                throw e;
-            }
-            else {
-                throw new InternalServerErrorException(e);
-            }
-        }
-    }
+    // public async create(dto: CreateTokensDTO): Promise<any> {
+    //     try {
+    //         const result = await this.userService
+    //           .authenticate(dto.email, dto.password);
+    //
+    //         const token = new Token();
+    //         token.userId = result.id;
+    //
+    //         return await this.tokensRepository
+    //           .save(token)
+    //           .then(persistedToken => {
+    //               return jwt.sign({ ...persistedToken }, 'fr0d0n s3cr3t');
+    //           });
+    //     }
+    //
+    //     catch (e) {
+    //         this.loggerService.error(e.message, e.stack, TokensService.name);
+    //
+    //         if (e instanceof UserNotAuthenticatedException) {
+    //             throw new ForbiddenException(e);
+    //         }
+    //
+    //         if (e instanceof ServiceUnavailableException) {
+    //             throw e;
+    //         }
+    //         else {
+    //             throw new InternalServerErrorException(e);
+    //         }
+    //     }
+    // }
 
     public async remove(id: number): Promise<boolean> {
         const entity = await this.tokensRepository

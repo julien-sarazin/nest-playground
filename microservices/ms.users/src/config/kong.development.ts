@@ -1,4 +1,4 @@
-import { KongModuleConfiguration } from '../../../shared/modules/kong/src';
+import { KongModuleConfiguration } from '@shared/modules/kong/src';
 
 export const KONG_CONFIG: KongModuleConfiguration = {
     kong: {

@@ -38,6 +38,7 @@ export class Kong {
             .delete(`/upstreams/${target.upstream}/targets/${target.id}`)
             .then(_ => true);
     }
+
 }
 
 export class KongConflictError extends Error {

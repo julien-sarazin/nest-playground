@@ -3,9 +3,9 @@ import { UsersModule } from './modules/users/users.module';
 import { HealthModule } from './modules/health/health.module';
 import { UsersController } from './modules/users/controller/users.controller';
 import * as morgan from 'morgan';
-import { KONG_CONFIG } from './config/service.development';
 import { NestKongModule } from '@shared/modules/kong/src/nest-kong.module';
 import { HealthController } from './modules/health/health.controller';
+import { KONG_CONFIG } from './config/kong.development';
 
 @Module({
     imports: [

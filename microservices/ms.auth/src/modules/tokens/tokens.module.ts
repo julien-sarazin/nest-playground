@@ -13,7 +13,7 @@ import UsersRemoteService from '../users/remote/users.remote.service';
     providers: [
         TokensService,
         TokensRepositoryProvider,
-        UsersRemoteService,
+        // UsersRemoteService,
         {
             provide: 'LoggerService',
             useClass: Logger,
@@ -24,7 +24,7 @@ import UsersRemoteService from '../users/remote/users.remote.service';
     ],
     imports: [
         DatabaseModule,
-        UsersModule,
+        // UsersModule,
     ],
 })
 export class TokensModule {
