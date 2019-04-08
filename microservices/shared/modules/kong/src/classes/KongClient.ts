@@ -1,5 +1,5 @@
 import { KongClientOptions, KongTarget } from '../interfaces';
-import Axios, { AxiosInstance } from 'axios';
+import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 export class Kong {
     private options: KongClientOptions;
@@ -39,6 +39,10 @@ export class Kong {
             .then(_ => true);
     }
 
+    public async request(configuration: AxiosRequestConfig): Promise<any> {
+        return this.axios
+            .request(configuration);
+    }
 }
 
 export class KongConflictError extends Error {

@@ -2,6 +2,7 @@ import { Injectable, Logger, LoggerService, OnModuleDestroy, OnModuleInit, Optio
 import { get } from 'lodash';
 import { KongModuleConfiguration, KongTarget } from './interfaces';
 import { Kong } from './classes/KongClient';
+import { RemoteRepositoryService } from './remote-repository.service';
 
 export interface Instantiable<T> {
     new(): T;
@@ -49,6 +50,12 @@ export class NestKongService implements OnModuleInit, OnModuleDestroy {
         }
 
         return await this.unregister();
+    }
+
+    public getRemoteRepository<R>(Type: Instantiable<R>, service: string): RemoteRepositoryService<R> {
+        this.logger.log('Providing remote repository for service: ' + Type.name.toLocaleLowerCase(), NestKongService.name);
+
+        return new RemoteRepositoryService(Type, service, Type.constructor.name.toLowerCase(), );
     }
 
     private async register(): Promise<void> {
