@@ -30,6 +30,7 @@ export class NestKongModule {
                 return await new Kong(options.kong);
             },
         };
+
         const kongServiceProvider = {
             provide: KONG_SERVICE_PROVIDER,
             useFactory: async (kongClient: Kong, kongConfiguration: KongModuleConfiguration): Promise<NestKongService> => {

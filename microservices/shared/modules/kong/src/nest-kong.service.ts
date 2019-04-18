@@ -1,8 +1,8 @@
-import { Injectable, Logger, LoggerService, OnModuleDestroy, OnModuleInit, Optional } from '@nestjs/common';
+import { Inject, Injectable, Logger, LoggerService, OnModuleDestroy, OnModuleInit, Optional } from '@nestjs/common';
 import { get } from 'lodash';
 import { KongModuleConfiguration, KongTarget } from './interfaces';
 import { Kong } from './classes/KongClient';
-import { RemoteRepositoryService } from './remote-repository.service';
+import { KONG_CLIENT_PROVIDER } from './constants';
 
 export interface Instantiable<T> {
     new(): T;
@@ -16,7 +16,7 @@ export class NestKongService implements OnModuleInit, OnModuleDestroy {
     private readonly retryInterval: number;
 
     constructor(
-        private readonly kong: Kong,
+        @Inject(KONG_CLIENT_PROVIDER) private readonly kongClient: Kong,
         private readonly configuration: KongModuleConfiguration,
         @Optional() private readonly logger?: LoggerService,
     ) {
@@ -52,16 +52,10 @@ export class NestKongService implements OnModuleInit, OnModuleDestroy {
         return await this.unregister();
     }
 
-    public getRemoteRepository<R>(Type: Instantiable<R>, service: string): RemoteRepositoryService<R> {
-        this.logger.log('Providing remote repository for service: ' + Type.name.toLocaleLowerCase(), NestKongService.name);
-
-        return new RemoteRepositoryService(Type, service, Type.constructor.name.toLowerCase(), );
-    }
-
     private async register(): Promise<void> {
         this.logger.log(`Registering service to ${this.localService.upstream} ...`, NestKongService.name);
         try {
-            this.localService = await this.kong.register(this.localService);
+            this.localService = await this.kongClient.register(this.localService);
 
             this.logger.log(`Registration succeeded.`, NestKongService.name);
             this.resetTriesCount();
@@ -81,7 +75,7 @@ export class NestKongService implements OnModuleInit, OnModuleDestroy {
 
     private async unregister(): Promise<void> {
         try {
-            await this.kong
+            await this.kongClient
                 .unregister(this.localService);
 
             this.logger.log(`Unregistered the service ${this.localService.upstream} successfully.`);

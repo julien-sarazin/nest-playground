@@ -17,7 +17,7 @@ export class Kong {
         this.baseUrl = `${protocol}://${options.host}${port}`;
         this.axios = Axios.create({ baseURL: this.baseUrl});
     }
-
+    
     public async register(target: KongTarget): Promise<KongTarget> {
         if (target.id) {
             throw new KongConflictError('Target Already registered');
