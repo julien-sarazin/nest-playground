@@ -28,7 +28,7 @@ export class ServiceNode {
         this.host = configuration.address;
         this.port = configuration.port;
 
-        this.axios = Axios.create({ baseURL: `http://${this.host}${this.port !== 80 ? `:${this.port}` : ''}/api` });
+        this.axios = Axios.create({ baseURL: `http://${this.host}${this.port !== 80 ? `:${this.port}` : ''}` });
     }
 
     public async request(configuration: AxiosRequestConfig): Promise<any> {
