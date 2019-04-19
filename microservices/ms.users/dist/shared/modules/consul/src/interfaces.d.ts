@@ -39,7 +39,7 @@ export interface IServiceNodeWatcherDelegate {
 export interface IRemoteRepository<T> {
     setConfiguration(defaultConfiguration: AxiosRequestConfig): void;
     list(configuration?: AxiosRequestConfig): Promise<T[]>;
-    peek(data?: any, configuration?: AxiosRequestConfig): Promise<T | null>;
+    search(data?: any, configuration?: AxiosRequestConfig): Promise<T | null>;
     create(data?: any, configuration?: AxiosRequestConfig): Promise<T>;
     update(data?: any, configuration?: AxiosRequestConfig): Promise<T>;
     remove(configuration?: AxiosRequestConfig): Promise<void>;

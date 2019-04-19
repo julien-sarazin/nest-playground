@@ -15,16 +15,16 @@ export class Kong {
             ? `:${options.port}` : '';
 
         this.baseUrl = `${protocol}://${options.host}${port}`;
-        this.axios = Axios.create({ baseURL: this.baseUrl});
+        this.axios = Axios.create({ baseURL: this.baseUrl });
     }
-    
+
     public async register(target: KongTarget): Promise<KongTarget> {
         if (target.id) {
             throw new KongConflictError('Target Already registered');
         }
         const path = `/upstreams/${target.upstream}/targets`;
 
-        return this.axios
+        return await this.axios
             .post(path, target)
             .then(response => Object.assign(response.data, target));
     }
@@ -34,14 +34,15 @@ export class Kong {
             throw new InvalidTargetError('Missing target identifier');
         }
 
-        return this.axios
+        return await this.axios
             .delete(`/upstreams/${target.upstream}/targets/${target.id}`)
             .then(_ => true);
     }
 
     public async request(configuration: AxiosRequestConfig): Promise<any> {
-        return this.axios
-            .request(configuration);
+        return await this.axios
+            .request(configuration)
+            .then(response => response.data);
     }
 }
 

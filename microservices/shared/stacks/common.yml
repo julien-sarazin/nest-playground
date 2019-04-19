@@ -50,6 +50,16 @@ services:
     ports:
       - 3032:3306
 
+  partners_db:
+    image: mysql
+    container_name: mysql_partners
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: partners_service_database
+    ports:
+      - 3033:3306
   ####
   # Consul
   ###############################################

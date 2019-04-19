@@ -3,6 +3,7 @@ import { get } from 'lodash';
 import { KongModuleConfiguration, KongTarget } from './interfaces';
 import { Kong } from './classes/KongClient';
 import { KONG_CLIENT_PROVIDER } from './constants';
+import { KongConsumersResource } from './classes/consumers.resource';
 
 export interface Instantiable<T> {
     new(): T;
@@ -14,6 +15,8 @@ export class NestKongService implements OnModuleInit, OnModuleDestroy {
     private tries: number;
     private readonly maxRetry: number;
     private readonly retryInterval: number;
+
+    public readonly consumers: KongConsumersResource;
 
     constructor(
         @Inject(KONG_CLIENT_PROVIDER) private readonly kongClient: Kong,
@@ -34,6 +37,7 @@ export class NestKongService implements OnModuleInit, OnModuleDestroy {
         this.retryInterval = get(configuration, 'kong.retryInterval', 1000);
 
         this.setupProcessHandlers();
+        this.consumers = new KongConsumersResource(this.kongClient);
     }
 
     public async onModuleInit(): Promise<any> {

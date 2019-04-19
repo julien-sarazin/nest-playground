@@ -45,7 +45,7 @@ export class RemoteRepositoryService<R> implements IServiceNodeWatcherDelegate {
     }
 
     public async pick(config?: AxiosRequestConfig): Promise<R | null> {
-        const configuration = _.assignIn({ method: 'GET', url: this.resourceName + '/peek' }, config);
+        const configuration = _.assignIn({ method: 'GET', url: this.resourceName + '/search' }, config);
 
         return await this.node
             .request(configuration)

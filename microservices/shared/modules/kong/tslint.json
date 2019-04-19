@@ -7,7 +7,8 @@
         "no-unused-expression": true
     },
     "rules": {
-        "no-empty-interface": false,
+      "variable-name": false,
+      "no-empty-interface": false,
         "interface-over-type-literal": false,
       "max-classes-per-file": false,
       "quotemark": [

@@ -11,7 +11,7 @@ export const CONSUL_CONFIG: ConsulModuleConfiguration = {
     service: {
         id: uuid.v4(),
         name: 'auth',
-        address: 'host.docker.internal',
+        address: '127.0.0.1',
         port: parseInt(process.env.PORT),
         tags: ['auth', 'macro'],
         meta: {
@@ -20,7 +20,7 @@ export const CONSUL_CONFIG: ConsulModuleConfiguration = {
         },
         check: {
             DeregisterCriticalServiceAfter: '20s',
-            http: `http://host.docker.internal:${process.env.PORT}/api/health/check`,
+            http: `http://host.docker.internal:${process.env.PORT}/health`,
             interval: '10s',
             ttl: '15s',
         },

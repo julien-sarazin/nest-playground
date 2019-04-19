@@ -7,7 +7,7 @@ export declare class UsersController {
     constructor(usersService: UsersService);
     list(criteria: any): Promise<any[]>;
     get(id: any): Promise<any>;
-    peek(criteria: any): Promise<any>;
+    search(criteria: any): Promise<any>;
     create(userCreateDTO: UserCreateDTO): Promise<any>;
     update(id: any, userUpdateDTO: UserUpdateDTO): Promise<any>;
     remove(id: any): Promise<any>;

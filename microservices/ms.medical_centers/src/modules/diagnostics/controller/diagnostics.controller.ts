@@ -48,16 +48,16 @@ export class DiagnosticsController {
   }
 
   @Get()
-  async peek(@Query() query): Promise<any> {
+  async search(@Query() query): Promise<any> {
     return this.diagnosticsService
-      .peek(query);
+      .search(query);
   }
 
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async create(@Body() createDiagnosticDTO: DiagnosticCreateDTO) {
     const patient = await this.patientsService
-      .peek({
+      .search({
         id: createDiagnosticDTO.patientId,
         practitionerId: createDiagnosticDTO.practitionerId
       });

@@ -11,18 +11,18 @@ export const CONSUL_CONFIG: ConsulModuleConfiguration = {
     service: {
         id: uuid.v4(),
         name: 'users',
-        address: 'host.docker.internal',
+        address: '127.0.0.1',
         port: parseInt(process.env.PORT),
         tags: ['users', 'micro'],
         meta: {
-            nestjs_version: '5.0.1',
-            prefix: 'api',
+            nestjs_version: '5.0.1'
         },
         check: {
-            DeregisterCriticalServiceAfter: '20s',
-            http: `http://host.docker.internal:${process.env.PORT}/api/health/check`,
+            DeregisterCriticalServiceAfter: '1m',
+            http: `http://host.docker.internal:${process.env.PORT}/health`,
             interval: '10s',
             ttl: '15s',
         },
     },
+    collaborators: [],
 };

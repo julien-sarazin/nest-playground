@@ -29,7 +29,7 @@ export default class PatientsService {
     return result;
   }
 
-  public async peek(@Query() query): Promise<IPatient> {
+  public async search(@Query() query): Promise<IPatient> {
     return await this.patientRepository
       .findOne(query);
   }

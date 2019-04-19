@@ -42,10 +42,10 @@ export class PatientsController {
     }
   }
 
-  @Get('peek')
-  async peek(@Query() query): Promise<any> {
+  @Get('search')
+  async search(@Query() query): Promise<any> {
     return this.patientsService
-      .peek(query);
+      .search(query);
   }
 
   @Post()

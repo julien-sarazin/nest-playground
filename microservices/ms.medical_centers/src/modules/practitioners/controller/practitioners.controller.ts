@@ -42,9 +42,9 @@ export class PractitionersController {
   }
 
   @Get()
-  async peek(@Query() query): Promise<any> {
+  async search(@Query() query): Promise<any> {
     return this.practitionersService
-      .peek(query);
+      .search(query);
   }
 
   @Post()

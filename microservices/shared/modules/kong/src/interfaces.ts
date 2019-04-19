@@ -25,7 +25,7 @@ export interface IRemoteRepository<T> {
 
     list(configuration?: AxiosRequestConfig): Promise<T[]>;
 
-    peek(data?: any, configuration?: AxiosRequestConfig): Promise<T | null>;
+    search(data?: any, configuration?: AxiosRequestConfig): Promise<T | null>;
 
     create(data?: any, configuration?: AxiosRequestConfig): Promise<T>;
 

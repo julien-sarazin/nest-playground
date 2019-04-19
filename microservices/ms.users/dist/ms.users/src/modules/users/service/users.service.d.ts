@@ -8,7 +8,7 @@ export default class UsersService {
     constructor(usersRepository: UsersRepository);
     list(criteria: any): Promise<User[]>;
     get(id: number): Promise<User>;
-    peek(criteria: any): Promise<User>;
+    search(criteria: any): Promise<User>;
     create(dto: UserCreateDTO): Promise<User>;
     update(id: number, dto: UserUpdateDTO): Promise<void>;
     remove(id: number): Promise<void>;

@@ -42,10 +42,10 @@ export class UsersController {
     }
   }
 
-  @Get('peek')
-  public async peek(@Criteria() criteria): Promise<any> {
+  @Get('search')
+  public async search(@Criteria() criteria): Promise<any> {
     return this.usersService
-      .peek(criteria);
+      .search(criteria);
   }
 
   @Post()

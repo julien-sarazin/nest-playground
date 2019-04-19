@@ -2,9 +2,9 @@ import { Logger, Module } from '@nestjs/common';
 import TokensService from './service/tokens.service';
 import { TokensController } from './controller/tokens.controller';
 import { DatabaseModule } from '../../database/database.module';
-import TokenRepository, { TokensRepositoryProvider } from './model/token.repository';
-import { UsersModule } from '../users/users.module';
+import { TokensRepositoryProvider } from './model/token.repository';
 import UsersRemoteService from '../users/remote/users.remote.service';
+import { UsersModule } from '../users/users.module';
 
 @Module({
     controllers: [
@@ -13,7 +13,7 @@ import UsersRemoteService from '../users/remote/users.remote.service';
     providers: [
         TokensService,
         TokensRepositoryProvider,
-        // UsersRemoteService,
+        UsersRemoteService,
         {
             provide: 'LoggerService',
             useClass: Logger,
@@ -24,7 +24,7 @@ import UsersRemoteService from '../users/remote/users.remote.service';
     ],
     imports: [
         DatabaseModule,
-        // UsersModule,
+        UsersModule,
     ],
 })
 export class TokensModule {

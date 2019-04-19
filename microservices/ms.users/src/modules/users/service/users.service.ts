@@ -30,7 +30,7 @@ export default class UsersService {
     return entity;
   }
 
-  public async peek(criteria): Promise<User> {
+  public async search(criteria): Promise<User> {
     return await this.usersRepository
       .findOne(criteria);
   }

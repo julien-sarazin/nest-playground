@@ -29,7 +29,7 @@ export default class PractitionersService {
     return result;
   }
 
-  public async peek(@Query() query): Promise<IPractitioner> {
+  public async search(@Query() query): Promise<IPractitioner> {
     return await this.practitionerRepository
       .findOne(query);
   }
