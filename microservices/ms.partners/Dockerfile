@@ -6,10 +6,8 @@ ENV PORT=$PORT
 #Todo : faire les autres env
 
 WORKDIR /workspace
-COPY . /workspace
-
-RUN ["npm", "i"]
-RUN ["npm", "build"]
+COPY ./dist /workspace/
+COPY ./package.json /workspace
 
 CMD ["npm", "run", "start:prod"]
 
