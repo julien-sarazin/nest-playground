@@ -11,7 +11,7 @@ export const CONSUL_CONFIG: ConsulModuleConfiguration = {
     service: {
         id: uuid.v4(),
         name: 'partners',
-        address: process.env.SERVICE_HOST || '127.0.0.1',
+        address: process.env.HOST || '127.0.0.1',
         port: parseInt(process.env.PORT),
         tags: ['partners', 'micro'],
         meta: {
