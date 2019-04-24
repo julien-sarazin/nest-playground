@@ -37,6 +37,27 @@ $ npm install
 ## Running the app
 
 ```bash
+Set env
+
+```bash
+PORT=6060
+PROXY_PORT=6060
+HOST=127.0.0.1
+PROXY_HOST=127.0.0.1
+MYSQL_HOST=localhost
+MYSQL_PORT=3033
+MYSQL_USERNAME=root
+MYSQL_PASSWORD=root
+MYSQL_DATABASE=partners_service_database
+CONSUL_HOST=127.0.0.1
+CONSUL_PORT=8500
+CONSUL_HEALTH_ADDRESS=http://host.docker.internal:6060/health
+KONG_HOST=127.0.0.1
+KONG_PORT=8001
+KONG_UPSTREAM=partners.upstream
+KONG_TARGET=host.docker.internal:6060
+```
+
 # development
 $ npm run start
 

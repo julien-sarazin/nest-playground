@@ -11,8 +11,8 @@ export const CONSUL_CONFIG: ConsulModuleConfiguration = {
     service: {
         id: uuid.v4(),
         name: 'partners',
-        address: process.env.HOST || '127.0.0.1',
-        port: parseInt(process.env.PORT),
+        address: process.env.PROXY_HOST || '127.0.0.1',
+        port: parseInt(process.env.PROXY_PORT),
         tags: ['partners', 'micro'],
         meta: {
             nestjs_version: '5.0.1',

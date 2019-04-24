@@ -10,7 +10,7 @@
         "start": "ts-node -r tsconfig-paths/register src/main.ts",
         "start:dev": "nodemon",
         "start:debug": "nodemon --config nodemon-debug.json",
-        "start:prod": "node ms.partners/src/main.js",
+        "start:prod": "node dist/ms.partners/src/main.js",
         "lint": "tslint -p tsconfig.json -c tslint.json",
         "test": "jest",
         "test:watch": "jest --watch",

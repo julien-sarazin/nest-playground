@@ -9,6 +9,6 @@ export const KONG_CONFIG: KongModuleConfiguration = {
     },
     service: {
         upstream: process.env.KONG_UPSTREAM || 'partners.upstream',
-        target: process.env.KONG_TARGET  || `host.docker.internal:${process.env.PORT}`,
+        target: process.env.KONG_TARGET  || `host.docker.internal:${process.env.PROXY_PORT}`,
     },
 };
