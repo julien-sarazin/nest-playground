@@ -20,7 +20,7 @@
         "@types/node": "^11.11.6",
         "@nestjs/common": "^5.1.0",
         "@nestjs/core": "^5.1.0",
-        "@nestjs/testing": "^5.1.0",
+        "@nestjs/testing": "^5.4.0",
         "@types/jest": "^23.3.0",
         "coveralls": "^3.0.2",
         "jest": "^23.3.0",

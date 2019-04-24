@@ -1,18 +1,52 @@
+import PartnersService from '../service/partners.service';
 import { Test, TestingModule } from '@nestjs/testing';
-import PartnersService from './partners.service';
+import PartnersRepository from '../model/partner.repository';
+import { KONG_SERVICE_PROVIDER, NestKongService } from '@shared/modules/kong';
 
-describe('PartnersService', () => {
-  let service: PartnersService;
+const mockPartnerRepository = {
+    findById:
+      () => ({}),
+    findOne:
+      () => ({}),
+    find:
+      () => ({}),
+    create:
+      () => ({}),
+    remove:
+      () => ({}),
+    update:
+      () => ({}),
+};
+const mockKongService = {};
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [PartnersService],
-    }).compile();
+const partnersRepositoryProvider = {
+    provide: PartnersRepository,
+    useValue: mockPartnerRepository,
+};
 
-    service = module.get<PartnersService>(PartnersService);
-  });
+const kongServiceProvider = {
+    provide: KONG_SERVICE_PROVIDER,
+    useValue: mockKongService,
+};
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
+describe('Partners.service', () => {
+    let service: PartnersService;
+
+    beforeAll(async () => {
+        const module: TestingModule = await Test.createTestingModule(
+          {
+              providers: [
+                  partnersRepositoryProvider,
+                  kongServiceProvider,
+                  PartnersService,
+              ],
+          })
+          .compile();
+
+        service = module.get<PartnersService>(PartnersService);
+    });
+
+    describe('When init', () => {
+        it('should be defined', () => expect(service).toBeDefined());
+    });
 });

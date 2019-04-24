@@ -15,7 +15,7 @@
   "dependencies": {
     "@nestjs/common": "^6.0.4",
     "@nestjs/core": "^6.0.4",
-    "@nestjs/testing": "^5.1.0",
+    "@nestjs/testing": "^5.4.0",
     "consul": "latest",
     "dotenv": "^6.1.0",
     "glob": "^7.1.2",

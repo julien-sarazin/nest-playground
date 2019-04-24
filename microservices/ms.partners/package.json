@@ -19,9 +19,9 @@
         "test:e2e": "jest --config ./test/jest-e2e.json"
     },
     "dependencies": {
-        "@nestjs/common": "^6.0.4",
-        "@nestjs/core": "^6.0.4",
-        "@nestjs/platform-fastify": "^6.0.4",
+        "@nestjs/common": "^6.1.1",
+        "@nestjs/core": "^6.1.1",
+        "@nestjs/platform-fastify": "^6.1.1",
         "class-transformer": "^0.2.0",
         "class-validator": "^0.9.1",
         "consul": "^0.34.1",
@@ -36,7 +36,7 @@
         "uuid": "^3.3.2"
     },
     "devDependencies": {
-        "@nestjs/testing": "^5.1.0",
+        "@nestjs/testing": "^6.1.1",
         "@types/consul": "^0.23.33",
         "@types/express": "^4.16.0",
         "@types/jest": "^23.3.1",
@@ -44,6 +44,7 @@
         "@types/node": "^10.7.1",
         "@types/supertest": "^2.0.5",
         "@types/uuid": "^3.4.4",
+        "@nestjs/platform-express": "^6.1.1",
         "jest": "^23.5.0",
         "nodemon": "^1.18.3",
         "prettier": "^1.14.2",
@@ -61,6 +62,9 @@
             "ts"
         ],
         "rootDir": "src",
+        "moduleNameMapper": {
+            "^@shared/(.*)$": "/Users/juliensarazin/workspace/lab/nest-playground/microservices/shared/$1"
+        },
         "testRegex": ".spec.ts$",
         "transform": {
             "^.+\\.(t|j)s$": "ts-jest"
