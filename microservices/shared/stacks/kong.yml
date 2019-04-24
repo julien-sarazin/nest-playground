@@ -1,8 +1,12 @@
-version: "3.7"
+version: "3"
+
+networks:
+  kong-net:
+    driver: bridge
 
 services:
 
-  ######
+  #######################################
   # Postgres: The database used by Kong
   #######################################
   kong-database:
@@ -15,13 +19,18 @@ services:
       POSTGRES_DB: kong
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "kong"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
-  ######
+  #######################################
   # Kong database migration
   #######################################
   kong-migration:
     image: kong:latest
-    command: "kong migrations bootstrap"
+    command: "kong migrations up"
     networks:
       - kong-net
     restart: on-failure
@@ -32,7 +41,7 @@ services:
     depends_on:
       - kong-database
 
-  ######
+  #######################################
   # Kong: The API Gateway
   #######################################
   kong:
@@ -41,7 +50,6 @@ services:
     networks:
       - kong-net
     environment:
-      KONG_DATABASE: postgres
       KONG_PG_HOST: kong-database
       KONG_PROXY_LISTEN: 0.0.0.0:8000
       KONG_PROXY_LISTEN_SSL: 0.0.0.0:8443
@@ -58,7 +66,7 @@ services:
       - "8001:8001"
       - "8000:8000"
 
-  #######
+  #######################################
   # Konga database prepare
   #######################################
   konga-prepare:
@@ -72,7 +80,7 @@ services:
     depends_on:
       - kong-database
 
-  ########
+  #######################################
   # Konga: Kong GUI
   #######################################
   konga:
@@ -86,13 +94,8 @@ services:
       DB_USER: kong
       TOKEN_SECRET: km1GUr4RkcQD7DewhJPNXrCuZwcKmqjb
       DB_DATABASE: konga_db
-      NODE_ENV: development
+      NODE_ENV: production
     depends_on:
       - kong-database
     ports:
       - "1337:1337"
-
-
-networks:
-  kong-net:
-    driver: bridge
