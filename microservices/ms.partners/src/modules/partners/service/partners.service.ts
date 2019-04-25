@@ -54,8 +54,7 @@ export default class PartnersService {
 
         const credentials = await this.kongService
           .consumers
-          .generateApiKey(consumer)
-          .catch(e => { console.error(e); throw e});
+          .generateApiKey(consumer);
 
         partner.applicationKey = credentials.key;
 
