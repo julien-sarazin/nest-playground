@@ -95,6 +95,10 @@ export default class PartnersService {
             throw new PartnerNotFoundException(`No partner with the identifier ${id}`);
         }
 
+        await this.kongService
+          .consumers
+          .remove(entity.applicationId);
+
         await this.partnersRepository
           .remove(entity);
     }

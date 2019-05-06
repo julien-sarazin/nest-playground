@@ -6,7 +6,7 @@ import PartnersService, {
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConflictException, NotFoundException } from '@nestjs/common';
 
-const mockPartnersService = {
+const mockPartnersService =  {
     get:
       () => ({}),
     list:
