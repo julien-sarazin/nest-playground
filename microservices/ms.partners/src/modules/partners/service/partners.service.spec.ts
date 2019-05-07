@@ -9,6 +9,7 @@ import { NestKongService } from '@shared/modules/kong/src';
 import { InternalServerErrorException } from '@nestjs/common';
 import { UpdatePartnerDTO } from '../dto/update.dto';
 import { IPartner } from '../model/partner.interface';
+import { Partner } from '../model/partner.entity';
 
 const mockPartnerRepository = {
     findById:
@@ -233,6 +234,18 @@ describe('.remove()', () => {
 
         expect(kongService.consumers.remove)
           .toHaveBeenCalled();
+    });
+
+    describe('when the partner does not exists', () => {
+        it('should throw a PartnerNotFoundException', async () => {
+            jest
+              .spyOn(repository, 'findOne')
+              .mockImplementation(async () => await undefined);
+
+            expect(service.remove(123))
+              .rejects
+              .toThrow(PartnerNotFoundException);
+        });
     });
 
     describe('when the kong service fails', () => {
