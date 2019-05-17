@@ -1,0 +1,747 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Partner Service API
+  description: The partner service holds the responsability to manage all external API consumers.
+    - It is in charge of giving the Gateway (K0ng) all registered consumers and set their access token.
+    - It is in charge of registring and deliver the webhook created by the partner.
+
+servers:
+  - url: http://dev-api.implicity.com/partners-service/
+    description: Private development server
+  - url: https://staging-api.immplicity.com/partners-service/
+    description: Public staging server
+  - url: https://api.immplicity.com/partners-service/
+    description: Public Production API Server
+
+tags:
+  - name: Partners
+    description: Everything about Partners
+  - name: Webhooks
+    description: Everything related to Webhooks
+  - name: Events
+    description: Everything about Events
+
+paths:
+  ###########
+  ## Partners
+  ##############################################################################
+  /partners:
+    post:
+      summary: Create a partner
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartnerDTO'
+      responses:
+        201:
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Partner'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        409:
+          $ref: '#/components/responses/Conflict'
+      tags:
+        - Partners
+    get:
+      summary: List all partners
+      parameters:
+        - name: criteria
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Criteria'
+      responses:
+        200:
+          description: List of webooks matching the query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPartners'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+      tags:
+        - Partners
+  /partners/one:
+    get:
+      summary: Returns the first partner matching the given criteria
+      parameters:
+        - name: criteria
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Criteria'
+      responses:
+        200:
+          description: List of webooks matching the query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Partner'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+      tags:
+        - Partners
+  /partners/{id}:
+    get:
+      summary: Get a partner for a given id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The partner id
+      responses:
+        200:
+          description: The partner matching the identifier
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Partner'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - Partners
+    delete:
+      summary: delete a Partner for a given id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The partner id
+      responses:
+        204:
+          description: Partner removed successfuly.
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - Partners
+    put:
+      summary: update a Partner for a given id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The partner id
+      responses:
+        200:
+          description: The updated partner.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Partner'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - Partners
+  /partners/{id}/disable:
+    post:
+      summary: Disable a partner
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The partner id
+      responses:
+        204:
+          description: Resource disabled successfuly
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+      tags:
+        - Partners
+  /partners/{id}/enable:
+    post:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The partner id
+      summary: Enable a partner
+      responses:
+        204:
+          description: Resource enable successfuly
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+      tags:
+        - Partners
+  /partners/{id}/link/medical_centers:
+    post:
+      summary: Associate Medical Center to Partners
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The partner identifier
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkPartnerToMedicalCenterDTO'
+      responses:
+        201:
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Partner'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        409:
+          $ref: '#/components/responses/Conflict'
+      tags:
+        - Partners
+  /partners/{id}/link/medical_centers/{medical_center_id}:
+    delete:
+      summary: Remove link between the Partner and provided Medical Centers
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The partner identifier
+        - name: medical_center_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The medical center identifier
+      responses:
+        204:
+          description: Resource removed successfuly
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        409:
+          $ref: '#/components/responses/Conflict'
+      tags:
+        - Partners
+  ###########
+  ## Webhooks
+  ##############################################################################
+  /webooks:
+    post:
+      summary: Create a webook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookDTO'
+      responses:
+        201:
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        409:
+          $ref: '#/components/responses/Conflict'
+      tags:
+        - Webhooks
+    get:
+      summary: List all webook
+      parameters:
+        - name: criteria
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Criteria'
+      responses:
+        200:
+          description: List of webook matching the query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedWebhooks'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+      tags:
+        - Webhooks
+  /webooks/one:
+    get:
+      summary: Returns the first webook matching the given criteria
+      parameters:
+        - name: criteria
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Criteria'
+      responses:
+        200:
+          description: A webook matching the given criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+      tags:
+        - Webhooks
+  /webhooks/{id}:
+    get:
+      summary: Get a partner for a given id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The partner id
+      responses:
+        200:
+          description: A webook matching the given criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - Webhooks
+    delete:
+      summary: delete a Webhook for a given id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The webhook id
+      responses:
+        204:
+          description: Webhook successfuly removed
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - Webhooks
+    put:
+      summary: update a Partner for a given id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The partner id
+      responses:
+        200:
+          description: A webook matching the given criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - Webhooks
+
+  ###########
+  ## Events
+  ##############################################################################
+  /events:
+    get:
+      summary: List all events
+      parameters:
+        - name: criteria
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Criteria'
+      responses:
+        200:
+          description: List of events matching the query
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+      tags:
+        - Events
+  /events/one:
+    get:
+      summary: Returns the first event matching the given criteria
+      parameters:
+        - name: criteria
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Criteria'
+      responses:
+        200:
+          description: An event matching the given criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+      tags:
+        - Events
+  /events/{id}:
+    get:
+      summary: Get an event for a given id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The event id
+      responses:
+        200:
+          description: An event matching the given criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - Events
+
+components:
+  schemas:
+    Partner:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Identify the resource
+        name:
+          type: string
+          description: The name of the partner
+        consumer_key:
+          type: string
+          description: Token to provide to identify the consumer
+        consumer_secret:
+          type: string
+          description: Token to provide to encrypt the requests
+        created_at:
+          type: string
+          description: (Date type) representing when the resource has been created
+        updated_at:
+          type: string
+          description: (Date type) representing when the resource has been updated
+        medical_center_ids:
+          type: array
+          description: List of Implicity identifiers for medical centers attached to the partner
+          items:
+            type: string
+
+    PartnerDTO:
+      properties:
+        name:
+          type: string
+          description: The name of the partner
+    LinkPartnerToMedicalCenterDTO:
+      properties:
+        medical_center_ids:
+          type: array
+          items:
+            type: string
+            description: List of medical center identifiers
+
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Identify the resource
+        partner_id:
+          type: number
+          description: Foreign key referencing the partner associated to the hook
+        event:
+          $ref: '#/components/schemas/EventType'
+        callback:
+          type: string
+          description: The endpoint to call when the event is emitted.
+        created_at:
+          type: string
+          description: (Date type) representing when the resource has been created
+        updated_at:
+          type: string
+          description: (Date type) representing when the resource has been updated
+    WebhookDTO:
+      properties:
+        partner_id:
+          type: number
+          description: The reference of the partner.
+        event_type:
+          $ref: '#/components/schemas/EventType'
+        callback:
+          type: string
+          description: Gives humanized name to the webook
+
+    Event:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Event identifier
+        created_at:
+          type: string
+          description: Date when the event is created
+        type:
+          $ref: '#/components/schemas/EventType'
+        data:
+          oneOf:
+            - $ref: '#/components/schemas/DocumentEventData'
+            - $ref: '#/components/schemas/TransmissionEventData'
+    EventType:
+      type: string
+      enum: [
+        Document.CRO.Created,
+        Document.CRC.Created,
+        Document.CRTSM.Created,
+        Document.Invoice.Created,
+        Document.Prescription.Created,
+        Transmission.EGM.Created,
+        Transmission.Setting.Created,
+        Transmission.HL7.Created
+      ]
+      example: 'Document.CRO.Created'
+    DocumentEventData:
+      type: object
+      properties:
+        created_at:
+          type: string
+          description: Date when the document has been created
+        updated_at:
+          type: string
+          description: Date when the document has been updated
+        patient_id:
+          type: number
+          description: Implicity identifier identifying a Patient
+        medical_center_id:
+          type: number
+          description: Implicity identifier identifying a Medical Center
+        owner_id:
+          type: number
+          description: Implicity identifier identifying the practitioner responsible of the document
+        creator_id:
+          type: number
+          description: Implicity identifier identifying the user who created the document
+        content:
+          type: object
+          description: Content of the document
+        versions:
+          type: array
+          items:
+            type: string
+            description: List of file generated from the document metadata
+    TransmissionEventData:
+      type: object
+      properties:
+        created_at:
+          type: string
+          description: Date when the document has been created
+        updated_at:
+          type: string
+          description: Date when the document has been updated
+        device_id:
+          type: number
+          description: Implicity identifier for a Device
+        transmission_id:
+          type: number
+          description: Implicity identifier for a Transmission
+
+    Criteria:
+      type: object
+      properties:
+        sort:
+          type: object
+          description: Apply a sort query to the research
+        filter:
+          type: object
+          description: Apply a filtering query to the research
+        limit:
+          type: number
+          description: Apply a result limit query to the reseach
+          default: 20
+        skip:
+          type: number
+          description: Apply an offset query to the research
+          default: 0
+        include:
+          type: object
+          description: Apply a join query to the research
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+
+    PaginatedResource:
+      properties:
+        limit:
+          type: number
+          description: The number of items per page
+        current:
+          type: number
+          description: The current "position" of the cursor against the full collection
+        total:
+          type: number
+          description: The full count of the resources matching the criteria
+    PaginatedPartners:
+      allOf:
+        - $ref: '#/components/schemas/PaginatedResource'
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Partner'
+    PaginatedWebhooks:
+      allOf:
+        - $ref: '#/components/schemas/PaginatedResource'
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+  responses:
+    BadRequest:
+      description: The request is not well formatted
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request is valid but the business logic cannot finalize the request. Process aborted.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized / Not authenticated
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: A resource with similar identifier already exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Not enough rights to proceed the request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

@@ -1,11 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreatePartnerDTO } from '../dto/create.dto';
 import { UpdatePartnerDTO } from '../dto/update.dto';
 import PartnersRepository from '../model/partner.repository';
 import { Partner } from '../model/partner.entity';
 import { IPartner } from '../model/partner.interface';
 import * as uuid from 'uuid/v4';
 import { KONG_SERVICE_PROVIDER, NestKongService } from '@shared/modules/kong';
+import { CreatePartnerDTO } from '../dto/create.dto';
 
 @Injectable()
 export default class PartnersService {
